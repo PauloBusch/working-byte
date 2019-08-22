@@ -1,0 +1,52 @@
+Infraestrutura
+	Cadastro de equipamentos.
+	Histórico de manutenção.
+	Controle de estoque(Disponíveis para manutenção).
+	Localização dos equipamentos.
+	Registro de chamado para manuteção.
+	Relatório básico(equipamentos com mais defeitos)
+	
+	
+Supermercado
+	Cadastro de lista de compras(sugestão dos próximos do prazo de validade)
+	Controle de estoque básico(com validade, preço e unidades)
+	Pagamento via app(verificar a possibilidade)
+	Pontos de entrega([calculo de rota] para um ou mais clientes
+	Relatórios de entregas(regiões mais atendidas)
+
+Pensionato/República
+	Cadastro de quartos, estudantes(nome, cidade, curso[período])
+	Cadastro de checklist de compras que cada um deve fazer
+	Cadastro de cobrança recorrente(Aluguél)
+	Checklist dos pagamentos
+	Sinalização dos pagamentos em dia, próximo da data de pagamento e atrazados
+	Relatório para recortar e colar nas portas dos quartos, com informações dos estudantes
+
+Tinder para eventos
+	GPS / IA
+	Grupo reunindo pessoas do evento
+	Próximos eventos
+	Patrocínio / Promoção / Sorteio
+	
+Psicologo
+	Rede social de comunicação
+	Nome criptografado
+	Discutir sobre casos clínicos
+
+Consultas
+	Sistema de agendamento
+
+
+Diário dos sonhos
+	Padrões
+	Ficha de registro dos sonhos que teve
+
+Coronograma de academia / treinamento
+	Instrução dos alunos
+	Controle de mensalidade / treino / medida
+	Notificação de aula treino
+
+Análise / processamento de texto
+
+
+
