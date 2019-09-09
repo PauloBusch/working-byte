@@ -8,7 +8,7 @@
 /Artefatos/Projeto/client/bazel-out
 
 # dependencies
-/Artefatos/Projeto/client/node_modules
+#/Artefatos/Projeto/client/node_modules
 
 # profiling files
 chrome-profiler-events.json
