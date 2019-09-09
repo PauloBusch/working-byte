@@ -18,6 +18,7 @@ speed-measure-plugin.json
 /Artefatos/Projeto/client/.idea
 .project
 .classpath
+.vs
 .c9/
 *.launch
 .settings/
