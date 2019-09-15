@@ -4,6 +4,6 @@
 
 ## Membros
 - Paulo Ricardo Busch
-- Enio Amarantes Neto - Online - Diagrama de Atividades
-- Frederson Mandu de Oliveira
+- Enio Amarantes Neto
+- Frederson Mandu de Oliveira - Online - Diagrama de Atividades
 - Kaique Ribeiro de Campos
