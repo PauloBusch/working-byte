@@ -1,0 +1,34 @@
+mat-card {
+    max-width: 400px;
+    margin: 10em auto;
+    text-align: center;
+}
+
+.bg-academia {
+    background-image: url("../../assets/images/academia.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.signin-content {
+    padding: 60px 1rem;
+}
+
+.full-width-input {
+    width: 100%;
+}
+
+.margin-height-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    margin: 15px 0px !important;
+}

@@ -36,6 +36,7 @@ speed-measure-plugin.json
 /Artefatos/Projeto/client/.sass-cache
 /Artefatos/Projeto/client/connect.lock
 /Artefatos/Projeto/client/coverage
+/Artefatos/Projeto/client/node_modules
 /Artefatos/Projeto/client/libpeerconnection.log
 npm-debug.log
 yarn-error.log

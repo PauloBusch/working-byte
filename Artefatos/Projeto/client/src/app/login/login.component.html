@@ -1,0 +1,27 @@
+<div class="bg-academia">
+  <mat-card>
+      <mat-card-content>
+          <form [formGroup]="form">
+              <div class="margin-height-20">
+                  <app-logo></app-logo>
+              </div>
+              <mat-form-field class="full-width-input">
+                  <input matInput placeholder="Login" formControlName="userName" required>
+                  <mat-error *ngIf="isFieldInvalid('userName')">
+                    Informe o login
+                  </mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width-input">
+                  <input matInput placeholder="Senha" formControlName="password" required>
+                  <mat-error *ngIf="isFieldInvalid('password')">
+                    Informe a senha
+                  </mat-error>
+              </mat-form-field>
+          </form>
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center">
+          <a href="#" align="start">Esqueci minha senha</a>
+          <button mat-raised-button color="primary" align="end">Logar</button>
+      </mat-card-actions>
+  </mat-card>
+</div>
