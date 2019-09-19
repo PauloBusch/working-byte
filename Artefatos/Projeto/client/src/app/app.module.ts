@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule } from "@angular/material";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { LogoComponent } from './shared/logo/logo.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     MatCardModule,
     FormsModule,
     MatFormFieldModule,
