@@ -1,25 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule } from "@angular/material";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoComponent } from './shared/logo/logo.component';
+import { TrainingComponent } from './training/training.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LogoComponent,
+    TrainingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     MatCardModule,
     FormsModule,
     MatFormFieldModule,
