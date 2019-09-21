@@ -1,0 +1,19 @@
+<div class="bg-academia">
+    <mat-card>
+        <mat-card-content>
+            <div class="title-training">
+                <h1>Treinamentos WorkingByte</h1>
+            </div>       
+
+            <ul>
+                <li *ngFor='let training of trainings'>
+                    <span>{{training.type}}</span>
+                </li>
+            </ul>
+            
+            <div>
+                <p> Colocar talvez uma tag aqui e explicar os trainos que forem clicados!</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

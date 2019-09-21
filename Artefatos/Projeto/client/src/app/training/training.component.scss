@@ -1,0 +1,53 @@
+mat-card {
+    max-width: 1020px;
+    max-height: 860px;
+    height: 600px;
+    margin: 2em auto;
+    text-align: center;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 10px 10px 10px 10px gray;
+    padding: 0px;
+}
+
+.title-training {
+    background-color: purple;
+    padding: 5px;
+    box-shadow: 1px 1px 1px 1px gray;
+}
+
+.bg-academia {
+    background-image: url("../../assets/images/academia.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color: white;
+    font-size: 18me;
+    text-shadow: 2px, 2px, 2px, 2px;
+}
+
+ul {
+    max-width: 200px;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    background-color: rgba(220, 220, 220);
+}
+
+li {
+    list-style-type: none;
+    background-color: rgb(158, 156, 158);
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(32, 32, 32);
+    margin-top: 2px;
+    padding: 4px;
+}
