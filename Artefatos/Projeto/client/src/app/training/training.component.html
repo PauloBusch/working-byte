@@ -1,18 +1,53 @@
 <div class="bg-academia">
     <mat-card>
-        <mat-card-content>
-            <div class="title-training">
+        <div class="title-training">
                 <h1>Treinamentos WorkingByte</h1>
-            </div>       
-
-            <ul>
-                <li *ngFor='let training of trainings'>
-                    <span>{{training.type}}</span>
-                </li>
-            </ul>
-            
+        </div>  
+        <mat-card-content> 
+           
             <div>
                 <p> Colocar talvez uma tag aqui e explicar os trainos que forem clicados!</p>
+            
+        
+                <form [formGroup]='form'>
+
+                    <mat-form-field class='full-width-input'>
+                        <input formControlName = "name" matInput type="text" placeholder="Treino">
+                    </mat-form-field>
+
+                    <mat-form-field class='full-width-input'>
+                        <select formControlName = "id_type" matInput placeholder="Tipo de Treino" >
+
+                            <option >
+                                Peito
+                            </option>
+
+                            <option >
+                                Pernas
+                            </option>
+
+                            <option >
+                                Costas
+                            </option>
+
+                        </select>
+                    </mat-form-field>
+
+                    <mat-form-field class='full-width-input'>
+                        <input formControlName = "rep" matInput type="number" placeholder="Repetições">
+                    </mat-form-field>
+
+                    <mat-form-field class='full-width-input'>
+                        <input formControlName = "weight" matInput type="number" placeholder="Carga">
+                    </mat-form-field>
+
+                    <mat-form-field class='full-width-input'>
+                        <input formControlName = "id_equip" matInput type="text" placeholder="Aparelho">
+                    </mat-form-field>
+
+                </form>
+                <button mat-raised-button (click)='submit()'>Submit</button>
+
             </div>
         </mat-card-content>
     </mat-card>
