@@ -6,7 +6,7 @@
         <mat-card-content> 
            
             <div>
-                <p> Colocar talvez uma tag aqui e explicar os trainos que forem clicados!</p>
+                <h2> Cadastrar Treino para Atleta: {{atleta?.name}} !</h2>
             
         
                 <form [formGroup]='form'>
@@ -38,6 +38,7 @@
 
                 </form>
                 <button mat-raised-button (click)='submit()'>Submit</button>
+				<button mat-raised-button (click)='cancel()'>Cancel</button>
 
             </div>
         </mat-card-content>

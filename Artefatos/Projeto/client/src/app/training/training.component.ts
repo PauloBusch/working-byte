@@ -30,7 +30,13 @@ export class TrainingComponent implements OnInit {
 
   submit(){
     this.training = Object.assign(new Training(), this.form.value);
+	window.alert("Treino Cadastrado!");
     debugger;
+  }
+  
+  cancel(){
+	window.alert("Cadastro Cancelado!");
+	//desenvolver algo que limpe os campos.
   }
 
 }
