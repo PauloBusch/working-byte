@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 
+const users = require('./controllers/users');
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -15,6 +17,8 @@ connection.connect((error) => {
   } 
   console.log('Conectado!');
 });
+
+app.use('/', users);
 
 app.get('/',(req, res) => {
   var msg = `
