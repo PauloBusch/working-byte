@@ -17,6 +17,7 @@ import { LogoComponent } from './shared/logo/logo.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { TrainingComponent } from './training/training.component';
 import { MenuComponent } from './shared/menu/menu.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MenuComponent } from './shared/menu/menu.component';
     LogoComponent,
     PageNotFoundComponent,
     TrainingComponent,
-    MenuComponent
+    MenuComponent,
+    UserModule
   ],
   imports: [
     BrowserModule,
