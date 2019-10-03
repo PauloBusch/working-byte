@@ -1,0 +1,1 @@
+https://blog.rocketseat.com.br/nodejs-express-sequelize/
