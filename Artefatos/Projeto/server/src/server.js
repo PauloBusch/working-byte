@@ -17,8 +17,13 @@ connection.connect((error) => {
 });
 
 app.get('/',(req, res) => {
+  var msg = `
+    API Server WorkingByte Works <br/>
+    Server Time______: ${new Date()}<br/>
+    Db workingbyte___: ${connection.state}<br/>
+  `;
 
-  
+  res.send(msg);
 });
 
 app.listen(1300);
