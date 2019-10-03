@@ -33,6 +33,12 @@ speed-measure-plugin.json
 .history/*
 
 # misc
+/Artefatos/Projeto/server/.sass-cache
+/Artefatos/Projeto/server/connect.lock
+/Artefatos/Projeto/server/coverage
+/Artefatos/Projeto/server/node_modules
+/Artefatos/Projeto/server/libpeerconnection.log
+
 /Artefatos/Projeto/client/.sass-cache
 /Artefatos/Projeto/client/connect.lock
 /Artefatos/Projeto/client/coverage
