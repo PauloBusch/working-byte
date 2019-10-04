@@ -17,7 +17,8 @@ import { LogoComponent } from './shared/logo/logo.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { TrainingComponent } from './training/training.component';
 import { MenuComponent } from './shared/menu/menu.component';
-import { UserModule } from './user/user.module';
+import { UserModule } from './user/user/user.module';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { UserModule } from './user/user.module';
     PageNotFoundComponent,
     TrainingComponent,
     MenuComponent,
-    UserModule
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +39,7 @@ import { UserModule } from './user/user.module';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    UserModule,
 
     ReactiveFormsModule,
     BrowserAnimationsModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from './models/user.models';
+import { User } from '../user/models/user.models';
 import { Observable } from 'rxjs';
 
 @Injectable({

@@ -1,6 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const app = express();
+
+const users = require('./controllers/users.controller');
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -15,6 +18,9 @@ connection.connect((error) => {
   } 
   console.log('Conectado!');
 });
+
+app.use(bodyParser.json());
+app.use('/', users);
 
 app.get('/',(req, res) => {
   var msg = `
