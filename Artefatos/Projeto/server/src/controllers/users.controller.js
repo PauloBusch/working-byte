@@ -20,14 +20,14 @@ routes.get('/users/:id', async (req, res) => {
 routes.post('/users', async (req, res) => {
     console.log(req.body);
     await User.create(req.body)
-        .then(result => res.json(result))
+        .then(user => res.json(user))
         .catch(error => res.status(500).json(error.errors));
 });
 
 //Atualizar
 routes.put('/users/:id', async (req, res) => {
     const { id } = req.params;
-    await User.udpate(req.body, { 
+    await User.update(req.body, { 
         where: { id: id }
     })
     .then(result => res.json(result))
