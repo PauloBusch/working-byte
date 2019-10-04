@@ -5,6 +5,8 @@ import {
   MatListModule, MatSidenavModule
 } from '@angular/material';
 
+import { UserService } from 'src/app/shared/services/user.service';
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -12,9 +14,14 @@ import {
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
+    this.userService.getUsers().subscribe(users => {
+      console.log(users);
+    });
   }
 
 }

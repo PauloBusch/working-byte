@@ -6,12 +6,16 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
 import { TrainingComponent } from './training/training.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { UserComponent } from './user/user/user.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'menu', component: MenuComponent, children:[
-    { path: 'training', component: TrainingComponent},
-    { path: 'user/user-list', component: UserListComponent},
+  { path: 'menu', component: MenuComponent, children: [
+    { path: 'training', component: TrainingComponent },
+    { path: 'users', component: UserListComponent, children: [
+      { path: 'new', component: UserComponent },
+      { path: 'edit/:identifier', component: UserComponent },
+    ] },
     { path: '',   redirectTo: '/menu/training', pathMatch: 'full' },
 
   ] },

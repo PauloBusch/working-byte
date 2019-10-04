@@ -8,8 +8,6 @@ import {
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
-
-
 @NgModule({
   declarations: [
     UserComponent
@@ -29,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatListModule,
     MatSidenavModule
-  ]
+  ],
+  providers: []
 })
 export class UserModule { }

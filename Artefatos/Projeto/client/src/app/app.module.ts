@@ -19,6 +19,8 @@ import { TrainingComponent } from './training/training.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { UserModule } from './user/user/user.module';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { UserService } from './shared/services/user.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
 
     MatCardModule,
     FormsModule,
@@ -52,6 +55,8 @@ import { UserListComponent } from './user/user-list/user-list.component';
     MatSidenavModule
   ],
   providers: [
+    HttpClientModule,
+    UserService,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
