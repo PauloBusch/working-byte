@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const app = express();
 
@@ -18,6 +19,7 @@ connection.connect((error) => {
   console.log('Conectado!');
 });
 
+app.use(bodyParser.json());
 app.use('/', users);
 
 app.get('/',(req, res) => {
