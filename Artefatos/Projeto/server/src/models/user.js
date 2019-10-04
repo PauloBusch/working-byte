@@ -55,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
     {
+        timestamps: false,
         indexes: [
             {
                 unique: true,

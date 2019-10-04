@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 
-const users = require('./controllers/users');
+const users = require('./controllers/users.controller');
 
 const connection = mysql.createConnection({
   host: 'localhost',
