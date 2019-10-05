@@ -1,10 +1,12 @@
+const { NewIdentifier } = require('../utils/random');
+
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(8),
+            defaultValue: NewIdentifier,
             primaryKey: true,
-            autoIncrement: true
-        },  
+        },
         first_name: { 
             type: DataTypes.STRING(30),
             allowNull: false
@@ -48,10 +50,15 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(50),
             allowNull: false
         },
+        creation_date: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+            allowNull: false
+        },
         removed: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
+            defaultValue: false,
+            allowNull: false
         }
     },
     {

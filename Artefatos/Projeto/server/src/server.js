@@ -4,7 +4,7 @@ const mysql = require('mysql');
 const cors = require('cors')
 const app = express();
 
-const users = require('./controllers/users.controller');
+const { controllerUser } = require('./controllers/users.controller');
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -22,8 +22,15 @@ connection.connect((error) => {
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/', users);
 
+// Rotas
+app.get('/users', controllerUser.getAll);
+app.get('/users/:id', controllerUser.getAll);
+app.post('/users', controllerUser.create);
+app.put('/users/:id', controllerUser.update);
+app.delete('/users/:id', controllerUser.delete);
+
+// Index
 app.get('/',(req, res) => {
   var msg = `
     API Server WorkingByte Works <br/>

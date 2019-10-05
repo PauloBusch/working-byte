@@ -1,17 +1,12 @@
-import { DecimalPipe } from '@angular/common';
-
 export class User {
-    private id: number;
-    private nome: string;
-    private email: string;
-    private endereco: string;
-    private idade: number;
-    private medidas: number;
-    private e_personal: boolean;
-    private user: string;
-    private password: string;
-
-    constructor(){
-
-    }
+    public id: number;
+    public identifier: string;
+    public nome: string;
+    public email: string;
+    public endereco: string;
+    public idade: number;
+    public medidas: number;
+    public is_personal: boolean;
+    public user: string;
+    public password: string;
 }
