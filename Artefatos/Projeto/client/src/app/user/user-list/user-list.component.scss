@@ -1,0 +1,14 @@
+.mat-list-item{
+    &:hover{  
+        background: #efefef;
+    }
+    background: white; 
+}
+$color-sub: rgba(0, 0, 0, 0.59);
+.mat-list .button-icon .mat-icon{
+    color: $color-sub;
+}
+
+.msg-user{
+    color: $color-sub;
+}
