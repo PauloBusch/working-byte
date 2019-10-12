@@ -2,6 +2,7 @@ const { Obj } = require('../utils/content/dataResult.js');
 
 const { CommandHandle } = require('../utils/handle/commandHandle');
 const { CreateUserCommand } = require('../models/users/commands/createUserCommand');
+const { UpdateUserCommand } = require('../models/users/commands/updateUserCommand');
 
 const controllerUser = { };
 
@@ -20,7 +21,9 @@ controllerUser.create = async (req, res) => {
 };
 
 controllerUser.update = async (req, res) => {
-    
+    const command = Obj.getData(new UpdateUserCommand(), req);
+    const result = await CommandHandle.Execute(command);
+    res.json(result);
 };
 
 controllerUser.delete = async (req, res) => {

@@ -1,12 +1,12 @@
 const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 const { Email, Phone, Cpf, Age, Sexo, Login } = require('../../../utils/content/validators');
 const { Command } = require('../../../utils/interfaces/command');
-const { Auth } = require('../../../utils/auth/authUser');
 
 const { User } = require('../user');
 const { UserDb } = require('../../../mapping');
+const { Op } = require('sequelize');
 
-class CreateUserCommand extends Command {
+class UpdateUserCommand extends Command {
     constructor(
         id,
         first_name,
@@ -18,8 +18,7 @@ class CreateUserCommand extends Command {
         age,
         is_personal,
         sexo,
-        login,
-        password
+        login
     ){
         super();
         this.id = id;
@@ -33,7 +32,6 @@ class CreateUserCommand extends Command {
         this.is_personal = is_personal;
         this.sexo = sexo;
         this.login = login;
-        this.password = password;
     }
 
     async GetError(){
@@ -70,18 +68,19 @@ class CreateUserCommand extends Command {
         if (!this.login || !Login.valid(this.login))
             return new Error(EErrorCode.InvalidParams, "Parameter login is not valid");
             
-        if (!this.password)
-            return new Error(EErrorCode.InvalidParams, "Parameter password cannot be null");
+        const exists = await UserDb.count({ where: { id: this.id, removed: false } });
+        if (!exists)
+            return new Error(EErrorCode.NotFound, `User with id cannot exists`);
 
-        const existsName = await UserDb.count({ where: { first_name: this.first_name, last_name: this.last_name, removed: false } });
+        const existsName = await UserDb.count({ where: { id: { [Op.ne]: this.id }, first_name: this.first_name, last_name: this.last_name, removed: false } });
         if (existsName)
             return new Error(EErrorCode.DuplicateUnique, `User with first_name and last_name already exists`);
-        
-        const existsEmail = await UserDb.count({ where: { email: this.email, removed: false } });
+
+        const existsEmail = await UserDb.count({ where: { id: { [Op.ne]: this.id }, email: this.email, removed: false } });
         if(existsEmail)
             return new Error(EErrorCode.DuplicateUnique, "Parameter email already exists");
         
-        const existsLogin = await UserDb.count({ where: { login: this.login, removed: false } });
+        const existsLogin = await UserDb.count({ where: { id: { [Op.ne]: this.id }, login: this.login, removed: false } });
         if(existsLogin)
             return new Error(EErrorCode.DuplicateUnique, "Parameter login already exists");
     
@@ -93,6 +92,7 @@ class CreateUserCommand extends Command {
     }
 
     async Execute(){
+        const query = { where: { id: this.id } };
         const user = new User(
             this.id,
             this.first_name,
@@ -104,15 +104,14 @@ class CreateUserCommand extends Command {
             this.age,
             this.is_personal,
             this.sexo,
-            this.login,
-            await Auth.encrypt(this.password)
+            this.login
         );
 
-        const result = await UserDb.create(user);
+        const result = await UserDb.update(user, query);
         return new CommandResult(result ? 1 : 0);
     }
 }
 
 module.exports = {
-    CreateUserCommand
+    UpdateUserCommand
 }

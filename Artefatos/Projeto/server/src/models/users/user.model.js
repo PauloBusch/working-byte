@@ -1,10 +1,10 @@
-const { NewIdentifier } = require('../../utils/database/random');
+const { NewId } = require('../../utils/database/random');
 
 const UserModel = (sequelize, dataTypes) => {
     const User = sequelize.define('User', {
         id: {
             type: dataTypes.STRING(8),
-            defaultValue: NewIdentifier,
+            defaultValue: NewId,
             primaryKey: true,
         },
         first_name: { 
@@ -17,8 +17,7 @@ const UserModel = (sequelize, dataTypes) => {
         },
         email: { 
             type: dataTypes.STRING(200),
-            allowNull: false,
-            unique: true
+            allowNull: false
         },
         address: { 
             type: dataTypes.STRING(200),
@@ -66,6 +65,16 @@ const UserModel = (sequelize, dataTypes) => {
                 name: 'UQ_user_name',
                 unique: true,
                 fields: ['first_name','last_name']
+            },
+            {
+                name: 'UQ_user_email',
+                unique: true,
+                fields: ['email']
+            },
+            {
+                name: 'UQ_user_login',
+                unique: true,
+                fields: ['login']
             }
         ]
     });

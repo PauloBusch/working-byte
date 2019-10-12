@@ -35,6 +35,8 @@ class User extends EntityBase {
         //MySQL currently doesn't support conditional indexes.
         this.first_name = `${NewId()}-${this.first_name}`;//UQ_user_name
         this.last_name = `${NewId()}-${this.last_name}`;//UQ_user_name
+        this.email = `${NewId()}-${this.email}`;//UQ_user_email
+        this.login = `${NewId()}-${this.login}`;//UQ_user_login
     }
 }
 
