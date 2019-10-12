@@ -1,7 +1,5 @@
 const { CommandResult, Error, EErrorCode, Obj } = require('../../../utils/content/dataResult');
-const { Email, Phone, Cpf, Age, Sexo, Login } = require('../../../utils/content/validators');
 const { Command } = require('../../../utils/interfaces/command');
-const { Auth } = require('../../../utils/auth/authUser');
 
 const { User } = require('../user');
 const { UserDb } = require('../../../mapping');
