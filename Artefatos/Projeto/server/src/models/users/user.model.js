@@ -1,68 +1,66 @@
-const { NewIdentifier } = require('../utils/random');
+const { NewIdentifier } = require('../../utils/database/random');
 
-module.exports = (sequelize, DataTypes) => {
+const UserModel = (sequelize, dataTypes) => {
     const User = sequelize.define('User', {
         id: {
-            type: DataTypes.STRING(8),
+            type: dataTypes.STRING(8),
             defaultValue: NewIdentifier,
             primaryKey: true,
         },
         first_name: { 
-            type: DataTypes.STRING(30),
+            type: dataTypes.STRING(30),
             allowNull: false
         },
         last_name: { 
-            type: DataTypes.STRING(60),
+            type: dataTypes.STRING(60),
             allowNull: false
         },
         email: { 
-            type: DataTypes.STRING(200),
+            type: dataTypes.STRING(200),
             allowNull: false,
             unique: true
         },
         address: { 
-            type: DataTypes.STRING(200),
+            type: dataTypes.STRING(200),
             allowNull: false
         },
         phone: { 
-            type: DataTypes.STRING(20),
+            type: dataTypes.STRING(20),
             allowNull: false
         },
         cpf: { 
-            type: DataTypes.STRING(14),
+            type: dataTypes.STRING(14),
             allowNull: false
         },
-        age: DataTypes.INTEGER,
+        age: dataTypes.INTEGER,
         is_personal: {
-            type: DataTypes.BOOLEAN,
+            type: dataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
         sexo: {
-            type: DataTypes.ENUM('M', 'F'),
+            type: dataTypes.ENUM('M', 'F'),
             allowNull: false
         },
         login: {
-            type: DataTypes.STRING(50),
+            type: dataTypes.STRING(50),
             allowNull: false
         },
         password: {
-            type: DataTypes.STRING(50),
-            allowNull: false
-        },
-        creation_date: {
-            type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW,
+            type: dataTypes.STRING(50),
             allowNull: false
         },
         removed: {
-            type: DataTypes.BOOLEAN,
+            type: dataTypes.BOOLEAN,
             defaultValue: false,
             allowNull: false
-        }
+        },
+        user_created: dataTypes.DATE,
+        user_updated: dataTypes.DATE
     },
-    {
-        timestamps: false,
+    {        
+        createdAt: 'user_created',
+        updatedAt: 'user_updated',
         indexes: [
             {
                 unique: true,
@@ -72,4 +70,8 @@ module.exports = (sequelize, DataTypes) => {
     });
   
     return User;
-  }
+}
+
+module.exports = {
+    UserModel
+}
