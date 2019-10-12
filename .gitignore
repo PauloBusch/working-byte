@@ -34,6 +34,7 @@ speed-measure-plugin.json
 
 # misc
 /Artefatos/Projeto/server/.sass-cache
+/Artefatos/Projeto/server/assets/.env
 /Artefatos/Projeto/server/connect.lock
 /Artefatos/Projeto/server/coverage
 /Artefatos/Projeto/server/node_modules
