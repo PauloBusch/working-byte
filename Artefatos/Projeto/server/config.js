@@ -1,5 +1,6 @@
 module.exports = {
     AppConfig: {
+        expirationToken: 43200, //12 hours
         port: 1320
     },
     DbConfig: {

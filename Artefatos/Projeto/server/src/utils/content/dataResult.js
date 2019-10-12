@@ -50,6 +50,22 @@ class Error {
     }
 };
 
+class AuthResult {
+    constructor(
+        auth,
+        token,
+        user,
+        errorCode,
+        message
+    ){
+        this.Auth = auth;
+        this.Token = token;
+        this.User = user,
+        this.Message = message;
+        this.ErrorCode = errorCode || EErrorCode.None;
+    }
+}
+
 class CommandResult {
     constructor(
         rows,
@@ -82,6 +98,7 @@ module.exports = {
     Obj,
     Error,
     EErrorCode,
+    AuthResult,
     CommandResult,
     QueryResult
 };
