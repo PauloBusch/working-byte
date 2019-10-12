@@ -28,6 +28,14 @@ class User extends EntityBase {
         this.login = login;
         this.password = password;
     }
+
+    remove(){
+        super.remove();
+        
+        //MySQL currently doesn't support conditional indexes.
+        this.first_name = `${NewId()}-${this.first_name}`;//UQ_user_name
+        this.last_name = `${NewId()}-${this.last_name}`;//UQ_user_name
+    }
 }
 
 module.exports = {

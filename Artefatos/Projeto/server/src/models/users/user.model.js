@@ -47,7 +47,7 @@ const UserModel = (sequelize, dataTypes) => {
             allowNull: false
         },
         password: {
-            type: dataTypes.STRING(50),
+            type: dataTypes.STRING(60),
             allowNull: false
         },
         removed: {
@@ -63,6 +63,7 @@ const UserModel = (sequelize, dataTypes) => {
         updatedAt: 'user_updated',
         indexes: [
             {
+                name: 'UQ_user_name',
                 unique: true,
                 fields: ['first_name','last_name']
             }
