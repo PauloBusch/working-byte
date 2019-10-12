@@ -1,4 +1,5 @@
 const { EntityBase } = require('../../utils/database/entityBase');
+const { NewId } = require('../../utils/database/random');
 
 class User extends EntityBase {
     constructor(

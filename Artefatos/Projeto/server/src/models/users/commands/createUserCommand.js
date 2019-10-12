@@ -38,40 +38,40 @@ class CreateUserCommand extends Command {
 
     async GetError(){
         if (!this.id)
-            return new Error(EErrorCode.InvalidParams, "Parameter id cannot be null");
+            return new Error(EErrorCode.InvalidParams, 'Parameter id cannot be null');
             
         if (!this.first_name)
-            return new Error(EErrorCode.InvalidParams, "Parameter first_name cannot be null");
+            return new Error(EErrorCode.InvalidParams, 'Parameter first_name cannot be null');
             
         if (!this.last_name)
-            return new Error(EErrorCode.InvalidParams, "Parameter last_name cannot be null");
+            return new Error(EErrorCode.InvalidParams, 'Parameter last_name cannot be null');
             
         if (!this.email || !Email.valid(this.email))
-            return new Error(EErrorCode.InvalidParams, "Parameter email is not valid");
+            return new Error(EErrorCode.InvalidParams, 'Parameter email is not valid');
             
         if (!this.address)
-            return new Error(EErrorCode.InvalidParams, "Parameter address cannot be null");
+            return new Error(EErrorCode.InvalidParams, 'Parameter address cannot be null');
             
         if (!this.phone || !Phone.valid(this.phone))
-            return new Error(EErrorCode.InvalidParams, "Parameter phone is not valid");
+            return new Error(EErrorCode.InvalidParams, 'Parameter phone is not valid');
             
         if (!this.cpf || !Cpf.valid(this.cpf))
-            return new Error(EErrorCode.InvalidParams, "Parameter cpf is not valid");
+            return new Error(EErrorCode.InvalidParams, 'Parameter cpf is not valid');
             
         if (!this.age || !Age.valid(this.age))
-            return new Error(EErrorCode.InvalidParams, "Parameter age is not valid");
+            return new Error(EErrorCode.InvalidParams, 'Parameter age is not valid');
             
         if (this.is_personal == null || this.is_personal == undefined)
-            return new Error(EErrorCode.InvalidParams, "Parameter is_personal cannot be null");
+            return new Error(EErrorCode.InvalidParams, 'Parameter is_personal cannot be null');
             
         if (!this.sexo || !Sexo.valid(this.sexo))
-            return new Error(EErrorCode.InvalidParams, "Parameter sexo is not valid");
+            return new Error(EErrorCode.InvalidParams, 'Parameter sexo is not valid');
             
         if (!this.login || !Login.valid(this.login))
-            return new Error(EErrorCode.InvalidParams, "Parameter login is not valid");
+            return new Error(EErrorCode.InvalidParams, 'Parameter login is not valid');
             
         if (!this.password)
-            return new Error(EErrorCode.InvalidParams, "Parameter password cannot be null");
+            return new Error(EErrorCode.InvalidParams, 'Parameter password cannot be null');
 
         const existsName = await UserDb.count({ where: { first_name: this.first_name, last_name: this.last_name, removed: false } });
         if (existsName)
@@ -79,12 +79,13 @@ class CreateUserCommand extends Command {
         
         const existsEmail = await UserDb.count({ where: { email: this.email, removed: false } });
         if(existsEmail)
-            return new Error(EErrorCode.DuplicateUnique, "Parameter email already exists");
+            return new Error(EErrorCode.DuplicateUnique, 'Parameter email already exists');
         
         const existsLogin = await UserDb.count({ where: { login: this.login, removed: false } });
         if(existsLogin)
-            return new Error(EErrorCode.DuplicateUnique, "Parameter login already exists");
-    
+            return new Error(EErrorCode.DuplicateUnique, 'Parameter login already exists');
+        
+        return null;
     }
 
     async HasPermission(){
