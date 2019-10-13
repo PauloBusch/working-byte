@@ -12,7 +12,7 @@
                   </mat-error>
               </mat-form-field>
               <mat-form-field class="full-width-input">
-                  <input type="password" matInput placeholder="Senha" formControlName="password" required>
+                  <input type="password" matInput placeholder="Senha" formControlName="password" (keyup.enter)="login()" required>
                   <mat-error *ngIf="isFieldInvalid('password')">
                     Informe a senha
                   </mat-error>

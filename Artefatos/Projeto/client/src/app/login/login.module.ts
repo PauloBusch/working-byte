@@ -5,8 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule,
   MatFormFieldModule,
   MatSnackBarModule,
-  MatInputModule
+  MatInputModule,
+  MatButtonModule
 } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { LoginComponent } from './login-form/login.component';
 import { LogoModule } from '../shared/components/logo/logo.module';
@@ -22,6 +25,9 @@ import { LogoModule } from '../shared/components/logo/logo.module';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    FlexLayoutModule,
     MatSnackBarModule,
 
     MatCardModule,

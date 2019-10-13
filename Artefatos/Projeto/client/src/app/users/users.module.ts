@@ -9,7 +9,8 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatListModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatMenuModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
@@ -29,6 +30,7 @@ import { UserListComponent } from './user-list/user-list.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatMenuModule,
 
     MatButtonModule,
 

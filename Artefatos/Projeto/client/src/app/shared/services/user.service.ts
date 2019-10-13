@@ -7,6 +7,13 @@ import { CommadResult } from 'src/app/shared/models/CommandRestult.model';
 import { QueryResult } from 'src/app/shared/models/QueryResult.model';
 import { User } from 'src/app/users/models/user.models';
 
+import { CreateUserCommand } from 'src/app/users/models/commands/createUserCommand';
+import { UpdateUserCommand } from 'src/app/users/models/commands/updateUserCommand';
+import { RemoveUserCommand } from 'src/app/users/models/commands/removeUserCommand';
+import { ListUserQuery } from 'src/app/users/models/queries/listUserQuery';
+import { GetUserQuery } from 'src/app/users/models/queries/getUserQuery';
+import { Content } from '../utils/content';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,23 +24,23 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  createUser(user: User): Observable<CommadResult> {
-    return this.http.post<CommadResult>(`${this.url}/users`, user);
+  createUser(command: CreateUserCommand): Observable<CommadResult> {
+    return this.http.post<CommadResult>(`${this.url}/users`, command);
   }
 
-  updateUser(user: User): Observable<CommadResult> {
-    return this.http.put<CommadResult>(`${this.url}/users/${user.id}`, user);
+  updateUser(command: UpdateUserCommand): Observable<CommadResult> {
+    return this.http.put<CommadResult>(`${this.url}/users/${command.id}`, command);
   }
 
-  deleteUser(id: string): Observable<CommadResult> {
-    return this.http.delete<CommadResult>(`${this.url}/users/${id}`);
+  deleteUser(command: RemoveUserCommand): Observable<CommadResult> {
+    return this.http.delete<CommadResult>(`${this.url}/users/${command.id}`);
   }
 
-  getUsers(): Observable<QueryResult<User>> {
-    return this.http.get<QueryResult<User>>(`${this.url}/users`);
+  getUsers(query: ListUserQuery): Observable<QueryResult<User>> {
+    return this.http.get<QueryResult<User>>(`${this.url}/users`, Content.GetParams(query));
   }
 
-  getUserById(id: string): Observable<QueryResult<User>> {
-    return this.http.get<QueryResult<User>>(`${this.url}/users/${id}`);
+  getUserById(query: GetUserQuery): Observable<QueryResult<User>> {
+    return this.http.get<QueryResult<User>>(`${this.url}/users/${query.id}`, Content.GetParams(query));
   }
 }

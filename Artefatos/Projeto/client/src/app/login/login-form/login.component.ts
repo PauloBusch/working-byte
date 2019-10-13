@@ -37,6 +37,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    if (this.form.invalid) {
+      this.snackBar.open('Informe o login e a senha', 'OK', { duration: 3000 });
+      return;
+    }
+
     const { value } = this.form;
     const command = new AuthUserCommand(
       value.login,

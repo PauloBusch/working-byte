@@ -30,9 +30,15 @@ export class AuthService {
       }));
   }
 
-  // logout(): Observable<AuthResult> {
-
-  // }
+  logout(): void {
+    this.http.get<AuthResult>(`${this.url}/logout`).subscribe(
+      (authResult) => {
+        if (!authResult.Auth) {
+          localStorage.removeItem('token');
+        }
+      }
+    );
+  }
 
   getAccessToken() {
     return localStorage.getItem('token');
