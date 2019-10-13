@@ -10,7 +10,6 @@ class RemoveUserCommand extends Command {
     ){
         super();
         this.id = id;
-
     }
     
     async GetError(){

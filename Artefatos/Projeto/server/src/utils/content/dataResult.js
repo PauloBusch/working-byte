@@ -1,9 +1,15 @@
+const queryString = require('query-string');
+const config = { parseNumbers: true, parseBooleans: true };
+
 const Obj = {
     getData(obj, req){
         const json = req.body;
-        const parm = req.params;
-        for (var prop in parm)
-            json[prop] = parm[prop];
+        const params = req.params;
+        const query = queryString.parseUrl(req.url, config).query;
+        for (var prop in query)
+            json[prop] = query[prop];
+        for (var prop in params)
+            json[prop] = params[prop];
             
         return this.cast(obj, json);
     },

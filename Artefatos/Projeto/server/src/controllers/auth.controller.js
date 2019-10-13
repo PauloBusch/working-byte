@@ -1,5 +1,6 @@
-const { AuthUserCommand } = require('../models/users/commands/authUserCommand');
 const { AuthHandle } = require('../utils/handle/authHandle');
+const { AuthUserCommand } = require('../models/users/commands/authUserCommand');
+const { LogoutUserCommand } = require('../models/users/commands/logoutUserCommand');
 
 const { Obj } = require('../utils/content/dataResult');
 
@@ -13,7 +14,10 @@ controllerAuth.login = async (req, res) => {
 }
 
 controllerAuth.logout = async (req, res) => {
-
+    const command = Obj.getData(new LogoutUserCommand(), req);
+    const result = await AuthHandle.Execute(command);
+    res.cookie('auth', null);
+    res.json(result); 
 }
 
 module.exports = {
