@@ -32,8 +32,8 @@ export class UserService {
     return this.http.put<CommadResult>(`${this.url}/users/${command.id}`, command);
   }
 
-  deleteUser(command: RemoveUserCommand): Observable<CommadResult> {
-    return this.http.delete<CommadResult>(`${this.url}/users/${command.id}`);
+  removeUser(command: RemoveUserCommand): Observable<CommadResult> {
+    return this.http.delete<CommadResult>(`${this.url}/users/${command.id}`, Content.GetParams(command));
   }
 
   getUsers(query: ListUserQuery): Observable<QueryResult<User>> {

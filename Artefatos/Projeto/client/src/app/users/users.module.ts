@@ -7,15 +7,18 @@ import {
   MatSelectModule,
   MatButtonModule,
   MatToolbarModule,
-  MatIconModule,
   MatListModule,
   MatSidenavModule,
-  MatMenuModule
+  MatMenuModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 
 import { UserComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { UserListComponent } from './user-list/user-list.component';
   ],
   imports: [
     CommonModule,
+    AppRoutingModule,
+    MatProgressSpinnerModule,
 
     MatCardModule,
     FormsModule,
@@ -31,13 +36,12 @@ import { UserListComponent } from './user-list/user-list.component';
     MatInputModule,
     MatSelectModule,
     MatMenuModule,
-
     MatButtonModule,
-
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FlexLayoutModule
   ],
   exports: [
     UserComponent

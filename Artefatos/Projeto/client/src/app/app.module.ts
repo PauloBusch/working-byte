@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
   MatButtonModule, MatSelectModule, MatToolbarModule,
-  MatListModule, MatSidenavModule
+  MatListModule, MatSidenavModule, MatDialogModule, MatDialogRef
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,13 +21,16 @@ import { UsersModule } from './users/users.module';
 import { LogoModule } from './shared/components/logo/logo.module';
 import { HttpInterceptorProviders } from './shared/interceptors/provider-interceptor';
 import { AuthGuard } from './shared/guards/auth.service';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm-dialog.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     TrainingComponent,
-    MenuComponent
+    MenuComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     LoginModule,
@@ -52,10 +55,13 @@ import { AuthGuard } from './shared/guards/auth.service';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule
   ],
+  entryComponents:[ConfirmDialogComponent],
   providers: [
     AuthGuard,
+    ConfirmDialogService,
     HttpClientModule,
     HttpInterceptorProviders,
     { provide: LOCALE_ID, useValue: 'pt-BR' }

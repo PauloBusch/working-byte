@@ -29,7 +29,7 @@ class RemoveUserCommand extends Command {
     }
 
     async Execute(){
-        const query = { where: { id: this.id } };
+        const query = { raw: true, where: { id: this.id } };
         const userDb = await UserDb.findOne(query);
         const user = Obj.cast(new User(), userDb);
         user.remove();
