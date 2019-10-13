@@ -4,8 +4,8 @@ import {
   MatButtonModule, MatSelectModule, MatToolbarModule,
   MatListModule, MatSidenavModule
 } from '@angular/material';
-
 import { UserService } from 'src/app/shared/services/user.service';
+
 
 @Component({
   selector: 'app-user-list',

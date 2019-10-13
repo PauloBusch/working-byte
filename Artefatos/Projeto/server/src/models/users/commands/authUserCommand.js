@@ -52,7 +52,7 @@ class AuthUserCommand extends Command {
         const userDb = await UserDb.findOne(query);
 
         if (!await Auth.validate(this.password, userDb.password))
-            return new AuthResult(false, undefined, undefined, EErrorCode.Unauthorized, "Invalid password");
+            return new AuthResult(false, undefined, undefined, EErrorCode.Fail, "Invalid password");
 
         const userData = new UserData(
             userDb.id,

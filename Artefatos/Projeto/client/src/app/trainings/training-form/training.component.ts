@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-
-import { Training } from './models/training.model';
+import { Training } from '../models/training.model';
 
 @Component({
   selector: 'app-training',

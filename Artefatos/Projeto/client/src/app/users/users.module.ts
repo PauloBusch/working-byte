@@ -1,16 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserComponent } from './user.component';
 import {
-  MatCardModule, MatFormFieldModule, MatInputModule,
-  MatButtonModule, MatSelectModule, MatToolbarModule,
-  MatListModule, MatSidenavModule, MatIconModule
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
+import { UserComponent } from './user-form/user-form.component';
+import { UserListComponent } from './user-list/user-list.component';
+
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +37,8 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     MatSidenavModule
   ],
-  providers: []
+  exports: [
+    UserComponent
+  ]
 })
-export class UserModule { }
+export class UsersModule { }

@@ -1,13 +1,13 @@
 <div class="bg-academia">
   <mat-card>
       <mat-card-content>
-          <form [formGroup]="form">
+          <form [formGroup]="form" (ngSubmit)="login()">
               <div class="margin-height-20">
                   <app-logo></app-logo>
               </div>
               <mat-form-field class="full-width-input">
-                  <input matInput placeholder="Login" formControlName="userName" required>
-                  <mat-error *ngIf="isFieldInvalid('userName')">
+                  <input matInput placeholder="Login" formControlName="login" required>
+                  <mat-error *ngIf="isFieldInvalid('login')">
                     Informe o login
                   </mat-error>
               </mat-form-field>
@@ -21,7 +21,7 @@
       </mat-card-content>
       <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center">
           <a href="#" align="start">Esqueci minha senha</a>
-          <a [routerLink]="['/menu']"><button mat-raised-button color="primary" align="end">Logar</button></a>
+          <a><button (click)="login()" mat-raised-button color="primary" align="end">Logar</button></a>
       </mat-card-actions>
   </mat-card>
 </div>
