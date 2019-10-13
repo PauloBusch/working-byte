@@ -7,12 +7,13 @@ import { MenuComponent } from './shared/components/menu/menu.component';
 import { TrainingComponent } from './trainings/training-form/training.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserComponent } from './users/user-form/user-form.component';
+import { AuthGuard } from './shared/guards/auth.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'menu', component: MenuComponent, children: [
-    { path: 'training', component: TrainingComponent },
-    { path: 'users', component: UserListComponent, children: [
+  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard], children: [
+    { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
+    { path: 'users', component: UserListComponent, canActivate: [AuthGuard], children: [
       { path: 'new', component: UserComponent },
       { path: 'edit/:id', component: UserComponent },
     ] },

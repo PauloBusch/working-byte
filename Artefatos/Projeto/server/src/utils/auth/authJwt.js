@@ -31,7 +31,7 @@ const Token = {
         const callback = async (success, tokenData) => {
             if (!success){
                 const result = new AuthResult(false, undefined, undefined, EErrorCode.Forebiden, 'Failed to authenticate token.');
-                res.status(500).send(result);
+                res.status(401).send(result);
                 return;
             }
             req.body.tokenData = tokenData;

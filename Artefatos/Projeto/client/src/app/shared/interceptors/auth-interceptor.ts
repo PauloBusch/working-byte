@@ -15,15 +15,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const token = this.authService.getAccessToken();
-    const headers = req.headers
-        .set('access-token', token);
+    const headers = token ? req.headers.set('access-token', token) : req.headers;
 
     const authReq = req.clone({ headers });
-
     return next.handle(authReq)
     .pipe(
       catchError(err => {
-        if (err instanceof HttpErrorResponse && err.status === 401){
+        if (err instanceof HttpErrorResponse && err.status === 401) {
             this.snackBar.open('Sua sessão expirou. Faça login novamente.', 'OK', { duration: 3000 });
         }
         return throwError(err);

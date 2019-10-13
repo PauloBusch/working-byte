@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     );
     this.authService.login(command).subscribe(authResult => {
       if (authResult.Auth) {
-        this.router.navigate(['/menu']);
+        this.router.navigate(['menu']);
         return;
       }
       if (authResult.ErrorCode === EErrorCode.InvalidParams) {
