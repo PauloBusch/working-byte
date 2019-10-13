@@ -19,6 +19,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
 import { LoginModule } from './login/login.module';
 import { UsersModule } from './users/users.module';
 import { LogoModule } from './shared/components/logo/logo.module';
+import { HttpInterceptorProviders } from './shared/interceptors/provider-interceptor';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { LogoModule } from './shared/components/logo/logo.module';
   ],
   providers: [
     HttpClientModule,
+    HttpInterceptorProviders,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]

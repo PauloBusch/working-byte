@@ -24,6 +24,7 @@ export class AuthService {
     return this.http.post<AuthResult>(`${this.url}/login`, command)
       .pipe(tap(authResult => {
         if (authResult.Auth) {
+          localStorage.setItem('token', authResult.Token);
           this.loginEvent.emit(authResult.User);
         }
       }));
@@ -32,4 +33,8 @@ export class AuthService {
   // logout(): Observable<AuthResult> {
 
   // }
+
+  getAccessToken() {
+    return localStorage.getItem('token');
+  }
 }

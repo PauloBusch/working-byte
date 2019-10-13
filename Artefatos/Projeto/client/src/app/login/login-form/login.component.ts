@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     );
     this.authService.login(command).subscribe(authResult => {
       if (authResult.Auth) {
-        localStorage.setItem('token', authResult.Token);
         this.router.navigate(['/menu']);
         return;
       }
