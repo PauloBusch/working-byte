@@ -7,16 +7,31 @@
   <div fxLayout="column" fxLayoutAlign="space-around stretch">
     
     <div class="page-header" fxLayout="row">
-      <div fxFlex="20" fxLayoutAlign="start center">
+      <div fxFlex="10" fxLayoutAlign="start center">
         <div fxFlex="100">
           <h2>Usuários</h2>
         </div>
       </div>
       
-      <div fxFlex="80" fxLayoutAlign="start center">
-        <mat-form-field fxFlex="50" floatLabel="never">
-          <input matInput placeholder="Localizar usuário (nome, email)" (keyup.enter)="loadUsers()" [(ngModel)]="listQuery.search"/>
+      <div fxFlex="80" fxLayoutAlign="center center">
+
+        <mat-form-field fxFlex="40" floatLabel="never">
+          <input matInput placeholder="Localizar usuário" 
+            (keyup.enter)="listQuery.page=1;loadUsers();" 
+            [(ngModel)]="listQuery.search"/>
         </mat-form-field>
+
+        <mat-form-field fxFlex="40" floatLabel="never" [style.left.px]="15">
+          <mat-label>Tipo</mat-label>
+          <mat-select 
+            (ngModelChange)="listQuery.page=1;loadUsers();"
+            [(ngModel)]="listQuery.is_personal">
+            <mat-option [value]="undefined">Todos</mat-option>
+            <mat-option [value]="true">Personal</mat-option>
+            <mat-option [value]="false">Aluno</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
       </div>
 
       <div fxFlex="none" class="actions" fxLayoutAlign="end center">
