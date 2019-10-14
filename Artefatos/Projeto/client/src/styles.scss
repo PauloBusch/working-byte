@@ -4,15 +4,16 @@ body, html {
 
 .page-container {
     position: relative;
-    padding: 16px 16px 70px 16px !important;
+    padding: 16px !important;
     margin: auto;
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 100px);
     background-color: rgb(255, 255, 255);
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .loading-spinner {
-    margin-top: 150px;
+    position: absolute;
+    left: 45%;
     mat-spinner {
         margin: auto;
         width: 100px;

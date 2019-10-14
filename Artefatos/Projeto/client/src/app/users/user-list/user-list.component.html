@@ -32,20 +32,33 @@
       <mat-spinner mode="indeterminate"></mat-spinner>
     </div>
 
-    <mat-list *ngIf="!users.loading" class="list-users">
-      <mat-nav-list *ngFor="let user of users.list" >
-        <mat-list-item (click)="edit(user.id)">
-          <img matListAvatar src="../../../assets//images//avatar.png">
-          <h3 matLine>{{ user.first_name }}</h3>
-          <p matLine class="user-email"><span>{{ user.email }}</span></p>
-          <button class="button-icon" mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
-        </mat-list-item>
-        <mat-menu #userMenu="matMenu">
-          <button mat-menu-item (click)="edit(user.id)">Editar</button>
-          <button mat-menu-item (click)="remove(user.id)">Remover</button>
-        </mat-menu>
-      </mat-nav-list>
-    </mat-list>
-
+    <div class="list-users">
+      <div *ngIf="!users.loading">
+        <mat-list>
+            <mat-nav-list *ngFor="let user of users.list" >
+              <mat-list-item (click)="edit(user.id)">
+                <img matListAvatar src="../../../assets//images//avatar.png">
+                <h3 matLine>{{ user.first_name }}</h3>
+                <p matLine class="user-email"><span>{{ user.email }}</span></p>
+                <button class="button-icon" mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
+              </mat-list-item>
+              <mat-menu #userMenu="matMenu">
+                <button mat-menu-item (click)="edit(user.id)">Editar</button>
+                <button mat-menu-item (click)="remove(user.id)">Remover</button>
+              </mat-menu>
+            </mat-nav-list>
+          </mat-list>
+      </div>
+    </div>
+    <div>
+      <mat-paginator 
+        [length]="users.length"
+        [pageSize]="listQuery.limit" 
+        [pageIndex]="listQuery.page -1"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        [showFirstLastButtons]="true"
+        (page)="pageChange($event)">
+      </mat-paginator>
+    </div>
   </div>
 </div>

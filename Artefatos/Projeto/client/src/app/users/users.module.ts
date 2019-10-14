@@ -10,7 +10,8 @@ import {
   MatListModule,
   MatSidenavModule,
   MatMenuModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatPaginatorModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +30,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     AppRoutingModule,
     MatProgressSpinnerModule,
-
+    MatPaginatorModule,
     MatCardModule,
     FormsModule,
     MatFormFieldModule,

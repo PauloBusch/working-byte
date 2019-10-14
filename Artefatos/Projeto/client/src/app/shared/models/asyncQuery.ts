@@ -6,6 +6,7 @@ import { EErrorCode } from './EErrorCode.model';
 export class AsyncQuery<Type> {
     public list: Type[];
     public subsc: Subscription;
+    public length: number;
     public loading: boolean;
     public noItems: boolean;
 
@@ -22,6 +23,7 @@ export class AsyncQuery<Type> {
             if (res.ErrorCode ===  EErrorCode.None) {
                 this.list = res.List;
                 this.noItems = !res.List.length;
+                this.length = res.Rows;
             }
         }));
     }

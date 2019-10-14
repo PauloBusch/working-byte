@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
   MatButtonModule, MatSelectModule, MatToolbarModule,
-  MatListModule, MatSidenavModule, MatSnackBar
+  MatListModule, MatSidenavModule, MatSnackBar, MatPaginator
 } from '@angular/material';
+import {PageEvent} from '@angular/material/paginator';
+
 import { UserService } from 'src/app/shared/services/user.service';
 import { ListUserQuery } from '../models/queries/listUserQuery';
 import { User } from '../models/user.models';
@@ -12,6 +14,7 @@ import { RemoveUserCommand } from '../models/commands/removeUserCommand';
 import { QueryResult } from 'src/app/shared/models/QueryResult.model';
 import { Observable } from 'rxjs';
 import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
+import { Storage } from 'src/app/shared/utils/storage';
 
 
 @Component({
@@ -21,8 +24,9 @@ import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 })
 export class UserListComponent implements OnInit, OnDestroy {
 
-  private listQuery: ListUserQuery;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  private listQuery: ListUserQuery;
   private users = new AsyncQuery<User>();
 
   constructor(
@@ -30,7 +34,9 @@ export class UserListComponent implements OnInit, OnDestroy {
     private confirmDialogService: ConfirmDialogService,
     private snackBar: MatSnackBar
   ) {
-    this.listQuery = new ListUserQuery(10, 1, true, 'user_created');
+    const limit = Storage.get('users.limit', 5);
+    const page = Storage.get('users.page', 1);
+    this.listQuery = new ListUserQuery(limit, page, true, 'user_created');
   }
 
   ngOnInit() {
@@ -44,6 +50,14 @@ export class UserListComponent implements OnInit, OnDestroy {
   loadUsers() {
     this.users.$list = this.userService.getUsers(this.listQuery);
     this.users.subsc = this.users.$list.subscribe();
+  }
+
+  pageChange(ev: PageEvent) {
+    this.listQuery.page = ev.pageIndex + 1;
+    this.listQuery.limit = ev.pageSize;
+    Storage.set('users.limit', this.listQuery.limit);
+    Storage.set('users.page', this.listQuery.page);
+    this.loadUsers();
   }
 
   edit(id: string) {

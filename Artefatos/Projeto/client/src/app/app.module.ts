@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
   MatButtonModule, MatSelectModule, MatToolbarModule,
-  MatListModule, MatSidenavModule, MatDialogModule, MatDialogRef
+  MatListModule, MatSidenavModule, MatDialogModule, MatDialogRef, MatPaginatorIntl
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +23,7 @@ import { HttpInterceptorProviders } from './shared/interceptors/provider-interce
 import { AuthGuard } from './shared/guards/auth.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm-dialog.service';
+import { CustomPaginator } from './shared/utils/paginator';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm
     ConfirmDialogService,
     HttpClientModule,
     HttpInterceptorProviders,
+    { provide: MatPaginatorIntl, useValue: CustomPaginator() },
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
