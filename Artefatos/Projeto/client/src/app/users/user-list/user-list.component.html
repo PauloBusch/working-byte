@@ -4,39 +4,48 @@
     <mat-icon>add</mat-icon>
   </a>
 
-  <div class="page-header" fxLayout="row">
-    <div fxFlex="100" fxLayoutAlign="start center">
-      <div fxFlex="100">
-        <h2 class="page-title">Usuários</h2>
+  <div fxLayout="column" fxLayoutAlign="space-around stretch">
+    
+    <div class="page-header" fxLayout="row">
+      <div fxFlex="20" fxLayoutAlign="start center">
+        <div fxFlex="100">
+          <h2>Usuários</h2>
+        </div>
+      </div>
+      
+      <div fxFlex="80" fxLayoutAlign="start center">
+        <mat-form-field fxFlex="50" floatLabel="never">
+          <input matInput placeholder="Localizar usuário (nome, email)" (keyup.enter)="loadUsers()" [(ngModel)]="listQuery.search"/>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="none" class="actions" fxLayoutAlign="end center">
+        <button mat-icon-button type="button" (click)="loadUsers()" matTooltip="Atualizar">
+          <mat-icon>refresh</mat-icon>
+        </button>
       </div>
     </div>
 
-    <div fxFlex="none" class="actions" fxLayoutAlign="end center">
-      <button mat-icon-button type="button" (click)="loadUsers()" matTooltip="Atualizar">
-        <mat-icon>refresh</mat-icon>
-      </button>
+    <div *ngIf="users.noItems">Nenhum usuário!</div>
+
+    <div *ngIf="users.loading" class="loading-spinner">
+      <mat-spinner mode="indeterminate"></mat-spinner>
     </div>
+
+    <mat-list *ngIf="!users.loading" class="list-users">
+      <mat-nav-list *ngFor="let user of users.list" >
+        <mat-list-item (click)="edit(user.id)">
+          <img matListAvatar src="../../../assets//images//avatar.png">
+          <h3 matLine>{{ user.first_name }}</h3>
+          <p matLine class="user-email"><span>{{ user.email }}</span></p>
+          <button class="button-icon" mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
+        </mat-list-item>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="edit(user.id)">Editar</button>
+          <button mat-menu-item (click)="remove(user.id)">Remover</button>
+        </mat-menu>
+      </mat-nav-list>
+    </mat-list>
+
   </div>
-
-  <div *ngIf="users.noItems">Nenhum usuário cadastrado!</div>
-
-  <div *ngIf="users.loading" class="loading-spinner">
-    <mat-spinner mode="indeterminate"></mat-spinner>
-  </div>
-
-  <mat-list *ngIf="!users.loading">
-    <mat-nav-list *ngFor="let user of users.list" >
-      <mat-list-item (click)="edit(user.id)">
-        <img matListAvatar src="../../../assets//images//avatar.png">
-        <h3 matLine>{{ user.first_name }}</h3>
-        <p matLine class="user-email"><span>{{ user.email }}</span></p>
-        <button class="button-icon" mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
-      </mat-list-item>
-      <mat-menu #userMenu="matMenu">
-        <button mat-menu-item (click)="edit(user.id)">Editar</button>
-        <button mat-menu-item (click)="remove(user.id)">Remover</button>
-      </mat-menu>
-    </mat-nav-list>
-  </mat-list>
-
 </div>

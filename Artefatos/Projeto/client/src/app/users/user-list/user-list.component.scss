@@ -2,6 +2,11 @@
     color: #aaa;
 }
 
+.list-users {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
 a[mat-fab] {
     position: fixed;
     bottom: 30px;
