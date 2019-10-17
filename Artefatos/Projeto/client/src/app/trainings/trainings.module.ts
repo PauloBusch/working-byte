@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TrainingListComponent } from './training-list/training-list.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TrainingListComponent],
   imports: [
     CommonModule
   ]
