@@ -44,13 +44,6 @@ class ListUserQuery extends Query {
             'first_name', 
             'last_name', 
             'email',
-            'address', 
-            'phone', 
-            'cpf', 
-            'age', 
-            'is_personal',
-            'sexo', 
-            'login'
         ];
         if(!this.columnSort || !_.some(fields, f => f == this.columnSort))
             this.columnSort = 'user_created';

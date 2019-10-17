@@ -74,7 +74,7 @@ class CreateUserCommand extends Command {
             return new Error(EErrorCode.InvalidParams, 'Parameter password cannot be null');
 
         const existsName = await UserDb.count({ where: { first_name: this.first_name, last_name: this.last_name, removed: false } });
-        if (existsName)
+        if (existsName) 
             return new Error(EErrorCode.DuplicateUnique, `User with first_name and last_name already exists`);
         
         const existsEmail = await UserDb.count({ where: { email: this.email, removed: false } });

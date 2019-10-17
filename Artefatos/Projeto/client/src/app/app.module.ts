@@ -24,6 +24,7 @@ import { AuthGuard } from './shared/guards/auth.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm-dialog.service';
 import { CustomPaginator } from './shared/utils/paginator';
+import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CustomPaginator } from './shared/utils/paginator';
     PageNotFoundComponent,
     TrainingComponent,
     MenuComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    BottomSheetComponent
   ],
   imports: [
     LoginModule,
@@ -59,7 +61,6 @@ import { CustomPaginator } from './shared/utils/paginator';
     MatSidenavModule,
     MatDialogModule
   ],
-  entryComponents:[ConfirmDialogComponent],
   providers: [
     AuthGuard,
     ConfirmDialogService,

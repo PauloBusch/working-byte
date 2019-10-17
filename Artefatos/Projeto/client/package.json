@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~8.0.1",
     "@angular/router": "~8.0.1",
     "@material/list": "^3.2.0",
+    "lodash": "^4.17.15",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
     "tslib": "^1.9.0",

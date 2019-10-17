@@ -1,9 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
-import {
-  MatCardModule, MatFormFieldModule, MatInputModule,
-  MatButtonModule, MatSelectModule, MatToolbarModule,
-  MatListModule, MatSidenavModule, MatSnackBar, MatPaginator
-} from '@angular/material';
+import { MatSnackBar, MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import {PageEvent} from '@angular/material/paginator';
 
 import { UserService } from 'src/app/shared/services/user.service';
@@ -11,10 +7,10 @@ import { ListUserQuery } from '../models/queries/listUserQuery';
 import { User } from '../models/user.models';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { RemoveUserCommand } from '../models/commands/removeUserCommand';
-import { QueryResult } from 'src/app/shared/models/QueryResult.model';
-import { Observable } from 'rxjs';
 import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 import { Storage } from 'src/app/shared/utils/storage';
+import { UserComponent } from '../user-form/user-form.component';
+import { UserList } from '../models/view-models/user.list';
 
 
 @Component({
@@ -24,10 +20,8 @@ import { Storage } from 'src/app/shared/utils/storage';
 })
 export class UserListComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   private listQuery: ListUserQuery;
-  private users = new AsyncQuery<User>();
+  private users = new AsyncQuery<UserList>();
 
   constructor(
     private userService: UserService,
@@ -47,6 +41,23 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.users.subsc.unsubscribe();
   }
 
+  testes() {
+    debugger;
+  }
+
+  public pushUserList(user: UserList) {
+    const indexUser = this.users.list.findIndex(us => us.id === user.id);
+    if (indexUser === -1) {
+      this.users.list.unshift(user);
+    } else {
+      this.users.list[indexUser] = user;
+    }
+  }
+
+  public removeUserList(id: string) {
+    this.users.list = this.users.list.filter(us => us.id !== id);
+  }
+
   loadUsers() {
     this.users.$list = this.userService.getUsers(this.listQuery);
     this.users.subsc = this.users.$list.subscribe();
@@ -60,10 +71,6 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.loadUsers();
   }
 
-  edit(id: string) {
-
-  }
-
   remove(id: string) {
     this.confirmDialogService.confirmRemove('Deseja remover o usuário?').subscribe(confirm => {
       if (!confirm) {
@@ -74,7 +81,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.userService.removeUser(command).subscribe(
         (result) => {
           if (result.Rows > 0) {
-            this.users.list = this.users.list.filter(us => us.id !== id);
+            this.removeUserList(id);
             this.snackBar.open('Usuário removido com sucesso!', 'OK', { duration: 3000 });
             return;
           }

@@ -11,15 +11,22 @@ import {
   MatSidenavModule,
   MatMenuModule,
   MatProgressSpinnerModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatBottomSheetModule,
+  MatSnackBarModule,
+  MatCheckboxModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Patterns } from '../shared/utils/validators';
+import { UserService } from '../shared/services/user.service';
+import { Random } from '../shared/utils/random';
 
 @NgModule({
   declarations: [
@@ -28,24 +35,33 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   imports: [
     CommonModule,
+    MatBottomSheetModule,
     AppRoutingModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatCardModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatSelectModule,
+    MatCheckboxModule,
     MatMenuModule,
-    MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-    FlexLayoutModule
+
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    MatSnackBarModule,
+
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
-  exports: [
-    UserComponent
+  providers: [
+    Patterns,
+    UserService,
+    Random
   ]
 })
 export class UsersModule { }

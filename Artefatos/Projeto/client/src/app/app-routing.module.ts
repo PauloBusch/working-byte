@@ -6,19 +6,22 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { MenuComponent } from './shared/components/menu/menu.component';
 import { TrainingComponent } from './trainings/training-form/training.component';
 import { UserListComponent } from './users/user-list/user-list.component';
-import { UserComponent } from './users/user-form/user-form.component';
 import { AuthGuard } from './shared/guards/auth.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { UserComponent } from './users/user-form/user-form.component';
+import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard], children: [
     { path: 'confirm', component: ConfirmDialogComponent, canActivate: [AuthGuard] },
     { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
-    { path: 'users', component: UserListComponent, canActivate: [AuthGuard], children: [
-      { path: 'new', component: UserComponent },
-      { path: 'edit/:id', component: UserComponent },
-    ] },
+    { path: 'users', component: UserListComponent, canActivate: [AuthGuard],
+      children: [
+        { path: 'new', component: BottomSheetComponent, data: { form: UserComponent } },
+        { path: 'edit/:id', component: BottomSheetComponent, data: { form: UserComponent } }
+      ]
+    },
     { path: '',   redirectTo: '/menu/training', pathMatch: 'full' },
 
   ] },

@@ -25,6 +25,7 @@ export class AuthService {
       .pipe(tap(authResult => {
         if (authResult.Auth) {
           localStorage.setItem('token', authResult.Token);
+          localStorage.setItem('user', btoa(JSON.stringify(authResult.User)));
           this.loginEvent.emit(authResult.User);
         }
       }));
@@ -35,6 +36,7 @@ export class AuthService {
       (authResult) => {
         if (!authResult.Auth) {
           localStorage.removeItem('token');
+          localStorage.removeItem('user');
         }
       }
     );
@@ -42,5 +44,14 @@ export class AuthService {
 
   getAccessToken() {
     return localStorage.getItem('token');
+  }
+
+  getUser() {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      return null;
+    }
+
+    return JSON.parse(atob(user));
   }
 }

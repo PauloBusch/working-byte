@@ -4,6 +4,8 @@
     <mat-icon>add</mat-icon>
   </a>
 
+  <router-outlet (testes)="testes()"></router-outlet>
+
   <div fxLayout="column" fxLayoutAlign="space-around stretch">
     
     <div class="page-header" fxLayout="row">
@@ -51,14 +53,14 @@
       <div *ngIf="!users.loading">
         <mat-list>
             <mat-nav-list *ngFor="let user of users.list" >
-              <mat-list-item (click)="edit(user.id)">
+              <mat-list-item>
                 <img matListAvatar src="../../../assets//images//avatar.png">
                 <h3 matLine>{{ user.first_name }}</h3>
                 <p matLine class="user-email"><span>{{ user.email }}</span></p>
                 <button class="button-icon" mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
               </mat-list-item>
               <mat-menu #userMenu="matMenu">
-                <button mat-menu-item (click)="edit(user.id)">Editar</button>
+                <button mat-menu-item [routerLink]="['edit', user.id]">Editar</button>
                 <button mat-menu-item (click)="remove(user.id)">Remover</button>
               </mat-menu>
             </mat-nav-list>

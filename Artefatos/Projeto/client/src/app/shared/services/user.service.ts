@@ -13,6 +13,8 @@ import { RemoveUserCommand } from 'src/app/users/models/commands/removeUserComma
 import { ListUserQuery } from 'src/app/users/models/queries/listUserQuery';
 import { GetUserQuery } from 'src/app/users/models/queries/getUserQuery';
 import { Content } from '../utils/content';
+import { UserList } from 'src/app/users/models/view-models/user.list';
+import { UserDetails } from 'src/app/users/models/view-models/user.details';
 
 @Injectable({
   providedIn: 'root'
@@ -36,11 +38,11 @@ export class UserService {
     return this.http.delete<CommadResult>(`${this.url}/users/${command.id}`, Content.GetParams(command));
   }
 
-  getUsers(query: ListUserQuery): Observable<QueryResult<User>> {
-    return this.http.get<QueryResult<User>>(`${this.url}/users`, Content.GetParams(query));
+  getUsers(query: ListUserQuery): Observable<QueryResult<UserList>> {
+    return this.http.get<QueryResult<UserList>>(`${this.url}/users`, Content.GetParams(query));
   }
 
-  getUserById(query: GetUserQuery): Observable<QueryResult<User>> {
-    return this.http.get<QueryResult<User>>(`${this.url}/users/${query.id}`, Content.GetParams(query));
+  getUserById(query: GetUserQuery): Observable<QueryResult<UserDetails>> {
+    return this.http.get<QueryResult<UserDetails>>(`${this.url}/users/${query.id}`, Content.GetParams(query));
   }
 }

@@ -44,7 +44,7 @@ class GetUserQuery extends Query {
             where: { id: this.id }
          };
         const user = await UserDb.findOne(query);
-        return new QueryResult(user ? 1 : 0, user);
+        return new QueryResult(user ? 1 : 0, [user]);
     }
 }
 
