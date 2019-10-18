@@ -4,4 +4,12 @@ mat-sidenav-container {
     min-height: 100%;
     width: 100%;
     min-width: 100%;
- }
+}
+
+.is-active{
+    color:blue;
+    background-color: rgb(221, 221, 221) !important;
+    &:hover {
+       background-color: rgb(238, 238, 238) !important;
+    }
+}

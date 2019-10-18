@@ -1,46 +1,43 @@
-<div>
-    <mat-card>
-        <div class="title-training">
-                <h1>Treinamentos WorkingByte</h1>
-        </div>  
-        <mat-card-content> 
-           
-            <div>
-                <h2> Cadastrar Treino para Atleta: {{atleta?.name}} !</h2>
-            
-        
-                <form [formGroup]='form'>
-
-                    <mat-form-field class='full-width-input'>
-                        <input formControlName = "name" matInput type="text" placeholder="Treino">
-                    </mat-form-field>
-
-                    <mat-form-field class='full-width-input'>
-                      <mat-label>Tipo de Treino</mat-label>
-                        <mat-select [(value)]="id_type">
-                            <mat-option value ="Peito">Peito</mat-option>
-                            <mat-option value = "Pernas">Pernas</mat-option>
-                            <mat-option value = "Costas">Costas</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field class='full-width-input'>
-                        <input formControlName = "rep" matInput type="number" placeholder="Repetições">
-                    </mat-form-field>
-
-                    <mat-form-field class='full-width-input'>
-                        <input formControlName = "weight" matInput type="number" placeholder="Carga">
-                    </mat-form-field>
-
-                    <mat-form-field class='full-width-input'>
-                        <input formControlName = "id_equip" matInput type="text" placeholder="Aparelho">
-                    </mat-form-field>
-
-                </form>
-                <button mat-button class="submit" (click)='submit()'>Submit</button>
-				<button mat-button class="cancel" (click)='cancel()'>Cancel</button>
-
-            </div>
-        </mat-card-content>
-    </mat-card>
+<div fxLayout="row" class="header">
+    <button mat-icon-button type="button" (click)="close()">
+        <mat-icon>clear</mat-icon>
+    </button>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição'}}  de Treinamentos</h2>
+    <button mat-icon-button type="submit" form="form" (click)="save()">
+        <mat-icon>done</mat-icon>
+    </button>
 </div>
+
+<form [formGroup]='form'>
+
+    <div fxLayout="row">
+        <mat-form-field fxFlex="100">
+            <input formControlName = "name" matInput type="text" placeholder="Treino">
+        </mat-form-field>
+    </div>
+        
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <mat-form-field fxFlex="60">
+            <mat-label>Tipo de Treino</mat-label>
+            <mat-select [(value)]="id_type">
+                <mat-option value ="Peito">Peito</mat-option>
+                <mat-option value = "Pernas">Pernas</mat-option>
+                <mat-option value = "Costas">Costas</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="30">
+            <input formControlName = "rep" matInput type="number" placeholder="Repetições">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <mat-form-field fxFlex="48">
+            <input formControlName = "weight" matInput type="number" placeholder="Carga">
+        </mat-form-field>
+    
+        <mat-form-field fxFlex="48">
+            <input formControlName = "id_equip" matInput type="text" placeholder="Aparelho">
+        </mat-form-field>
+    </div>
+
+</form>

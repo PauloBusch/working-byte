@@ -1,1 +1,10 @@
-<p>training-list works!</p>
+<div class="page-container mat-elevation-z1" fxFlex="100" fxFlex.md="82" fxFlex.lg="62" fxFlex.xl="42">
+
+    <a mat-fab [routerLink]="['new']" color="primary">
+      <mat-icon>add</mat-icon>
+    </a>
+    
+    <router-outlet></router-outlet>
+
+    <p>training-list works!</p>
+</div>

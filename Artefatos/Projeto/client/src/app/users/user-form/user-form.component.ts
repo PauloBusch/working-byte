@@ -49,10 +49,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {  }
 
-  close() {
-    this.bottomSheet.dismiss();
-  }
-
   loadData(params: { id: string }) {
     this.refId = params.id;
     if (!this.refId) {
@@ -71,6 +67,10 @@ export class UserComponent implements OnInit {
       const user = result.List[0];
       this.form.patchValue(user);
     });
+  }
+
+  close() {
+    this.bottomSheet.dismiss();
   }
 
   save() {

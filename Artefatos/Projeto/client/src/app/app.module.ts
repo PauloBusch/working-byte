@@ -25,12 +25,12 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
 import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm-dialog.service';
 import { CustomPaginator } from './shared/utils/paginator';
 import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
+import { TrainingsModule } from './trainings/trainings.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    TrainingComponent,
     MenuComponent,
     ConfirmDialogComponent,
     BottomSheetComponent
@@ -38,6 +38,7 @@ import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sh
   imports: [
     LoginModule,
     UsersModule,
+    TrainingsModule,
     LogoModule,
 
     BrowserModule,
