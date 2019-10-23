@@ -5,7 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 const { Router } = require('./router');
-const { AppConfig } = require('./../config');
+const { AppConfig, DbConfig } = require('./../config');
 const { TestConnection } = require('./utils/database/connection');
 
 //========== MAIN =============
@@ -31,4 +31,4 @@ app.get('/',async (req, res) => {
   await state(state => res.send(state));
 });
 state(state => console.log(state));
-app.listen(AppConfig.port);
+app.listen(AppConfig.port, DbConfig.host);
