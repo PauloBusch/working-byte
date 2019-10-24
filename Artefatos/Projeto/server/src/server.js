@@ -31,4 +31,4 @@ app.get('/',async (req, res) => {
   await state(state => res.send(state));
 });
 state(state => console.log(state));
-app.listen(AppConfig.port, DbConfig.host);
+app.listen(AppConfig.port);

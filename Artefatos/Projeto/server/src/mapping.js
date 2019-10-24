@@ -6,6 +6,7 @@ const { DbConfig, DbManager } = require('./../config');
 
 const Connection = new Sequelize(DbConfig.database, DbConfig.user, DbConfig.password, {
   host: DbConfig.host,
+  port: DbConfig.port,
   dialect: 'mysql',
   pool: {
     max: 10,
