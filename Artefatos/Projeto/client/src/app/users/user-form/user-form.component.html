@@ -34,11 +34,11 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
         <mat-form-field fxFlex="48">
-            <input matInput placeholder="Telefone" formControlName="phone" maxlength="20"/>
+            <input matInput placeholder="Telefone" formControlName="phone" maxlength="20" mask="(00) 00000-0000"/>
             <mat-error *ngIf="hasError('phone', 'required')">Informe o Telefone</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="48">
-            <input matInput placeholder="CPF" formControlName="cpf" maxlength="14"/>
+            <input matInput placeholder="CPF" formControlName="cpf" maxlength="14" mask="000.000.000-00"/>
             <mat-error *ngIf="hasError('cpf', 'required')">Informe o CPF</mat-error>
         </mat-form-field>
     </div>
@@ -54,13 +54,13 @@
             <mat-label>Sexo</mat-label>
             <mat-select matInput formControlName="sexo">
                 <mat-option [value]="'M'">Masculino</mat-option>
-                <mat-option [value]="'F'">Femenino</mat-option>
+                <mat-option [value]="'F'">Feminino</mat-option>
                 <mat-option [value]="'O'">Outro</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
-        <mat-form-field fxFlex="isNew ? 48 : 100">
+        <mat-form-field fxFlex="{{ isNew ? 48 : 100 }}">
             <input matInput placeholder="Login" formControlName="login" maxlength="50"/>
             <mat-error *ngIf="hasError('login', 'required')">Informe o Login</mat-error>
         </mat-form-field>

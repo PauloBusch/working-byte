@@ -18,6 +18,7 @@ import {
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { UserComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
@@ -27,6 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Patterns } from '../shared/utils/validators';
 import { UserService } from '../shared/services/user.service';
 import { Random } from '../shared/utils/random';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
+  dropSpecialCharacters: false
+};
 
 @NgModule({
   declarations: [
@@ -56,7 +61,8 @@ import { Random } from '../shared/utils/random';
 
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgxMaskModule.forRoot(options)
   ],
   providers: [
     Patterns,

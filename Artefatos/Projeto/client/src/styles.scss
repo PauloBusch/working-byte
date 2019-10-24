@@ -20,3 +20,7 @@ body, html {
         height: 100px;
     }
 }
+
+mat-bottom-sheet-container {
+    overflow-y: hidden !important;
+}
