@@ -26,6 +26,7 @@ import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm
 import { CustomPaginator } from './shared/utils/paginator';
 import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
 import { TrainingsModule } from './trainings/trainings.module';
+import { DietModule } from './diet/diet.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { TrainingsModule } from './trainings/trainings.module';
     UsersModule,
     TrainingsModule,
     LogoModule,
+    DietModule,
 
     BrowserModule,
     AppRoutingModule,
