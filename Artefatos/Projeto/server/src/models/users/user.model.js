@@ -1,7 +1,7 @@
 const { NewId } = require('../../utils/database/random');
 
 const UserModel = (sequelize, dataTypes) => {
-    const User = sequelize.define('User', {
+    const User = sequelize.define('user', {
         id: {
             type: dataTypes.STRING(8),
             defaultValue: NewId,
@@ -38,7 +38,7 @@ const UserModel = (sequelize, dataTypes) => {
             defaultValue: false
         },
         sexo: {
-            type: dataTypes.ENUM('M', 'F'),
+            type: dataTypes.ENUM('M', 'F', 'O'),
             allowNull: false
         },
         login: {
