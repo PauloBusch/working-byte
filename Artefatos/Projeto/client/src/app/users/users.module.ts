@@ -28,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Patterns } from '../shared/utils/validators';
 import { UserService } from '../shared/services/user.service';
 import { Random } from '../shared/utils/random';
+import { DataService } from '../shared/services/data.service';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   dropSpecialCharacters: false
@@ -67,7 +68,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   providers: [
     Patterns,
     UserService,
-    Random
+    Random,
+    DataService
   ]
 })
 export class UsersModule { }

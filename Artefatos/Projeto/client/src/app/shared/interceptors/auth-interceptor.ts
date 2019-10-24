@@ -5,12 +5,14 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     constructor(
         private authService: AuthService,
-        public snackBar: MatSnackBar
+        public snackBar: MatSnackBar,
+        private router: Router
     ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
@@ -22,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
     .pipe(
       catchError(err => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-            this.snackBar.open('Sua sessão expirou. Faça login novamente.', 'OK', { duration: 3000 });
+          this.router.navigate(['login']);
         }
         return throwError(err);
       })

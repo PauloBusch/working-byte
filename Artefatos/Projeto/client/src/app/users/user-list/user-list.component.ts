@@ -11,6 +11,7 @@ import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 import { Storage } from 'src/app/shared/utils/storage';
 import { UserComponent } from '../user-form/user-form.component';
 import { UserList } from '../models/view-models/user.list';
+import { DataService } from 'src/app/shared/services/data.service';
 
 
 @Component({
@@ -26,26 +27,28 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private confirmDialogService: ConfirmDialogService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dataService: DataService<UserList>
   ) {
     const limit = Storage.get('users.limit', 5);
     const page = Storage.get('users.page', 1);
-    this.listQuery = new ListUserQuery(limit, page, true, 'user_created');
+    this.listQuery = new ListUserQuery(limit, page, false, 'user_created');
   }
 
   ngOnInit() {
     this.loadUsers();
+    this.dataService.source.subscribe(user => this.pushUserList(user));
   }
 
   ngOnDestroy() {
     this.users.subsc.unsubscribe();
   }
 
-  testes() {
-    debugger;
-  }
-
   public pushUserList(user: UserList) {
+    if (!user) {
+      return;
+    }
+
     const indexUser = this.users.list.findIndex(us => us.id === user.id);
     if (indexUser === -1) {
       this.users.list.unshift(user);
@@ -78,14 +81,14 @@ export class UserListComponent implements OnInit, OnDestroy {
       }
 
       const command = new RemoveUserCommand(id);
-      this.userService.removeUser(command).subscribe(
-        (result) => {
+      this.userService.removeUser(command).subscribe((result) => {
           if (result.Rows > 0) {
             this.removeUserList(id);
             this.snackBar.open('Usuário removido com sucesso!', 'OK', { duration: 3000 });
             return;
           }
-          this.snackBar.open('Falha ao remover o usuário!', 'OK', { duration: 3000 });        }
+          this.snackBar.open('Falha ao remover o usuário!', 'OK', { duration: 3000 });
+        }
       );
     });
   }

@@ -8,8 +8,8 @@ import { Random } from 'src/app/shared/utils/random';
 import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 import { UpdateUserCommand } from '../models/commands/updateUserCommand';
 import { GetUserQuery } from '../models/queries/getUserQuery';
-import { UserListComponent } from '../user-list/user-list.component';
 import { UserList } from '../models/view-models/user.list';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-user',
@@ -17,8 +17,6 @@ import { UserList } from '../models/view-models/user.list';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserComponent implements OnInit {
-  @Output() testes = new EventEmitter<any>();
-
   private isNew: boolean;
   private refId: string;
 
@@ -30,7 +28,8 @@ export class UserComponent implements OnInit {
     private patterns: Patterns,
     private userService: UserService,
     private random: Random,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private dataService: DataService<UserList>
   ) {
     this.form = this.fb.group({
       first_name: new FormControl('', Validators.required),
@@ -40,7 +39,7 @@ export class UserComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern(this.patterns.phone)]],
       cpf: ['', [Validators.required, Validators.pattern(this.patterns.cpf)]],
       age: ['', Validators.required],
-      is_personal: [null, Validators.required],
+      is_personal: [false],
       sexo: ['', Validators.required],
       login: ['', [Validators.required, Validators.pattern(this.patterns.login)]],
       password: ['', Validators.required]
@@ -183,7 +182,7 @@ export class UserComponent implements OnInit {
       values.last_name,
       values.email
     );
-    this.testes.emit(user);
+    this.dataService.update(user);
   }
 
   hasError(field: string, error: string): boolean {
