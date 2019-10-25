@@ -6,8 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { DietComponent } from '../diet/diet-forms/diet.component';
+import { DietComponent } from './diet-forms/diet-form.component';
 import { DietListComponent } from '../diet/diet-list/diet-list.component';
+
 @NgModule({
     declarations: [
         DietComponent,

@@ -18,7 +18,8 @@ import {
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
+import { IConfig } from 'ngx-mask/lib/config';
 
 import { UserComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
