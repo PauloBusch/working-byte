@@ -14,7 +14,11 @@ router.post('/users', Token.validate, ControllerUser.create);
 router.put('/users/:id', Token.validate, ControllerUser.update);
 router.delete('/users/:id', Token.validate, ControllerUser.delete);
 
+router.get('/evaluations', Token.validate, ControllerEvaluation.getAll);
+router.get('/evaluations/:id', Token.validate, ControllerEvaluation.getById);
 router.post('/evaluations', Token.validate, ControllerEvaluation.create);
+router.put('/evaluations/:id', Token.validate, ControllerEvaluation.update);
+router.delete('/evaluations/:id', Token.validate, ControllerEvaluation.remove);
 
 module.exports = {
     Router: router

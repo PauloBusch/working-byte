@@ -18,8 +18,11 @@ const Connection = new Sequelize(DbConfig.database, DbConfig.user, DbConfig.pass
 
 const UserDb = UserModel(Connection, Sequelize);
 const EvaluationDb = EvaluationModel(Connection, Sequelize);
-UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliador' });
-UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliado' });
+UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
+UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
+
+EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
+EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
 
 Connection.sync({ force: DbManager.overrideData })
   .then(() => console.log(`Tables created!`));

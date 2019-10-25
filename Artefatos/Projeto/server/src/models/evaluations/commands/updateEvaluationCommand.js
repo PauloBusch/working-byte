@@ -3,7 +3,7 @@ const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dat
 const { Evaluation } = require('../evaluation');
 const { EvaluationDb } = require('../../../mapping');
 
-class CreateEvaluationCommand extends Command {
+class UpdateEvaluationCommand extends Command {
     constructor(
         id,
         imc,
@@ -40,6 +40,10 @@ class CreateEvaluationCommand extends Command {
         if (!this.id_user_avaliador)
             return new Error(EErrorCode.InvalidParams, "Parameter id_user_avaliador cannot be null");
 
+        const exists = await EvaluationDb.count({ where: { id: this.id } });
+        if (!exists)
+            return new Error(EErrorCode.NotFound, `Evaluation with id: ${this.id} cannot exists`);
+
         return null;
     }
 
@@ -48,8 +52,9 @@ class CreateEvaluationCommand extends Command {
     }
 
     async Execute(){
+        const query = { where: { id: this.id } };
         const evaluation = new Evaluation(
-            this.id,
+            undefined,
             this.imc,
             this.peso,
             this.altura,
@@ -57,11 +62,11 @@ class CreateEvaluationCommand extends Command {
             this.id_user_avaliado
         );
 
-        const result = await EvaluationDb.create(evaluation);
+        const result = await EvaluationDb.update(evaluation, query);
         return new CommandResult(result ? 1 : 0);
     }
-}
+} 
 
 module.exports = {
-    CreateEvaluationCommand
+    UpdateEvaluationCommand
 }
