@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { CommadResult } from 'src/app/shared/models/CommandRestult.model';
+import { CommandResult } from 'src/app/shared/models/CommandRestult.model';
 import { QueryResult } from 'src/app/shared/models/QueryResult.model';
 import { User } from 'src/app/users/models/user.models';
 
@@ -26,16 +26,16 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  createUser(command: CreateUserCommand): Observable<CommadResult> {
-    return this.http.post<CommadResult>(`${this.url}/users`, command);
+  createUser(command: CreateUserCommand): Observable<CommandResult> {
+    return this.http.post<CommandResult>(`${this.url}/users`, command);
   }
 
-  updateUser(command: UpdateUserCommand): Observable<CommadResult> {
-    return this.http.put<CommadResult>(`${this.url}/users/${command.id}`, command);
+  updateUser(command: UpdateUserCommand): Observable<CommandResult> {
+    return this.http.put<CommandResult>(`${this.url}/users/${command.id}`, command);
   }
 
-  removeUser(command: RemoveUserCommand): Observable<CommadResult> {
-    return this.http.delete<CommadResult>(`${this.url}/users/${command.id}`, Content.GetParams(command));
+  removeUser(command: RemoveUserCommand): Observable<CommandResult> {
+    return this.http.delete<CommandResult>(`${this.url}/users/${command.id}`, Content.GetParams(command));
   }
 
   getUsers(query: ListUserQuery): Observable<QueryResult<UserList>> {

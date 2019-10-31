@@ -83,8 +83,8 @@ export class UserListComponent implements OnInit, OnDestroy {
       const command = new RemoveUserCommand(id);
       this.userService.removeUser(command).subscribe((result) => {
           if (result.Rows > 0) {
-            this.removeUserList(id);
             this.snackBar.open('Usuário removido com sucesso!', 'OK', { duration: 3000 });
+            this.removeUserList(id);
             return;
           }
           this.snackBar.open('Falha ao remover o usuário!', 'OK', { duration: 3000 });

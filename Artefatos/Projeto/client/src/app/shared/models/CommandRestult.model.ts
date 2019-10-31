@@ -1,6 +1,6 @@
 import { EErrorCode } from './EErrorCode.model';
 
-export class CommadResult {
+export class CommandResult {
     public Rows: number;
     public Data: any;
     public ErrorCode: EErrorCode;

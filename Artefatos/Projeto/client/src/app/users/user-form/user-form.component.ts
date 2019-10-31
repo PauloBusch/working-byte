@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
     private dataService: DataService<UserList>
   ) {
     this.form = this.fb.group({
-      first_name: new FormControl('', Validators.required),
+      first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.patterns.email)]],
       address: ['', Validators.required],
