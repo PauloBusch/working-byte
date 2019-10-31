@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const { UserModel } = require('./models/users/user.model');
 const { EvaluationModel } = require('./models/evaluations/evaluation.model');
+const { EquipamentModel } = require('./models/equipament/equipament.model');
 
 const { DbConfig, DbManager } = require('./../config');
 
@@ -18,6 +19,7 @@ const Connection = new Sequelize(DbConfig.database, DbConfig.user, DbConfig.pass
 
 const UserDb = UserModel(Connection, Sequelize);
 const EvaluationDb = EvaluationModel(Connection, Sequelize);
+const EquipamentDb = EquipamentModel(Connection, Sequelize);
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
 
@@ -29,6 +31,7 @@ Connection.sync({ force: DbManager.overrideData })
 
 module.exports = { 
   UserDb,
-  EvaluationDb,
+  EquipamentDb,
+  EvaluationDb, 
   Connection
 };

@@ -23,14 +23,15 @@
                 <mat-icon>account_circle</mat-icon>&nbsp;&nbsp;&nbsp;
                 <div>Usuários</div>
             </a>    
-            <a mat-list-item [routerLink]="['/menu/equip']" [routerLinkActive]="['is-active']">
+            <a mat-list-item [routerLink]="['/menu/equipaments']" [routerLinkActive]="['is-active']">
                 <mat-icon>fitness_center</mat-icon>&nbsp;&nbsp;&nbsp;
                 <div>Equipamentos</div>
             </a>   
- 
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <div class="page-container mat-elevation-z1" fxFlex="100" fxFlex.md="82" fxFlex.lg="62" fxFlex.xl="42">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -33,7 +33,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     const limit = Storage.get('users.limit', 5);
     const page = Storage.get('users.page', 1);
     this.listQuery = new ListUserQuery(limit, page, false, 'user_created');
-  }
+  } 
 
   ngOnInit() {
     this.loadUsers();

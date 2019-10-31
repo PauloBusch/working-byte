@@ -27,6 +27,8 @@ import { CustomPaginator } from './shared/utils/paginator';
 import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
 import { TrainingsModule } from './trainings/trainings.module';
 import { DietModule } from './diets/diets.module';
+import { EquipamentFormComponent } from './equipaments/equipament-form/equipament-form.component';
+import { EquipamentListComponent } from './equipaments/equipament-list/equipament-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { DietModule } from './diets/diets.module';
     PageNotFoundComponent,
     MenuComponent,
     ConfirmDialogComponent,
-    BottomSheetComponent
+    BottomSheetComponent,
+    EquipamentFormComponent,
+    EquipamentListComponent
   ],
   imports: [
     LoginModule,

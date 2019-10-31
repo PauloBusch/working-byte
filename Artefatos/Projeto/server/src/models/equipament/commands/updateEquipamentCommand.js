@@ -1,10 +1,7 @@
 const { Command } = require('../../../utils/interfaces/command');
-const { CommandResult, EErrorCode } = require('../../../utils/content/dataResult');
+const { CommandlResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
-const { Equipament } = require('../equipament');
-const { EquipamentDb } = require('../../../mapping');
-
-class CreateEquipamentCommand extends Command {
+class UpdateEquipamentCommand extends Command {
     constructor(
         id,
         name,
@@ -24,27 +21,33 @@ class CreateEquipamentCommand extends Command {
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
 
         if (!this.code)
-            return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
+            return new Error(EErrorCode.InvalidParams, "Parameter code cannot be null");
+
+        const exists = await EquipamentDb.count({ where: { id: this.id } });
+        if (!exists)
+            return new Error(EErrorCode.NotFount, `Equipament with id: ${this.id} does not exists`);
 
         return null;
-    }
+    }   
 
     async HasPermission(){
         return true;
     }
 
     async Execute(){
+        const query = { where: { id: this.id } };
         const equipament = new Equipament(
-            this.id,
+            undefined,
             this.name,
             this.code
         );
 
-        const result = await EquipamentDb.crate(equipament);
-        return new CommandResult(result ? 1 : 0);
+        const result = await EquipamentDb.update(equipament, query);
+        return new CommandlResult(result ? 1 : 0); 
     }
 }
 
 module.exports = {
-    CreateEquipamentCommand
+    UpdateEquipamentCommand
 }
+
