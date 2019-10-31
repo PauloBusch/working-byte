@@ -18,7 +18,7 @@ export class DietListComponent implements OnInit, OnDestroy {
     private listQuery: listDietQuery;
     private diets = new AsyncQuery<DietList>();
 
-    displayedColumns: string[] = ['name', 'description'];
+    displayedColumns: string[] = ['name', 'description', 'type_name'];
     dataSource: MatTableDataSource<DietList>;
 
   constructor(
