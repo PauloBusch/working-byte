@@ -10,8 +10,8 @@ export class ListEquipamentQuery {
         limit: number,
         sortAsc: boolean,
         columnSort: string,
-        search: string,
-        is_disponible: boolean
+        search: string = null,
+        is_disponible: boolean = null
     ) {
         this.page = page;
         this.limit = limit;
