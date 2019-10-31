@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
   MatButtonModule, MatSelectModule, MatToolbarModule,
-  MatListModule, MatSidenavModule, MatDialogModule, MatDialogRef, MatPaginatorIntl
+  MatListModule, MatSidenavModule, MatDialogModule, MatDialogRef, MatPaginatorIntl, MatTableModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +29,7 @@ import { TrainingsModule } from './trainings/trainings.module';
 import { DietModule } from './diets/diets.module';
 import { EquipamentFormComponent } from './equipaments/equipament-form/equipament-form.component';
 import { EquipamentListComponent } from './equipaments/equipament-list/equipament-list.component';
+import { EquipamentsModule } from './equipaments/equipaments.module';
 
 @NgModule({
   declarations: [
@@ -36,14 +37,13 @@ import { EquipamentListComponent } from './equipaments/equipament-list/equipamen
     PageNotFoundComponent,
     MenuComponent,
     ConfirmDialogComponent,
-    BottomSheetComponent,
-    EquipamentFormComponent,
-    EquipamentListComponent
+    BottomSheetComponent
   ],
   imports: [
     LoginModule,
     UsersModule,
     TrainingsModule,
+    EquipamentsModule,
     LogoModule,
     DietModule,
 

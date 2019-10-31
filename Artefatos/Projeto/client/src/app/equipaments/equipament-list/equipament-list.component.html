@@ -10,7 +10,7 @@
 
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let eqp">{{ eqp.name }}</t    d>
+        <td mat-cell *matCellDef="let eqp">{{ eqp.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="code">
@@ -23,6 +23,6 @@
         <td mat-cell *matCellDef="let eqp">{{ eqp.is_disponible ? 'Sim' : 'Não' }}</td>
     </ng-container>
 
-    <tr mat-header-row *MatHeaderRowDef="displayColumns"></tr>
-    <tr mat-row *MatRowDef="let row; columns: displayColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
 </table>

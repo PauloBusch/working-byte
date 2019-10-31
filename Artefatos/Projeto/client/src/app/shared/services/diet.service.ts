@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { CommadResult } from 'src/app/shared/models/CommandRestult.model';
+import { CommandResult } from 'src/app/shared/models/CommandRestult.model';
 import { QueryResult } from 'src/app/shared/models/QueryResult.model';
 
 import { createDietCommand } from 'src/app/diets/models/commands/createDietCommand';
@@ -25,16 +25,16 @@ export class dietService {
     private http: HttpClient
   ) { }
 
-  createUser(command: createDietCommand): Observable<CommadResult> {
-    return this.http.post<CommadResult>(`${this.url}/diets`, command);
+  createUser(command: createDietCommand): Observable<CommandResult> {
+    return this.http.post<CommandResult>(`${this.url}/diets`, command);
   }
 
-  updateUser(command: updateDietCommand): Observable<CommadResult> {
-    return this.http.put<CommadResult>(`${this.url}/diets/${command.id}`, command);
+  updateUser(command: updateDietCommand): Observable<CommandResult> {
+    return this.http.put<CommandResult>(`${this.url}/diets/${command.id}`, command);
   }
 
-  removeUser(command: removeDietCommand): Observable<CommadResult> {
-    return this.http.delete<CommadResult>(`${this.url}/diets/${command.id}`, Content.GetParams(command));
+  removeUser(command: removeDietCommand): Observable<CommandResult> {
+    return this.http.delete<CommandResult>(`${this.url}/diets/${command.id}`, Content.GetParams(command));
   }
 
   getUsers(query: listDietQuery): Observable<QueryResult<DietList>> {

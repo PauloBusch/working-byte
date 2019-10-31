@@ -14,6 +14,7 @@ import { RemoveEquipamentCommand } from '../models/commands/removeEquipamentComm
   styleUrls: ['./equipament-list.component.scss']
 })
 export class EquipamentListComponent implements OnInit, OnDestroy {
+  displayColumns: string[] = ['name', 'code', 'is_disponible'];
   dataSource: MatTableDataSource<EquipamentList>;
 
   private listQuery: ListEquipamentQuery;
