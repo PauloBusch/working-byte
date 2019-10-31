@@ -11,6 +11,8 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
 import { UserComponent } from './users/user-form/user-form.component';
 import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
 import { TrainingListComponent } from './trainings/training-list/training-list.component';
+import { DietListComponent } from './diets/diet-list/diet-list.component';
+import { DietComponent } from './diets/diet-forms/diet-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,7 +26,10 @@ const routes: Routes = [
         { path: 'new', component: BottomSheetComponent, data: { form: UserComponent } },
         { path: 'edit/:id', component: BottomSheetComponent, data: { form: UserComponent } }
     ] },
-    { path: '',   redirectTo: '/menu/training', pathMatch: 'full' },
+    { path: 'diets',   component: DietListComponent, canActivate: [AuthGuard], children: [
+        {path: 'new', component: BottomSheetComponent, data: {form: DietComponent} },
+        {path: 'edit/:id', component: BottomSheetComponent, data: { form: DietComponent} }
+    ] },
 
   ] },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },

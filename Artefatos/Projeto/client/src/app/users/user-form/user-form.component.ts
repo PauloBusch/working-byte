@@ -87,8 +87,9 @@ export class UserComponent implements OnInit {
   }
 
   private create(values: any) {
+    this.refId = this.random.NewId();
     const command = new CreateUserCommand(
-      this.random.NewId(),
+      this.refId,
       values.first_name,
       values.last_name,
       values.email,
@@ -177,7 +178,7 @@ export class UserComponent implements OnInit {
 
   private updateList(values: any) {
     const user = new UserList(
-      values.id,
+      this.refId,
       values.first_name,
       values.last_name,
       values.email

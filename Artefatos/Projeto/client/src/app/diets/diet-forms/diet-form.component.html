@@ -1,0 +1,72 @@
+<div fxLayout="row" class="header">
+    <button mat-icon-button type="button" (click)="close()">
+        <mat-icon>clear</mat-icon>
+    </button>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição'}}  de dieta</h2>
+    <button mat-icon-button type="submit" form="form" (click)="save()">
+        <mat-icon>done</mat-icon>
+    </button>
+</div>
+
+<form [formGroup]="form">
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <mat-form-field fxFlex="48">
+            <input matInput placeholder="Nome" formControlName="first_name" maxlength="30"/>
+            <mat-error *ngIf="hasError('first_name', 'required')">Informe o nome</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="48">
+            <input matInput placeholder="Sobrenome" formControlName="last_name" maxlength="60"/>
+            <mat-error *ngIf="hasError('first_name', 'required')">Informe o sobrenome</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Email" formControlName="email" maxlength="200"/>
+            <mat-error *ngIf="hasError('email', 'required')">Informe o email</mat-error>
+            <mat-error *ngIf="hasError('email', 'email')">Email inválido</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Endereço" formControlName="address" maxlength="200"/>
+            <mat-error *ngIf="hasError('address', 'required')">Informe o endereço</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <mat-form-field fxFlex="48">
+            <input matInput placeholder="Telefone" formControlName="phone" maxlength="20" mask="(00) 00000-0000"/>
+            <mat-error *ngIf="hasError('phone', 'required')">Informe o Telefone</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="48">
+            <input matInput placeholder="CPF" formControlName="cpf" maxlength="14" mask="000.000.000-00"/>
+            <mat-error *ngIf="hasError('cpf', 'required')">Informe o CPF</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <mat-form-field fxFlex="30">
+            <input matInput placeholder="Idade" formControlName="age"/>
+            <mat-error *ngIf="hasError('age', 'required')">Informe a idade</mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <mat-checkbox color="primary" formControlName="is_personal">É personal</mat-checkbox>
+        </div>
+        <mat-form-field fxFlex="30">
+            <mat-label>Sexo</mat-label>
+            <mat-select matInput formControlName="sexo">
+                <mat-option [value]="'M'">Masculino</mat-option>
+                <mat-option [value]="'F'">Feminino</mat-option>
+                <mat-option [value]="'O'">Outro</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <mat-form-field fxFlex="{{ isNew ? 48 : 100 }}">
+            <input matInput placeholder="Login" formControlName="login" maxlength="50"/>
+            <mat-error *ngIf="hasError('login', 'required')">Informe o Login</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="48" *ngIf="isNew">
+            <input matInput type="password" placeholder="Senha" formControlName="password" maxlength="60"/>
+            <mat-error *ngIf="hasError('password', 'required')">Informe a senha</mat-error>
+        </mat-form-field>
+    </div>
+</form>

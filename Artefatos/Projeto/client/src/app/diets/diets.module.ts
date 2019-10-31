@@ -7,7 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { DietComponent } from './diet-forms/diet-form.component';
-import { DietListComponent } from '../diet/diet-list/diet-list.component';
+import { DietListComponent } from '../diets/diet-list/diet-list.component';
+import { dietService } from '../shared/services/diet.service';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,9 @@ import { DietListComponent } from '../diet/diet-list/diet-list.component';
         MatCardModule,
         MatInputModule,
         MatFormFieldModule
+    ],
+    providers: [
+        dietService
     ]
 })
 export class DietModule { }

@@ -1,0 +1,80 @@
+<div class="page-container mat-elevation-z1" fxFlex="100" fxFlex.md="82" fxFlex.lg="62" fxFlex.xl="42">
+
+    <a mat-fab [routerLink]="['new']" color="primary">
+      <mat-icon>add</mat-icon>
+    </a>
+  
+    <router-outlet></router-outlet>
+  
+    <div fxLayout="column" fxLayoutAlign="space-around stretch">
+      
+      <div class="page-header" fxLayout="row">
+        <div fxFlex="10" fxLayoutAlign="start center">
+          <div fxFlex="100">
+            <h2>Dietas</h2>
+          </div>
+        </div>
+        
+        <div fxFlex="80" fxLayoutAlign="center center">
+  
+          <mat-form-field fxFlex="40" floatLabel="never">
+            <input matInput placeholder="Localizar Dietas" 
+              (keyup.enter)="listQuery.page=1;loadDiets();" 
+              [(ngModel)]="listQuery.search"/>
+          </mat-form-field>
+  
+          <mat-form-field fxFlex="40" floatLabel="never" [style.left.px]="15">
+            <mat-label>Tipo</mat-label>
+            <mat-select 
+              (ngModelChange)="listQuery.page=1;loadUsers();"
+              [(ngModel)]="listQuery.is_personal">
+              <mat-option [value]="undefined">Todos</mat-option>
+              <mat-option [value]="diet_type">{{diet.id_diet_type}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        </div>
+  
+        <div fxFlex="none" class="actions" fxLayoutAlign="end center">
+          <button mat-icon-button type="button" (click)="loadDiets()" matTooltip="Atualizar">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+      </div>
+  
+      <div *ngIf="users.noItems">Nenhum usuário!</div>
+  
+      <div *ngIf="users.loading" class="loading-spinner">
+        <mat-spinner mode="indeterminate"></mat-spinner>
+      </div>
+  
+      <div class="list-users">
+        <div *ngIf="!users.loading">
+          <mat-list>
+              <mat-nav-list *ngFor="let user of users.list">
+                <mat-list-item>
+                  <img matListAvatar src="../../../assets//images//avatar.png">
+                  <h3 matLine>{{ user.first_name }}</h3>
+                  <p matLine class="user-email"><span>{{ user.email }}</span></p>
+                  <button class="button-icon" mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>more_vert</mat-icon></button>
+                </mat-list-item>
+                <mat-menu #userMenu="matMenu">
+                  <button mat-menu-item [routerLink]="['edit', user.id]">Editar</button>
+                  <button mat-menu-item (click)="remove(user.id)">Remover</button>
+                </mat-menu>
+              </mat-nav-list>
+            </mat-list>
+        </div>
+      </div>
+      <div>
+        <mat-paginator 
+          [length]="users.length"
+          [pageSize]="listQuery.limit" 
+          [pageIndex]="listQuery.page -1"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          [showFirstLastButtons]="true"
+          (page)="pageChange($event)">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
