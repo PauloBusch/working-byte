@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-equipament-list',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./equipament-list.component.scss']
 })
 export class EquipamentListComponent implements OnInit {
+  // dataSource: MatTableDataSource<EquipamentList>;
 
   constructor() { }
 

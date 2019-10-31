@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ListEquipamentQuery } from '../models/queries/listEquipamentQuery';
+import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
+import { EquipamentList } from '../models/view-models/equipament.list';
 
 @Component({
   selector: 'app-equipament-form',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EquipamentFormComponent implements OnInit {
 
-  constructor() { }
+  private listQuery: ListEquipamentQuery;
+  private equipaments: AsyncQuery<EquipamentList>;
+
+  constructor(
+    
+  ) { }
 
   ngOnInit() {
   }

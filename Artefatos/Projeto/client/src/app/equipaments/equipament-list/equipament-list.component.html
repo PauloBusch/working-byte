@@ -1,1 +1,11 @@
-<p>equipament-list works!</p>
+<a mat-fab [routerLink]="['new']" color="primary">
+    <mat-icon>add</mat-icon>
+</a>
+
+<router-outlet></router-outlet>
+
+<table 
+    mat-table
+    [dataSource]="dataSource">
+
+</table>
