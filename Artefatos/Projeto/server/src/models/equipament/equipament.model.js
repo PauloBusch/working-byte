@@ -19,6 +19,10 @@ const EquipamentModel = (sequelize, dataTypes) => {
             type: dataTypes.BOOLEAN,
             defaultValue: true
         },
+        id_type: {
+            type: dataTypes.STRING(8),
+            allowNull: false
+        },
         removed: {
             type: dataTypes.BOOLEAN,
             defaultValue: false
@@ -27,8 +31,15 @@ const EquipamentModel = (sequelize, dataTypes) => {
         equipament_updated: dataTypes.DATE
     },{
         createdAt: 'equipament_created',
-        updatedAt: 'equipament_updated'
+        updatedAt: 'equipament_updated',
+        indexes: [{
+            name: 'UQ_code',
+            unique: true,
+            fields: ['code']
+        }]
     });
+
+    return Equipament;
 }
 
 module.exports = {

@@ -53,7 +53,6 @@ import { EquipamentsModule } from './equipaments/equipaments.module';
 
     MatCardModule,
     FormsModule,
-    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
 

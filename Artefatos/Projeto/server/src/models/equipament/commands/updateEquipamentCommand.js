@@ -5,12 +5,14 @@ class UpdateEquipamentCommand extends Command {
     constructor(
         id,
         name,
-        code
+        code,
+        type
     ){
         super();
         this.id = id;
         this.name = name;
         this.code = code;
+        this.type = type;
     }
 
     async GetError(){
@@ -22,6 +24,9 @@ class UpdateEquipamentCommand extends Command {
 
         if (!this.code)
             return new Error(EErrorCode.InvalidParams, "Parameter code cannot be null");
+
+        if (!this.type || !this.type.id || !this.type.name)
+            return new Error(EErrorCode.InvalidParams, "Paramter name require object { id: value, name: value }");
 
         const exists = await EquipamentDb.count({ where: { id: this.id } });
         if (!exists)
@@ -36,10 +41,18 @@ class UpdateEquipamentCommand extends Command {
 
     async Execute(){
         const query = { where: { id: this.id } };
+        const queryType = { where: { id: this.type.id } };
+        const existsType = await TypeDb.count(queryType);
+        if (existsType)
+            await TypeDb.update(this.type, queryType);
+        else
+            await TypeDb.create(this.type);
+            
         const equipament = new Equipament(
             undefined,
             this.name,
-            this.code
+            this.code,
+            this.type.id
         );
 
         const result = await EquipamentDb.update(equipament, query);

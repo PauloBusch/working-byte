@@ -10,6 +10,7 @@ import { EquipamentService } from 'src/app/shared/services/equipament.service';
 import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 import { DataService } from 'src/app/shared/services/data.service';
 import { UpdateEquipamentCommand } from '../models/commands/updateEquipamentCommand';
+import { GetEquipamentQuery } from '../models/queries/getEquipamanetQuery';
 
 @Component({
   selector: 'app-equipament-form',
@@ -36,7 +37,25 @@ export class EquipamentFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {  }
+
+  loadData(params: { id: string }) {
+    this.refId = params.id;
+    if (!this.refId) {
+      this.isNew = true;
+      return;
+    }
+
+    const query = new GetEquipamentQuery(this.refId);
+    this.equipamentService.getEquipamentById(query).subscribe(result => {
+      if (result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
+        this.snackBar.open('Equipamento inexistente!', 'OK', { duration: 3000 });
+        return;
+      }
+
+      const equipament = result.List[0];
+      this.form.patchValue(equipament);
+    });
   }
 
   save() {
@@ -109,5 +128,9 @@ export class EquipamentFormComponent implements OnInit {
     );
 
     this.dataService.update(equipament);
+  }
+
+  hasError(field: string, error: string): boolean {
+    return this.form.get(field).hasError(error);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatSnackBar, PageEvent } from '@angular/material';
 import { EquipamentService } from 'src/app/shared/services/equipament.service';
 import { Storage } from 'src/app/shared/utils/storage';
 import { ListEquipamentQuery } from '../models/queries/listEquipamentQuery';
@@ -7,6 +7,7 @@ import { EquipamentList } from '../models/view-models/equipament.list';
 import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { RemoveEquipamentCommand } from '../models/commands/removeEquipamentCommand';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-equipament-list',
@@ -23,7 +24,8 @@ export class EquipamentListComponent implements OnInit, OnDestroy {
   constructor(
     private equipamentService: EquipamentService,
     private confirmDialogService: ConfirmDialogService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dataService: DataService<EquipamentList>
   ) {
     const limit = Storage.get('equipaments.limit', 10);
     const page = Storage.get('equipaments.page', 1);
@@ -34,9 +36,10 @@ export class EquipamentListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadEquipaments();
+    this.dataService.source.subscribe(equipament => this.pushEquipamentList(equipament));
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.equipaments.subsc.unsubscribe();
   }
 
@@ -62,6 +65,14 @@ export class EquipamentListComponent implements OnInit, OnDestroy {
     this.equipaments.subsc = this.equipaments.$list.subscribe(result => {
       this.dataSource = new MatTableDataSource<EquipamentList>(result.List);
     });
+  }
+
+  pageChange(ev: PageEvent) {
+    this.listQuery.page = ev.pageIndex + 1;
+    this.listQuery.limit = ev.pageSize;
+    Storage.set('documents.limit', this.listQuery.limit);
+    Storage.set('documents.page', this.listQuery.page);
+    this.loadEquipaments();
   }
 
   remove(id: string) {

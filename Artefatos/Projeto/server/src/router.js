@@ -21,7 +21,12 @@ router.post('/evaluations', Token.validate, ControllerEvaluation.create);
 router.put('/evaluations/:id', Token.validate, ControllerEvaluation.update);
 router.delete('/evaluations/:id', Token.validate, ControllerEvaluation.remove);
 
-// router.post('/equipment', Token.validate, ControllerEquipament.create);
+router.get('/equipaments/types', Token.validate, ControllerEquipament.getAllTypes);
+router.get('/equipaments', Token.validate, ControllerEquipament.getAll);
+router.get('/equipaments/:id', Token.validate, ControllerEquipament.getById);
+router.post('/equipaments', Token.validate, ControllerEquipament.create);
+router.put('/equipaments/:id', Token.validate, ControllerEquipament.update);
+router.delete('/equipaments/:id', Token.validate, ControllerEquipament.remove);
 
 module.exports = {
     Router: router
