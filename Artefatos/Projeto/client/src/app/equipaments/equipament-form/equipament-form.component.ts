@@ -11,6 +11,8 @@ import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 import { DataService } from 'src/app/shared/services/data.service';
 import { UpdateEquipamentCommand } from '../models/commands/updateEquipamentCommand';
 import { GetEquipamentQuery } from '../models/queries/getEquipamanetQuery';
+import { ListTypeQuery } from '../models/queries/lsitTypeQuery';
+import { TypeList } from '../models/view-models/type.list';
 
 @Component({
   selector: 'app-equipament-form',
@@ -22,6 +24,7 @@ export class EquipamentFormComponent implements OnInit {
   private refId: string;
 
   private form: FormGroup;
+  private types: TypeList[];
 
   constructor(
     private fb: FormBuilder,
@@ -46,8 +49,8 @@ export class EquipamentFormComponent implements OnInit {
       return;
     }
 
-    const query = new GetEquipamentQuery(this.refId);
-    this.equipamentService.getEquipamentById(query).subscribe(result => {
+    const queryEquipaments = new GetEquipamentQuery(this.refId);
+    this.equipamentService.getEquipamentById(queryEquipaments).subscribe(result => {
       if (result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
         this.snackBar.open('Equipamento inexistente!', 'OK', { duration: 3000 });
         return;
@@ -55,6 +58,11 @@ export class EquipamentFormComponent implements OnInit {
 
       const equipament = result.List[0];
       this.form.patchValue(equipament);
+    });
+
+    const queryTypes = new ListTypeQuery();
+    this.equipamentService.getTypes(queryTypes).subscribe(result => {
+      this.types = result.List;
     });
   }
 

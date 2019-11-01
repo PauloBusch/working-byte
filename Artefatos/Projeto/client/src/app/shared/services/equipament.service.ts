@@ -13,6 +13,8 @@ import { EquipamentDetails } from 'src/app/equipaments/models/view-models/equipa
 import { CreateEquipamentCommand } from 'src/app/equipaments/models/commands/createEquipamentCommand';
 import { UpdateEquipamentCommand } from 'src/app/equipaments/models/commands/updateEquipamentCommand';
 import { RemoveEquipamentCommand } from 'src/app/equipaments/models/commands/removeEquipamentCommand';
+import { ListTypeQuery } from 'src/app/equipaments/models/queries/lsitTypeQuery';
+import { TypeList } from 'src/app/equipaments/models/view-models/type.list';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,10 @@ export class EquipamentService {
 
   remove(command: RemoveEquipamentCommand): Observable<CommandResult> {
     return this.http.delete<CommandResult>(`${this.url}/equipaments/${command.id}`, Content.GetParams(command));
+  }
+
+  getTypes(query: ListTypeQuery): Observable<QueryResult<TypeList>> {
+    return this.http.get<QueryResult<TypeList>>(`${this.url}/equipaments/types`, Content.GetParams(query));
   }
 
   getEquipaments(query: ListEquipamentQuery): Observable<QueryResult<EquipamentList>> {
