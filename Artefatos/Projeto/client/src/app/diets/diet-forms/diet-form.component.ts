@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatBottomSheet } from '@angular/material';
 
 @Component({
   selector: 'app-diet-form',
@@ -14,7 +15,8 @@ export class DietComponent implements OnInit {
   private form: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private bottomSheet: MatBottomSheet,
   ) { 
     this.form = fb.group({
       id: ['',Validators.required],
@@ -27,6 +29,10 @@ export class DietComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  close() {
+    this.bottomSheet.dismiss();
   }
 
 }

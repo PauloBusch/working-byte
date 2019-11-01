@@ -25,23 +25,23 @@ export class dietService {
     private http: HttpClient
   ) { }
 
-  createUser(command: createDietCommand): Observable<CommandResult> {
+  createDiet(command: createDietCommand): Observable<CommandResult> {
     return this.http.post<CommandResult>(`${this.url}/diets`, command);
   }
 
-  updateUser(command: updateDietCommand): Observable<CommandResult> {
+  updateDiet(command: updateDietCommand): Observable<CommandResult> {
     return this.http.put<CommandResult>(`${this.url}/diets/${command.id}`, command);
   }
 
-  removeUser(command: removeDietCommand): Observable<CommandResult> {
+  removeDiet(command: removeDietCommand): Observable<CommandResult> {
     return this.http.delete<CommandResult>(`${this.url}/diets/${command.id}`, Content.GetParams(command));
   }
 
-  getUsers(query: listDietQuery): Observable<QueryResult<DietList>> {
+  getDiet(query: listDietQuery): Observable<QueryResult<DietList>> {
     return this.http.get<QueryResult<DietList>>(`${this.url}/diets`, Content.GetParams(query));
   }
 
-  getUserById(query: getDietQuery): Observable<QueryResult<DietDetails>> {
+  getDietById(query: getDietQuery): Observable<QueryResult<DietDetails>> {
     return this.http.get<QueryResult<DietDetails>>(`${this.url}/diets/${query.id}`, Content.GetParams(query));
   }
 }

@@ -7,4 +7,8 @@ a[mat-fab] {
 
 table {
     width: 100%;
+
+    & tr {
+        height: 70px;
+    }
 }
