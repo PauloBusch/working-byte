@@ -5,10 +5,10 @@ import { Storage } from 'src/app/shared/utils/storage';
 
 import { listDietQuery } from '../models/queries/listDietQuery';
 import { DietList } from '../models/view-models/diet.list';
-import { dietService } from 'src/app/shared/services/diet.service';
+import { DietService } from 'src/app/shared/services/diet.service';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { DataService } from 'src/app/shared/services/data.service';
-import { removeDietCommand } from '../models/commands/removeDietCommand';
+import { RemoveDietCommand } from '../models/commands/removeDietCommand';
 
 @Component({
   selector: 'app-diet-list',
@@ -23,7 +23,7 @@ export class DietListComponent implements OnInit, OnDestroy {
     dataSource: MatTableDataSource<DietList>;
 
   constructor(
-    private dietService: dietService,
+    private dietService: DietService,
     private ConfirmDialogService: ConfirmDialogService,
     private snackBar: MatSnackBar,
     private dataService: DataService<DietList>) {
@@ -81,7 +81,7 @@ export class DietListComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const command = new removeDietCommand(id);
+      const command = new RemoveDietCommand(id);
       this.dietService.removeDiet(command).subscribe(result => {
         if(result.Rows > 0){
         this.snackBar.open('Dieta removida com sucesso.', 'OK', {duration: 3000 });
