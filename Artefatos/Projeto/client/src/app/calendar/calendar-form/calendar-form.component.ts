@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material';
 
 @Component({
   selector: 'app-calendar-form',
