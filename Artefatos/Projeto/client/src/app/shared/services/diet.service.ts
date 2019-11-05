@@ -10,7 +10,7 @@ import { createDietCommand } from 'src/app/diets/models/commands/createDietComma
 import { updateDietCommand } from 'src/app/diets/models/commands/updateDietCommand';
 import { removeDietCommand } from 'src/app/diets/models/commands/removeDietCommand';
 import { listDietQuery } from 'src/app/diets/models/queries/listDietQuery';
-import { getDietQuery } from 'src/app/diets/models/queries/getDietQuery';
+import { GetDietQuery } from 'src/app/diets/models/queries/GetDietQuery';
 import { Content } from '../utils/content';
 import { DietList } from 'src/app/diets/models/view-models/diet.list';
 import { DietDetails } from 'src/app/diets/models/view-models/diet.details';
@@ -18,7 +18,7 @@ import { DietDetails } from 'src/app/diets/models/view-models/diet.details';
 @Injectable({
   providedIn: 'root'
 })
-export class dietService {
+export class DietService {
   private url: string = environment.apiUrl;
 
   constructor(
@@ -41,7 +41,7 @@ export class dietService {
     return this.http.get<QueryResult<DietList>>(`${this.url}/diets`, Content.GetParams(query));
   }
 
-  getDietById(query: getDietQuery): Observable<QueryResult<DietDetails>> {
+  getDietById(query: GetDietQuery): Observable<QueryResult<DietDetails>> {
     return this.http.get<QueryResult<DietDetails>>(`${this.url}/diets/${query.id}`, Content.GetParams(query));
   }
 }
