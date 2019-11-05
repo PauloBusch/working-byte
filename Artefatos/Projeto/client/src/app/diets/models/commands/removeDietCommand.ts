@@ -1,4 +1,4 @@
-export class removeDietCommand {
+export class RemoveDietCommand {
     public id: string;
 
     constructor(
