@@ -14,7 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 
 import { DietComponent } from './diet-forms/diet-form.component';
 import { DietListComponent } from '../diets/diet-list/diet-list.component';
-import { dietService } from '../shared/services/diet.service';
+import { DietService } from '../shared/services/diet.service';
 
 @NgModule({
     declarations: [
@@ -48,7 +48,7 @@ import { dietService } from '../shared/services/diet.service';
         MatFormFieldModule
     ],
     providers: [
-        dietService
+        DietService
     ]
 })
 export class DietModule { }
