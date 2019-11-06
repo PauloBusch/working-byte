@@ -38,7 +38,7 @@ class ListTypesQuery extends Query {
             query.include.push({
                 attributes: [],
                 model: EquipamentDb,
-                where: { id_equipament = this.id_equipament }
+                where: { id_equipament: this.id_equipament }
             });
         }
 
