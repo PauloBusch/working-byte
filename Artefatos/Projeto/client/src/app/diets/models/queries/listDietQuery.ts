@@ -1,4 +1,4 @@
-export class listDietQuery {
+export class ListDietQuery {
     public search: string;
     public limit: number;
     public page: number;

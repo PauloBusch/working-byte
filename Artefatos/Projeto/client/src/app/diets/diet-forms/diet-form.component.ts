@@ -5,7 +5,6 @@ import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 import { GetDietQuery } from '../models/queries/GetDietQuery';
 
 import { DietService } from 'src/app/shared/services/diet.service';
-import { Patterns } from 'src/app/shared/utils/validators';
 import { DietList } from '../models/view-models/diet.list';
 import { DataService } from 'src/app/shared/services/data.service';
 import { Random } from 'src/app/shared/utils/random';
@@ -27,20 +26,16 @@ export class DietComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private paterns: Patterns,
     private random: Random,
     private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet,
     private dietService: DietService,
     private dataService: DataService<DietList>
   ) { 
-    this.form = fb.group({
-      id: ['',Validators.required],
+    this.form = this.fb.group({
       diet_name: ['', Validators.required],
-      description: ['', Validators.required],
-      id_training: ['', Validators.required],
-      id_user: ['', Validators.required],
-      id_diet_type: ['', Validators.required],
+      description: ['', Validators.required]
+      
     })
   }
 
@@ -49,23 +44,23 @@ export class DietComponent implements OnInit {
   }
 
   loadData(params: { id:string }) {
-  this.refId = params.id;
-  if(!this.refId){
-    this.isNew = true;
-    return;
-  }
-
-  const query = new GetDietQuery(this.refId);
-  this.dietService.getDietById(query).subscribe(result => {
-    if(result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
-      this.snackBar.open('Dieta não encontrada', 'OK', { duration: 3000 });
+    this.refId = params.id;
+    if(!this.refId){
+      this.isNew = true;
       return;
     }
 
-    const diet = result.List[0];
-    this.form.patchValue(diet);
-  })
-}
+    const query = new GetDietQuery(this.refId);
+    this.dietService.getDietById(query).subscribe(result => {
+      if(result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
+        this.snackBar.open('Dieta não encontrada', 'OK', { duration: 3000 });
+        return;
+      }
+
+      const diet = result.List[0];
+      this.form.patchValue(diet);
+    })
+  }
 
 
   close() {
@@ -93,7 +88,8 @@ export class DietComponent implements OnInit {
       values.diet_name,
       values.description
     );
-    this.dietService.createDiet(command).subscribe(result => {
+
+    this.dietService.create(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
         this.snackBar.open('Dieta salva com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
@@ -115,7 +111,7 @@ export class DietComponent implements OnInit {
       values.diet_name,
       values.description
     );
-    this.dietService.updateDiet(command).subscribe(result => {
+    this.dietService.update(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
         this.snackBar.open('Dieta editada com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
