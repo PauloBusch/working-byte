@@ -20,7 +20,12 @@ const PaymentsModel = (sequelize, dataTypes) => {
             allowNull: false
         }
     }, {
-        timestamps: false
+        timestamps: false,
+        indexes: [{
+            name: 'UQ_name',
+            unique: true,
+            fields: ['name']
+        }]
     });
 
     return Payments;

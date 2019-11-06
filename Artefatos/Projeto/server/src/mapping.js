@@ -5,6 +5,7 @@ const { EquipamentModel } = require('./models/equipament/equipament.model');
 const { TypeModel } = require('./models/equipament/types/type.model');
 
 const { DbConfig, DbManager } = require('./../config');
+const { PaymentsModel } = require('./models/payments/payments.model');
 
 const Connection = new Sequelize(DbConfig.database, DbConfig.user, DbConfig.password, {
   host: DbConfig.host,
@@ -29,12 +30,15 @@ EquipamentDb.hasOne(TypeDb, { foreignKey: 'id_type', as: 'type' });
 EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
 EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
 
+const PaymentsDb = PaymentsModel(Connection, Sequelize);
+
 Connection.sync({ force: DbManager.overrideData })
   .then(() => console.log(`Tables created!`));
 
 module.exports = { 
   UserDb,
   TypeDb,
+  PaymentsDb,
   EquipamentDb,
   EvaluationDb, 
   Connection

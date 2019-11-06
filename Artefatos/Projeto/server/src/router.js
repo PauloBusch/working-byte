@@ -5,6 +5,7 @@ const { ControllerUser } = require('./controllers/users.controller');
 const { ControllerAuth } = require('./controllers/auth.controller');
 const { ControllerEvaluation } = require('./controllers/evaluations.controller');
 const { ControllerEquipament } = require('./controllers/equipament.controller');
+const { ControllerPayment } = require('./controllers/payment.controller');
 
 router.post('/login', ControllerAuth.login);
 router.get('/logout', ControllerAuth.logout);
@@ -27,6 +28,8 @@ router.get('/equipaments/:id', Token.validate, ControllerEquipament.getById);
 router.post('/equipaments', Token.validate, ControllerEquipament.create);
 router.put('/equipaments/:id', Token.validate, ControllerEquipament.update);
 router.delete('/equipaments/:id', Token.validate, ControllerEquipament.remove);
+
+router.post('/payments', Token.validate, ControllerPayment.create);
 
 module.exports = {
     Router: router
