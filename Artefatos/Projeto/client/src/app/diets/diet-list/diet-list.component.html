@@ -1,3 +1,9 @@
+<a mat-fab [routerLink]="['new']" color="primary">
+  <mat-icon>add</mat-icon>
+</a>
+
+<router-outlet></router-outlet>
+
 <table mat-table [dataSource]="dataSource">
 
     <!-- Name Column -->
@@ -16,3 +22,12 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+
+<mat-paginator
+    [length]="diets.length"
+    [pageSize]="listQuery.limit"
+    [pageIndex]="listQuery.page - 1"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [showFirstLastButtons]="true"
+    (page)="pageChange($event)">    
+</mat-paginator>

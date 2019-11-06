@@ -30,6 +30,7 @@ import { DietModule } from './diets/diets.module';
 import { EquipamentFormComponent } from './equipaments/equipament-form/equipament-form.component';
 import { EquipamentListComponent } from './equipaments/equipament-list/equipament-list.component';
 import { EquipamentsModule } from './equipaments/equipaments.module';
+import { CalendarModule } from './calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { EquipamentsModule } from './equipaments/equipaments.module';
     EquipamentsModule,
     LogoModule,
     DietModule,
+    CalendarModule,
+    
 
     BrowserModule,
     AppRoutingModule,

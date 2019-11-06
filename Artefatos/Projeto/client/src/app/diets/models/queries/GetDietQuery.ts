@@ -1,4 +1,4 @@
-export class RemoveDietCommand {
+export class GetDietQuery {
     public id: string;
 
     constructor(
