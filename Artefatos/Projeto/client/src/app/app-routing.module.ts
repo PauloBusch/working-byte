@@ -16,6 +16,7 @@ import { DietComponent } from './diets/diet-forms/diet-form.component';
 import { EquipamentListComponent } from './equipaments/equipament-list/equipament-list.component';
 import { EquipamentFormComponent } from './equipaments/equipament-form/equipament-form.component';
 import { CalendarFormComponent } from './calendar/calendar-form/calendar-form.component';
+import { CalendarListComponent } from './calendar/calendar-list/calendar-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -37,7 +38,10 @@ const routes: Routes = [
         {path: 'new', component: BottomSheetComponent, data: {form: DietComponent} },
         {path: 'edit/:id', component: BottomSheetComponent, data: { form: DietComponent} }
     ] },
-    { path: 'calendar',   component: CalendarFormComponent, canActivate: [AuthGuard]},
+    { path: 'calendar',   component: CalendarListComponent, canActivate: [AuthGuard],  children: [
+      { path: 'new', component: BottomSheetComponent, data: { form: CalendarFormComponent } },
+      { path: 'edit/:id', component: BottomSheetComponent, data: { form: CalendarFormComponent } }
+    ] },
 
   ] },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
