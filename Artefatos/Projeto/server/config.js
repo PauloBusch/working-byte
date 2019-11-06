@@ -11,6 +11,6 @@ module.exports = {
         database: 'workingbyte'
     },
     DbManager: {
-        overrideData: false
+        overrideData: true
     }
 }

@@ -18,6 +18,11 @@ const PaymentsModel = (sequelize, dataTypes) => {
         day: {
             type: dataTypes.INTEGER,
             allowNull: false
+        },
+        removed: {
+            type: dataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false
         }
     }, {
         timestamps: false,

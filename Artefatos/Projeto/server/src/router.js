@@ -31,6 +31,7 @@ router.delete('/equipaments/:id', Token.validate, ControllerEquipament.remove);
 
 router.post('/payments', Token.validate, ControllerPayment.create);
 router.put('/payments/:id', Token.validate, ControllerPayment.update);
+router.delete('/payments/:id', Token.validate, ControllerPayment.remove);
 
 module.exports = {
     Router: router

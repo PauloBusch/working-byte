@@ -30,7 +30,7 @@ class CreatePaymentCommand extends Command {
         if (!this.day || typeof this.value !== 'number' || this.day <= 0 || this.day > 32)
             return new Error(EErrorCode.InvalidParams, "Parameter day is invalid");
 
-        const existsName = await PaymentsDb.count({ where: { name: this.name } });
+        const existsName = await PaymentsDb.count({ where: { name: this.name, removed: false } });
         if (existsName)
             return new Error(EErrorCode.DuplicateUnique, `Payment with name already exists`);
 

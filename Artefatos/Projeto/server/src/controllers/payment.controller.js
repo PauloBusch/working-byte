@@ -1,6 +1,7 @@
 const { CommandHandle } = require('..//utils/handle/commandHandle');
 const { CreatePaymentCommand } = require('../models/payments/commands/createPaymentCommand');
 const { UpdatePaymentCommand } = require('../models/payments/commands/updatePaymentCommand');
+const { RemovePaymentCommand } = require('../models/payments/commands/removePaymentCommand');
 
 const { Obj } = require('../utils/content/dataResult');
 
@@ -14,6 +15,12 @@ controllerPayment.create = async (req, res) => {
 
 controllerPayment.update = async (req, res) => {
     const command = Obj.getData(new UpdatePaymentCommand(), req);
+    const result = await CommandHandle.Execute(command);
+    res.json(result);
+}
+
+controllerPayment.remove = async (req, res) => {
+    const command = Obj.getData(new RemovePaymentCommand(), req);
     const result = await CommandHandle.Execute(command);
     res.json(result);
 }
