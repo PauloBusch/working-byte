@@ -1,4 +1,4 @@
-export class getDietQuery {
+export class GetDietQuery {
     public id: string;
 
     constructor(

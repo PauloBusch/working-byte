@@ -3,7 +3,7 @@ import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 import { MatSnackBar, MatTableDataSource, PageEvent } from '@angular/material';
 import { Storage } from 'src/app/shared/utils/storage';
 
-import { listDietQuery } from '../models/queries/listDietQuery';
+import { ListDietQuery } from '../models/queries/ListDietQuery';
 import { DietList } from '../models/view-models/diet.list';
 import { DietService } from 'src/app/shared/services/diet.service';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
@@ -16,11 +16,12 @@ import { RemoveDietCommand } from '../models/commands/removeDietCommand';
   styleUrls: ['./diet-list.component.scss']
 })
 export class DietListComponent implements OnInit, OnDestroy {
-    private listQuery: listDietQuery;
+    private listQuery: ListDietQuery;
     private diets = new AsyncQuery<DietList>();
 
     displayedColumns: string[] = ['name', 'description'];
     dataSource: MatTableDataSource<DietList>;
+
 
   constructor(
     private dietService: DietService,
@@ -29,8 +30,7 @@ export class DietListComponent implements OnInit, OnDestroy {
     private dataService: DataService<DietList>) {
       const limit = Storage.get('diet.limit', 5);
       const page = Storage.get('diet.page', 5);
-      this.listQuery = new listDietQuery(limit, page, false, 'diet_created');
-      this.dataSource = new MatTableDataSource<DietList>([new DietList('asdf', 'teste', 'nonono')]);
+      this.listQuery = new ListDietQuery(limit, page, false, 'diet_created');
    }
 
   ngOnInit() {
@@ -82,7 +82,7 @@ export class DietListComponent implements OnInit, OnDestroy {
       }
 
       const command = new RemoveDietCommand(id);
-      this.dietService.removeDiet(command).subscribe(result => {
+      this.dietService.remove(command).subscribe(result => {
         if(result.Rows > 0){
         this.snackBar.open('Dieta removida com sucesso.', 'OK', {duration: 3000 });
         this.removeDietList(id);

@@ -2,7 +2,7 @@
     <button mat-icon-button type="button" (click)="close()">
         <mat-icon>clear</mat-icon>
     </button>
-    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição'}}  de dieta</h2>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição'}}  de Dieta</h2>
     <button mat-icon-button type="submit" form="form" (click)="save()">
         <mat-icon>done</mat-icon>
     </button>
@@ -18,7 +18,7 @@
 
     <div>
         <mat-form-field fxFlex="400">
-            <textarea matInput placeholder="Descreva a Dieta:" formControlName="description" maxlength="2000"></textarea>
+            <textarea matInput placeholder="Descreva a Dieta:" formControlName="description" maxlength="2000" rows="4" cols= "150"></textarea>
             <mat-error *ngIf="haserror(description, required)">Descreva a Dieta!</mat-error>
         </mat-form-field>
     </div>
