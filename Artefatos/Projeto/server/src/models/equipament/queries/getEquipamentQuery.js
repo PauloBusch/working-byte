@@ -1,4 +1,5 @@
 const { Query } = require('../../../utils/interfaces/query');
+const { TypeDb, EquipamentDb } = require('../../../mapping');
  
 class GetEquipamentQuery extends Query {
     constructor(
@@ -26,7 +27,10 @@ class GetEquipamentQuery extends Query {
     async Execute(){
         const query = { 
             attributes: ['id','name','code','is_disponible'],
-            where: { id: this.id } 
+            where: { id: this.id },
+            include: [{
+                model: TypeDb
+            }]
         };
 
         const equipament = await EquipamentDb.findOne(query);

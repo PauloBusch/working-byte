@@ -8,7 +8,7 @@ import { QueryResult } from '../models/QueryResult.model';
 import { CommandResult } from '../models/CommandRestult.model';
 import { EquipamentList } from 'src/app/equipaments/models/view-models/equipament.list';
 import { ListEquipamentQuery } from 'src/app/equipaments/models/queries/listEquipamentQuery';
-import { GetEquipamentQuery } from 'src/app/equipaments/models/queries/getEquipamanetQuery';
+import { GetEquipamentQuery } from 'src/app/equipaments/models/queries/getEquipamentQuery';
 import { EquipamentDetails } from 'src/app/equipaments/models/view-models/equipament.details';
 import { CreateEquipamentCommand } from 'src/app/equipaments/models/commands/createEquipamentCommand';
 import { UpdateEquipamentCommand } from 'src/app/equipaments/models/commands/updateEquipamentCommand';
