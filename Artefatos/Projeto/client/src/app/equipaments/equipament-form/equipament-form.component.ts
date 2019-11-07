@@ -10,7 +10,7 @@ import { EquipamentService } from 'src/app/shared/services/equipament.service';
 import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 import { DataService } from 'src/app/shared/services/data.service';
 import { UpdateEquipamentCommand } from '../models/commands/updateEquipamentCommand';
-import { GetEquipamentQuery } from '../models/queries/getEquipamanetQuery';
+import { GetEquipamentQuery } from '../models/queries/getEquipamentQuery';
 import { ListTypeQuery } from '../models/queries/lsitTypeQuery';
 import { TypeList } from '../models/view-models/type.list';
 
@@ -132,7 +132,8 @@ export class EquipamentFormComponent implements OnInit {
       this.refId,
       values.name,
       values.code,
-      true
+      true,
+      { name: values.type.name }
     );
 
     this.dataService.update(equipament);

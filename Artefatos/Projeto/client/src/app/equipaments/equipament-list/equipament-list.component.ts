@@ -15,7 +15,7 @@ import { DataService } from 'src/app/shared/services/data.service';
   styleUrls: ['./equipament-list.component.scss']
 })
 export class EquipamentListComponent implements OnInit, OnDestroy {
-  displayColumns: string[] = ['name', 'code', 'is_disponible'];
+  displayColumns: string[] = ['name', 'code', 'type_name', 'is_disponible'];
   dataSource: MatTableDataSource<EquipamentList>;
 
   private listQuery: ListEquipamentQuery;
@@ -70,13 +70,13 @@ export class EquipamentListComponent implements OnInit, OnDestroy {
   pageChange(ev: PageEvent) {
     this.listQuery.page = ev.pageIndex + 1;
     this.listQuery.limit = ev.pageSize;
-    Storage.set('documents.limit', this.listQuery.limit);
-    Storage.set('documents.page', this.listQuery.page);
+    Storage.set('equipaments.limit', this.listQuery.limit);
+    Storage.set('equipaments.page', this.listQuery.page);
     this.loadEquipaments();
   }
 
   remove(id: string) {
-    this.confirmDialogService.confirmRemove('Deseja remover o equipament?').subscribe(confirm => {
+    this.confirmDialogService.confirmRemove('Deseja remover o equipamento?').subscribe(confirm => {
       if (!confirm) {
         return;
       }

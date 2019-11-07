@@ -6,9 +6,9 @@ import { environment } from '../../../environments/environment';
 import { CommandResult } from 'src/app/shared/models/CommandRestult.model';
 import { QueryResult } from 'src/app/shared/models/QueryResult.model';
 
-import { createDietCommand } from 'src/app/diets/models/commands/createDietCommand';
-import { updateDietCommand } from 'src/app/diets/models/commands/updateDietCommand';
-import { removeDietCommand } from 'src/app/diets/models/commands/removeDietCommand';
+import { CreateDietCommand } from 'src/app/diets/models/commands/createDietCommand';
+import { UpdateDietCommand } from 'src/app/diets/models/commands/updateDietCommand';
+import { RemoveDietCommand } from 'src/app/diets/models/commands/removeDietCommand';
 import { listDietQuery } from 'src/app/diets/models/queries/listDietQuery';
 import { GetDietQuery } from 'src/app/diets/models/queries/GetDietQuery';
 import { Content } from '../utils/content';
@@ -25,15 +25,15 @@ export class DietService {
     private http: HttpClient
   ) { }
 
-  createDiet(command: createDietCommand): Observable<CommandResult> {
+  createDiet(command: CreateDietCommand): Observable<CommandResult> {
     return this.http.post<CommandResult>(`${this.url}/diets`, command);
   }
 
-  updateDiet(command: updateDietCommand): Observable<CommandResult> {
+  updateDiet(command: UpdateDietCommand): Observable<CommandResult> {
     return this.http.put<CommandResult>(`${this.url}/diets/${command.id}`, command);
   }
 
-  removeDiet(command: removeDietCommand): Observable<CommandResult> {
+  removeDiet(command: RemoveDietCommand): Observable<CommandResult> {
     return this.http.delete<CommandResult>(`${this.url}/diets/${command.id}`, Content.GetParams(command));
   }
 

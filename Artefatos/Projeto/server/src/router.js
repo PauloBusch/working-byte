@@ -29,6 +29,7 @@ router.post('/equipaments', Token.validate, ControllerEquipament.create);
 router.put('/equipaments/:id', Token.validate, ControllerEquipament.update);
 router.delete('/equipaments/:id', Token.validate, ControllerEquipament.remove);
 
+router.get('/payments/:id', Token.validate, ControllerPayment.getById);
 router.post('/payments', Token.validate, ControllerPayment.create);
 router.put('/payments/:id', Token.validate, ControllerPayment.update);
 router.delete('/payments/:id', Token.validate, ControllerPayment.remove);

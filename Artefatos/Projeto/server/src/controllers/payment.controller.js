@@ -3,9 +3,18 @@ const { CreatePaymentCommand } = require('../models/payments/commands/createPaym
 const { UpdatePaymentCommand } = require('../models/payments/commands/updatePaymentCommand');
 const { RemovePaymentCommand } = require('../models/payments/commands/removePaymentCommand');
 
+const { QueryHandle } = require('../utils/handle/queryHandle');
+const { GetPaymentQuery } = require('../models/payments/queries/getPaymentQuery');
+
 const { Obj } = require('../utils/content/dataResult');
 
 const controllerPayment = { };
+
+controllerPayment.getById = async (req, res) => {
+    const query = Obj.getData(new GetPaymentQuery(), req);
+    const result = await QueryHandle.Execute(query);
+    res.json(result); 
+}
 
 controllerPayment.create = async (req, res) => {
     const command = Obj.getData(new CreatePaymentCommand(), req);
