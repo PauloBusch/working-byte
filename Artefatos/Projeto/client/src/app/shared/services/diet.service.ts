@@ -19,7 +19,7 @@ import { DietDetails } from 'src/app/diets/models/view-models/diet.details';
   providedIn: 'root'
 })
 export class DietService {
-  private url: string = environment.apiUrl;
+  private url = environment.apiUrl;
 
   constructor(
     private http: HttpClient

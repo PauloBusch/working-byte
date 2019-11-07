@@ -11,7 +11,6 @@ import { Random } from 'src/app/shared/utils/random';
 import { CreateDietCommand } from '../models/commands/createDietCommand';
 import { UpdateDietCommand } from '../models/commands/updateDietCommand';
 
-
 @Component({
   selector: 'app-diet-form',
   templateUrl: './diet-form.component.html',
@@ -61,7 +60,6 @@ export class DietComponent implements OnInit {
       this.form.patchValue(diet);
     })
   }
-
 
   close() {
     this.bottomSheet.dismiss();

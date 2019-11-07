@@ -6,14 +6,14 @@ export class ListDietQuery {
     public columnSort: string;
 
     constructor(
-        limit: number,
         page: number,
+        limit: number,
         sortAsc: boolean,
         columnSort: string,
         search: string = null
     ) {
-        this.limit = limit;
         this.page = page;
+        this.limit = limit;
         this.sortAsc = sortAsc;
         this.columnSort = columnSort;
         this.search = search;

@@ -28,9 +28,11 @@ export class DietListComponent implements OnInit, OnDestroy {
     private ConfirmDialogService: ConfirmDialogService,
     private snackBar: MatSnackBar,
     private dataService: DataService<DietList>) {
-      const limit = Storage.get('diet.limit', 5);
-      const page = Storage.get('diet.page', 5);
-      this.listQuery = new ListDietQuery(limit, page, false, 'diet_created');
+      const limit = Storage.get('diet.limit', 10);
+      const page = Storage.get('diet.page', 1);
+      const sortAsc = Storage.get('diet.sortAsc', false);
+      const columnSort = Storage.get('diet.columnSort', 'diet_created');
+      this.listQuery = new ListDietQuery(page, limit, sortAsc, columnSort);
    }
 
   ngOnInit() {

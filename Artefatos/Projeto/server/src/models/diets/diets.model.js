@@ -14,7 +14,17 @@ const DietsModel = (sequelize, dataTypes) => {
         description: {
             type: dataTypes.STRING(2000),
             allowNull: false
-        }
+        },
+        diet_created: dataTypes.DATE,
+        diet_updated: dataTypes.DATE
+    }, {
+        createdAt: 'diet_created',
+        updatedAt: 'diet_updated',
+        idexes: [{
+            name: 'UQ_code',
+            unique: true,
+            fields: ['description']
+        }]
     });
 
     return Diet;
