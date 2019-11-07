@@ -1,0 +1,38 @@
+<!--<a mat-fab [routerLink]="['new']" color="primary">
+    <mat-icon>add</mat-icon>
+  </a>
+  
+  <router-outlet></router-outlet>
+<p>Agenda!</p>
+ 
+<table 
+    mat-table
+    [dataSource]="dataSource">
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let eqp">{{ eqp.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> Código </th>
+        <td mat-cell *matCellDef="let eqp">{{ eqp.code }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="is_disponible">
+        <th mat-header-cell *matHeaderCellDef> Disponível </th>
+        <td mat-cell *matCellDef="let eqp">{{ eqp.is_disponible ? 'Sim' : 'Não' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+</table>
+
+<mat-paginator
+    [length]="equipaments.length"
+    [pageSize]="listQuery.limit"
+    [pageIndex]="listQuery.page - 1"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [showFirstLastButtons]="true"
+    (page)="pageChange($event)">    
+</mat-paginator> -->

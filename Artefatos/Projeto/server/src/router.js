@@ -5,6 +5,7 @@ const { ControllerUser } = require('./controllers/users.controller');
 const { ControllerAuth } = require('./controllers/auth.controller');
 const { ControllerEvaluation } = require('./controllers/evaluations.controller');
 const { ControllerEquipament } = require('./controllers/equipament.controller');
+const { ControllerDiet }= require('./controllers/diet.controller');
 const { ControllerPayment } = require('./controllers/payment.controller');
 
 router.post('/login', ControllerAuth.login);
@@ -28,6 +29,12 @@ router.get('/equipaments/:id', Token.validate, ControllerEquipament.getById);
 router.post('/equipaments', Token.validate, ControllerEquipament.create);
 router.put('/equipaments/:id', Token.validate, ControllerEquipament.update);
 router.delete('/equipaments/:id', Token.validate, ControllerEquipament.remove);
+
+router.get('./diets', Token.validate, ControllerDiet.getAll);
+router.get('./diets/:id', Token.validate, ControllerDiet.getById);
+router.post('./diets', Token.validate, ControllerDiet.create);
+router.put('/diets/:id', Token.validate, ControllerDiet.update);
+router.delete('/diets/:id', Token.validate, ControllerDiet.remove);
 
 router.get('/payments/:id', Token.validate, ControllerPayment.getById);
 router.post('/payments', Token.validate, ControllerPayment.create);

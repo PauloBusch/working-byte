@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarFormComponent } from './calendar-form/calendar-form.component';
-import { MatTableModule, MatIconModule, MatPaginatorModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatTableModule, MatIconModule, MatPaginatorModule, MatButtonModule, 
+  MatFormFieldModule, MatInputModule, MatBottomSheetModule, MatProgressSpinnerModule, 
+  MatCheckboxModule, MatMenuModule, MatToolbarModule, MatListModule,  MatSelectModule, 
+  MatSidenavModule, MatSnackBarModule, MatCardModule, } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CalendarListComponent } from './calendar-list/calendar-list.component';
+
+
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
-  declarations: [CalendarFormComponent],
+  declarations: [CalendarFormComponent, CalendarListComponent],
   imports: [
     CommonModule,
+
+    AppRoutingModule,
+
     MatTableModule, 
     MatIconModule, 
     MatPaginatorModule, 
@@ -17,7 +27,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule, 
     MatInputModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatBottomSheetModule, 
+    MatProgressSpinnerModule, 
+    MatCheckboxModule, 
+    MatMenuModule, 
+    MatToolbarModule, 
+    MatListModule,  
+    MatSelectModule, 
+    MatSidenavModule, 
+     MatSnackBarModule, 
+     MatCardModule
   ]
 })
 export class CalendarModule { }
