@@ -54,6 +54,7 @@ export class EquipamentListComponent implements OnInit, OnDestroy {
     } else {
       this.equipaments.list[indexEquipament] = equipament;
     }
+    this.dataSource = new MatTableDataSource<EquipamentList>(this.equipaments.list);
   }
 
   removeEquipamentList(id: string) {

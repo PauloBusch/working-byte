@@ -1,5 +1,5 @@
 const { Command } = require('../../../utils/interfaces/command');
-const { CommandResult, EErrorCode } = require('../../../utils/content/dataResult');
+const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
 const { Equipament } = require('../equipament');
 const { EquipamentDb } = require('../../../mapping');
@@ -22,14 +22,14 @@ class CreateEquipamentCommand extends Command {
     async GetError(){
         if (!this.id)
             return new Error(EErrorCode.InvalidParams, "Paramter id cannot be null");
-
+            
         if (!this.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
-
+            
         if (!this.code)
             return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
 
-        if (!this.type || !this.type.id || this.type.name)
+        if (!this.type || !this.type.id || !this.type.name)
             return new Error(EErrorCode.InvalidParams, "Parameter type require object { id: value, name: value }");
 
         return null;

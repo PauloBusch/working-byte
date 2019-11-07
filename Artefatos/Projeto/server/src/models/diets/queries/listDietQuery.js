@@ -53,7 +53,7 @@ class ListDietQuery extends Query{
         }
 
         const diets = await DietDb.findAndCountAll(query);
-        return new QueryResult(diets.rows.length, diets.rows);
+        return new QueryResult(diets.count, diets.rows);
     }
 }
 

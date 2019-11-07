@@ -57,7 +57,7 @@ class ListEquipamentQuery extends Query{
             query.where.is_disponible = this.is_disponible;
 
         const equipaments = await EquipamentDb.findAndCountAll(query);
-        return new QueryResult(equipaments.rows.length, equipaments.rows);
+        return new QueryResult(equipaments.count, equipaments.rows);
     }
 }
 
