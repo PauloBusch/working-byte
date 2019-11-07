@@ -27,7 +27,8 @@ const DietDb = DietsModel(Connection, Sequelize);
 const TypeDb = TypeModel(Connection, Sequelize);
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
-EquipamentDb.hasOne(TypeDb, { foreignKey: 'id_type', as: 'type' });
+TypeDb.hasMany(EquipamentDb, { foreignKey: 'id_type', as: 'type' });
+EquipamentDb.belongsTo(TypeDb, { foreignKey: 'id_type', as: 'type' });
 
 EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
 EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });

@@ -5,10 +5,17 @@ const { RemovePaymentCommand } = require('../models/payments/commands/removePaym
 
 const { QueryHandle } = require('../utils/handle/queryHandle');
 const { GetPaymentQuery } = require('../models/payments/queries/getPaymentQuery');
+const { ListPaymentQuery } = require('../models/payments/queries/listPaymentQuery');
 
 const { Obj } = require('../utils/content/dataResult');
 
 const controllerPayment = { };
+
+controllerPayment.getAll = async (req, res) => {
+    const query = Obj.getData(new ListPaymentQuery(), req);
+    const result = await QueryHandle.Execute(query);
+    res.json(result);
+}
 
 controllerPayment.getById = async (req, res) => {
     const query = Obj.getData(new GetPaymentQuery(), req);

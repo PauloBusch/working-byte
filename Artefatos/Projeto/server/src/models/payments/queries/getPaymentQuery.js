@@ -1,5 +1,5 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { Error, EErrorCode } = require('../../../utils/content/dataResult');
+const { QueryResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 const { PaymentsDb } = require('../../../mapping');  
 
 class GetPaymentQuery extends Query {
@@ -22,8 +22,10 @@ class GetPaymentQuery extends Query {
     }
 
     async HasPermission(){
+        const query = { where: { id: this.id } };
+        const payment = PaymentsDb.findOne(query);
 
-        return 
+        return new QueryResult(1, [payment]);
     }
 }
 

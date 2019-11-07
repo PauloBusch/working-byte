@@ -36,6 +36,7 @@ router.post('./diets', Token.validate, ControllerDiet.create);
 router.put('/diets/:id', Token.validate, ControllerDiet.update);
 router.delete('/diets/:id', Token.validate, ControllerDiet.remove);
 
+router.get('/payments', Token.validate, ControllerPayment.getAll);
 router.get('/payments/:id', Token.validate, ControllerPayment.getById);
 router.post('/payments', Token.validate, ControllerPayment.create);
 router.put('/payments/:id', Token.validate, ControllerPayment.update);

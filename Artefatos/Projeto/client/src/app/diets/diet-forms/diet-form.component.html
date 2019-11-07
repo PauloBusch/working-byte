@@ -12,14 +12,14 @@
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
         <mat-form-field fxFlex="50">
             <input matInput placeholder="Dieta" formControlName="diet_name" maxlength="50"/>
-            <mat-error *ngIf="hasError(diet_name, required)">Informe a Dieta!</mat-error>
+            <mat-error *ngIf="hasError('diet_name', required)">Informe a Dieta!</mat-error>
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field fxFlex="400">
             <textarea matInput placeholder="Descreva a Dieta:" formControlName="description" maxlength="2000" rows="4" cols= "150"></textarea>
-            <mat-error *ngIf="hasError(description, required)">Descreva a Dieta!</mat-error>
+            <mat-error *ngIf="hasError('description', required)">Descreva a Dieta!</mat-error>
         </mat-form-field>
     </div>
 </form>
