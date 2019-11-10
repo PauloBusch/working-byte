@@ -44,18 +44,18 @@ export class DietListComponent implements OnInit, OnDestroy {
     this.diets.subsc.unsubscribe();
   }
 
-  pushDietList(diets: DietList){
-    if(!diets){
+  pushDietList(diet: DietList){
+    if(!diet){
       return;
     }
 
-    const indexDiet = this.diets.list.findIndex(e => e.id === diets.id);
-
+    const indexDiet = this.diets.list.findIndex(e => e.id === diet.id);
     if(indexDiet === -1){
-      this.diets.list.unshift(diets);
+      this.diets.list.unshift(diet);
     } else {
-      this.diets.list[indexDiet] = diets;
+      this.diets.list[indexDiet] = diet;
     }
+    this.dataSource = new MatTableDataSource<DietList>(this.diets.list);
   }
 
   removeDietList(id: string){

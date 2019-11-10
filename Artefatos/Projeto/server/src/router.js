@@ -30,12 +30,13 @@ router.post('/equipaments', Token.validate, ControllerEquipament.create);
 router.put('/equipaments/:id', Token.validate, ControllerEquipament.update);
 router.delete('/equipaments/:id', Token.validate, ControllerEquipament.remove);
 
-router.get('./diets', Token.validate, ControllerDiet.getAll);
-router.get('./diets/:id', Token.validate, ControllerDiet.getById);
-router.post('./diets', Token.validate, ControllerDiet.create);
+router.get('/diets', Token.validate, ControllerDiet.getAll);
+router.get('/diets/:id', Token.validate, ControllerDiet.getById);
+router.post('/diets', Token.validate, ControllerDiet.create);
 router.put('/diets/:id', Token.validate, ControllerDiet.update);
 router.delete('/diets/:id', Token.validate, ControllerDiet.remove);
 
+router.get('/payments', Token.validate, ControllerPayment.getAll);
 router.get('/payments/:id', Token.validate, ControllerPayment.getById);
 router.post('/payments', Token.validate, ControllerPayment.create);
 router.put('/payments/:id', Token.validate, ControllerPayment.update);

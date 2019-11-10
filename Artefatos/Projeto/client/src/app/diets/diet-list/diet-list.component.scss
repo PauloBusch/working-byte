@@ -9,6 +9,10 @@ table {
     width: 100%;
 
     & tr {
-        height: 70px;
+        height: 50px;
     }
+}
+
+mat-paginator {
+    margin-bottom: 40px;
 }

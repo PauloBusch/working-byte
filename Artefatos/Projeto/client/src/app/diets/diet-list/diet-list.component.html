@@ -18,16 +18,17 @@
       <td mat-cell *matCellDef="let diet">{{ diet.description }}</td>
     </ng-container>
 
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
 
 <mat-paginator
-    [length]="diets.length"
-    [pageSize]="listQuery.limit"
-    [pageIndex]="listQuery.page - 1"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    [showFirstLastButtons]="true"
-    (page)="pageChange($event)">    
+[length]="diets.length"
+[pageSize]="listQuery.limit"
+[pageIndex]="listQuery.page - 1"
+[pageSizeOptions]="[5, 10, 25, 100]"
+[showFirstLastButtons]="true"
+(page)="pageChange($event)">    
 </mat-paginator>
