@@ -3,7 +3,7 @@ import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 import { MatSnackBar, MatTableDataSource, PageEvent } from '@angular/material';
 import { Storage } from 'src/app/shared/utils/storage';
 
-import { ListDietQuery } from '../models/queries/ListDietQuery';
+import { ListDietQuery } from '../models/queries/listDietQuery';
 import { DietList } from '../models/view-models/diet.list';
 import { DietService } from 'src/app/shared/services/diet.service';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';

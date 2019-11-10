@@ -1,4 +1,4 @@
-export class GetDietQuery {
+export class RemoveCalendarCommand {
     public id: string;
 
     constructor(

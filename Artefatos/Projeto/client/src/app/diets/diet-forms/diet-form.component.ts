@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
 import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
-import { GetDietQuery } from '../models/queries/GetDietQuery';
+import { GetDietQuery } from '../models/queries/getDietQuery';
 
 import { DietService } from 'src/app/shared/services/diet.service';
 import { DietList } from '../models/view-models/diet.list';
