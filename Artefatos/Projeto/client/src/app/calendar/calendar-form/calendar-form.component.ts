@@ -32,7 +32,7 @@ export class CalendarFormComponent implements OnInit {
     private dataService: DataService<CalendarList>
   ) { 
     this.form = this.fb.group({
-      Calendar_name: ['', Validators.required],
+      name: ['', Validators.required],
       description: ['', Validators.required]
       
     })
@@ -83,7 +83,7 @@ export class CalendarFormComponent implements OnInit {
     this.refId = this.random.NewId();
     const command = new CreateCalendarCommand(
       this.refId,
-      values.Calendar_name,
+      values.name,
       values.description
     );
 
@@ -106,7 +106,7 @@ export class CalendarFormComponent implements OnInit {
   private update(values: any) {
     const command = new UpdateCalendarCommand(
       this.refId,
-      values.Calendar_name,
+      values.name,
       values.description
     );
     this.calendarService.update(command).subscribe(result => {
