@@ -13,6 +13,7 @@ class Diets extends EntityBase {
     }
 }
 
+
 module.exports = {
     Diets
 }

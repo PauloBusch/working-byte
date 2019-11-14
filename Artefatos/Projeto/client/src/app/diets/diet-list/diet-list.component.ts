@@ -19,7 +19,7 @@ export class DietListComponent implements OnInit, OnDestroy {
     private listQuery: ListDietQuery;
     private diets = new AsyncQuery<DietList>();
 
-    displayedColumns: string[] = ['name', 'description'];
+    displayedColumns: string[] = ['name', 'description', 'symbol'];
     dataSource: MatTableDataSource<DietList>;
 
 
@@ -84,7 +84,9 @@ export class DietListComponent implements OnInit, OnDestroy {
       }
 
       const command = new RemoveDietCommand(id);
+
       this.dietService.remove(command).subscribe(result => {
+        alert(result.ErrorCode);
         if(result.Rows > 0){
         this.snackBar.open('Dieta removida com sucesso.', 'OK', {duration: 3000 });
         this.removeDietList(id);
