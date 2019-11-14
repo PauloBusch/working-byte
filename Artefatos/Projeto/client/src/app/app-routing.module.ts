@@ -38,7 +38,7 @@ const routes: Routes = [
         {path: 'new', component: BottomSheetComponent, data: {form: DietComponent} },
         {path: 'edit/:id', component: BottomSheetComponent, data: { form: DietComponent} }
     ] },
-    { path: 'calendar',   component: CalendarListComponent, canActivate: [AuthGuard],  children: [
+    { path: 'calendars',   component: CalendarListComponent, canActivate: [AuthGuard],  children: [
       { path: 'new', component: BottomSheetComponent, data: { form: CalendarFormComponent } },
       { path: 'edit/:id', component: BottomSheetComponent, data: { form: CalendarFormComponent } }
     ] },

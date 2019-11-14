@@ -3,6 +3,7 @@ const { UserModel } = require('./models/users/user.model');
 const { EvaluationModel } = require('./models/evaluations/evaluation.model');
 const { EquipamentModel } = require('./models/equipament/equipament.model');
 const { DietsModel } = require('./models/diets/diets.model');
+const { CalendarModel } = require('./models/calendar/calendar.model');
 const { TypeModel } = require('./models/equipament/types/type.model');
 
 const { DbConfig, DbManager } = require('./../config');
@@ -24,6 +25,7 @@ const UserDb = UserModel(Connection, Sequelize);
 const EvaluationDb = EvaluationModel(Connection, Sequelize);
 const EquipamentDb = EquipamentModel(Connection, Sequelize);
 const DietDb = DietsModel(Connection, Sequelize);
+const CalendarDb = CalendarModel(Connection, Sequelize);
 const TypeDb = TypeModel(Connection, Sequelize);
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
@@ -43,6 +45,7 @@ module.exports = {
   TypeDb,
   PaymentsDb,
   DietDb,
+  CalendarDb,
   EquipamentDb,
   EvaluationDb, 
   Connection

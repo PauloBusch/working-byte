@@ -89,13 +89,13 @@ export class CalendarFormComponent implements OnInit {
 
     this.calendarService.create(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
-        this.snackBar.open('Calendara salva com sucesso', 'OK', { duration: 3000 });
+        this.snackBar.open('Agenda Salva com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
         this.close();
         return;
       }
       if (result.ErrorCode ===  EErrorCode.InvalidParams) {
-        this.snackBar.open('Existem campos inválidos', 'OK', { duration: 3000 });
+        this.snackBar.open('Existem2 campos inválidos', 'OK', { duration: 3000 });
         return;
       }
 

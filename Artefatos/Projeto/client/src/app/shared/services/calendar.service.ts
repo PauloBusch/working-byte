@@ -26,22 +26,22 @@ export class CalendarService {
   ) { }
 
   create(command: CreateCalendarCommand): Observable<CommandResult> {
-    return this.http.post<CommandResult>(`${this.url}/diets`, command);
+    return this.http.post<CommandResult>(`${this.url}/calendars`, command);
   }
 
   update(command: UpdateCalendarCommand): Observable<CommandResult> {
-    return this.http.put<CommandResult>(`${this.url}/diets/${command.id}`, command);
+    return this.http.put<CommandResult>(`${this.url}/calendars/${command.id}`, command);
   }
 
   remove(command: RemoveCalendarCommand): Observable<CommandResult> {
-    return this.http.delete<CommandResult>(`${this.url}/diets/${command.id}`, Content.GetParams(command));
+    return this.http.delete<CommandResult>(`${this.url}/calendars/${command.id}`, Content.GetParams(command));
   }
 
   getCalendar(query: ListCalendarQuery): Observable<QueryResult<CalendarList>> {
-    return this.http.get<QueryResult<CalendarList>>(`${this.url}/diets`, Content.GetParams(query));
+    return this.http.get<QueryResult<CalendarList>>(`${this.url}/calendars`, Content.GetParams(query));
   }
 
   getCalendarById(query: GetCalendarQuery): Observable<QueryResult<CalendarDetails>> {
-    return this.http.get<QueryResult<CalendarDetails>>(`${this.url}/diets/${query.id}`, Content.GetParams(query));
+    return this.http.get<QueryResult<CalendarDetails>>(`${this.url}/calendars/${query.id}`, Content.GetParams(query));
   }
 }
