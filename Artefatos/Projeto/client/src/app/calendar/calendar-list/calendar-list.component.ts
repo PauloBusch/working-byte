@@ -19,7 +19,7 @@ export class CalendarListComponent implements OnInit {
   private listQuery: ListCalendarQuery;
   private calendars = new AsyncQuery<CalendarList>();
 
-  displayedColumns: string[] = ['name', 'description'];
+  displayedColumns: string[] = ['name', 'description', 'option'];
   dataSource: MatTableDataSource<CalendarList>;
 
   constructor(
