@@ -39,7 +39,6 @@ class ListCalendarQuery extends Query{
     async Execute(){
         const query = {
             attributes: ['id', 'name', 'description'], 
-            where: { removed: false },
             limit: this.limit,
             offset: (this.page - 1) * this.limit,
             order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
@@ -49,12 +48,10 @@ class ListCalendarQuery extends Query{
             const searchLike = `%${this.search}%`;
             query.where[Op.or] = [
                 { name: { [Op.like]: searchLike } },
-                { code: { [Op.like]: searchLike } }
+                { description: { [Op.like]: searchLike } }
             ];
         }
 
-        if (this.is_disponible)
-            query.where.is_disponible = this.is_disponible;
 
         const calendars = await CalendarDb.findAndCountAll(query);
         return new QueryResult(calendars.count, calendars.rows);

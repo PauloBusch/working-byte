@@ -13,7 +13,7 @@ class GetCalendarQuery extends Query {
         if (!this.id)
             return new Error(EErrorCode.InvalidParams, "Parameter id cannot be null");
 
-        const exists = await CalendarDb.count({ where: { id: this.id, removed: false } });
+        const exists = await CalendarDb.count({ where: { id: this.id } });
         if (!exists)
             return new Error(EErrorCode.NotFount, `Calendar with id: ${this.id} does not exists`);
 
@@ -27,10 +27,7 @@ class GetCalendarQuery extends Query {
     async Execute(){
         const query = { 
             attributes: ['id','name','description'],
-            where: { id: this.id },
-            include: [{
-                model: TypeDb
-            }]
+            where: { id: this.id }
         };
 
         const calendar = await CalendarDb.findOne(query);
