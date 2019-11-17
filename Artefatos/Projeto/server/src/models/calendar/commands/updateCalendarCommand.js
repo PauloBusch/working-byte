@@ -1,5 +1,5 @@
 const { Command } = require('../../../utils/interfaces/command');
-const { CommandlResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
+const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
 const { Calendar } = require('../calendar');
 const { CalendarDb } = require('../../../mapping');
@@ -47,7 +47,7 @@ class UpdateCalendarCommand extends Command {
         );
 
         const result = await CalendarDb.update(calendar, query);
-        return new CommandlResult(result ? 1 : 0); 
+        return new CommandResult(result ? 1 : 0); 
     }
 }
 
