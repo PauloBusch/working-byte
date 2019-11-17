@@ -4,14 +4,14 @@ class Calendar extends EntityBase {
     constructor(
         id, 
         name,
-        description,
-        removed
+        description
+        //removed
     ){
-        super();
-        this.id = id;
+        super(id);
+        //this.id = id;
         this.name = name;
         this.description = description;
-        this.removed = removed;
+        //this.removed = removed;
     }
 }
 

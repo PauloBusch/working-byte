@@ -1,18 +1,20 @@
 const { Command } = require('../../../utils/interfaces/command');
 const { CommandlResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
+const { Calendar } = require('../calendar');
+const { CalendarDb } = require('../../../mapping');
+const { Op } = require('sequelize');
+
 class UpdateCalendarCommand extends Command {
     constructor(
         id,
         name,
-        code,
-        type
+        description
     ){
         super();
         this.id = id;
         this.name = name;
-        this.code = code;
-        this.type = type;
+        this.description = description;
     }
 
     async GetError(){
@@ -22,11 +24,8 @@ class UpdateCalendarCommand extends Command {
         if (!this.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
 
-        if (!this.code)
+        if (!this.description)
             return new Error(EErrorCode.InvalidParams, "Parameter code cannot be null");
-
-        if (!this.type || !this.type.id || !this.type.name)
-            return new Error(EErrorCode.InvalidParams, "Paramter name require object { id: value, name: value }");
 
         const exists = await CalendarDb.count({ where: { id: this.id } });
         if (!exists)
@@ -41,18 +40,10 @@ class UpdateCalendarCommand extends Command {
 
     async Execute(){
         const query = { where: { id: this.id } };
-        const queryType = { where: { id: this.type.id } };
-        const existsType = await TypeDb.count(queryType);
-        if (existsType)
-            await TypeDb.update(this.type, queryType);
-        else
-            await TypeDb.create(this.type);
-            
         const calendar = new Calendar(
             undefined,
             this.name,
-            this.code,
-            this.type.id
+            this.description
         );
 
         const result = await CalendarDb.update(calendar, query);

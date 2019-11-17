@@ -9,7 +9,6 @@ import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/c
 import { DataService } from 'src/app/shared/services/data.service';
 import { CalendarList} from '../models/view-models/calendar.list';
 import { RemoveCalendarCommand } from '../models/commands/removeCalendarCommand';
-import { CalendarFormComponent } from '../calendar-form/calendar-form.component';
 import { from } from 'rxjs';
 
 @Component({

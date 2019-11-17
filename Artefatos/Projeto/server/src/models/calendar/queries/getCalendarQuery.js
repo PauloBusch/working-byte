@@ -26,13 +26,18 @@ class GetCalendarQuery extends Query {
     }
 
     async Execute(){
+        const fields =  [
+            'id', 
+            'name', 
+            'description'
+        ];
         const query = { 
-            attributes: ['id','name','description'],
+            attributes: fields,
             where: { id: this.id }
-        };
+         };
 
         const calendar = await CalendarDb.findOne(query);
-        return new QueryResult(1, [calendar]);        
+        return new QueryResult(calendar ? 1 : 0, [calendar]);        
     }
 }
 
