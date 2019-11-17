@@ -3,18 +3,20 @@
         <mat-icon>clear</mat-icon>
     </button>
     <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} da agenda</h2>
-    <button mat-icon-button (click)="save()">
+    <button mat-icon-button  type="submit" form="form" (click)="save()">
         <mat-icon>done</mat-icon>
     </button>
 </div>
 <form [formGroup]="form">
     <div fxLayout="row" fxLayoutAlign="space-between">
-        <mat-form-field fxFlex="60">
+        <mat-form-field fxFlex="100">
             <input matInput placeholder="Nome" formControlName="name" maxlength="50">
             <mat-error *ngIf="hasError('name', 'required')">Informe o nome</mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="30">
-            <input matInput placeholder="Descrição" formControlName="description" maxlength="10">
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Descrição" formControlName="description" maxlength="400">
             <mat-error *ngIf="hasError('description', 'required')">Informe o código</mat-error>
         </mat-form-field>
     </div>

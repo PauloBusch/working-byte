@@ -8,13 +8,11 @@
 
 <table mat-table [dataSource]="dataSource">
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Agenda </th>
       <td mat-cell *matCellDef="let calendar">{{ calendar.name }}</td>
     </ng-container>
   
-    <!-- Weight Column -->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> Descrição </th>
       <td mat-cell *matCellDef="let calendar">{{ calendar.description }}</td>
@@ -26,7 +24,7 @@
         <button class="button-icon" mat-icon-button [matMenuTriggerFor]="dietMenu"><mat-icon>more_vert</mat-icon></button>
         <mat-menu #dietMenu="matMenu">
           <button mat-menu-item [routerLink]="['edit', calendar.id]">Editar</button>
-          <button mat-menu-item (click)="remove(cal.id)">Remover</button>
+          <button mat-menu-item (click)="remove(calendar.id)">Remover</button>
         </mat-menu>
       </td>
 

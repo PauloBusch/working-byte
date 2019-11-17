@@ -52,7 +52,7 @@ export class CalendarFormComponent implements OnInit {
     const query = new GetCalendarQuery(this.refId);
     this.calendarService.getCalendarById(query).subscribe(result => {
       if(result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
-        this.snackBar.open('Agenda não encontrada', 'OK', { duration: 3000 });
+        this.snackBar.open('Agendas não encontrada', 'OK', { duration: 3000 });
         return;
       }
 
@@ -95,7 +95,7 @@ export class CalendarFormComponent implements OnInit {
         return;
       }
       if (result.ErrorCode ===  EErrorCode.InvalidParams) {
-        this.snackBar.open('Existem2 campos inválidos', 'OK', { duration: 3000 });
+        this.snackBar.open('Existem campos inválidos', 'OK', { duration: 3000 });
         return;
       }
 
@@ -111,7 +111,7 @@ export class CalendarFormComponent implements OnInit {
     );
     this.calendarService.update(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
-        this.snackBar.open('Calendara editada com sucesso', 'OK', { duration: 3000 });
+        this.snackBar.open('Agenda editada com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
         this.close();
         return;
@@ -128,7 +128,7 @@ export class CalendarFormComponent implements OnInit {
   private updateList(values: any) {
     const Calendar = new CalendarList(
       this.refId,
-      values.Calendar_name,
+      values.name,
       values.description
     );
     this.dataService.update(Calendar);

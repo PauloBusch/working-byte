@@ -15,6 +15,11 @@ const CalendarModel = (sequelize, dataTypes) => {
             type: dataTypes.STRING(10),
             allowNull: false
         },
+        removed: {
+            type: dataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false
+        },
         calendar_created: dataTypes.DATE,
         calendar_updated: dataTypes.DATE
     },{

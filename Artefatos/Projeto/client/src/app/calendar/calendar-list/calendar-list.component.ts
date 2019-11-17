@@ -82,9 +82,9 @@ export class CalendarListComponent implements OnInit {
       }
 
       const command = new RemoveCalendarCommand(id);
-      this.calendarService.remove(command).subscribe((result) => {
+      this.calendarService.removeCalendar(command).subscribe((result) => {
           if (result.Rows > 0) {
-            this.snackBar.open('Usuário removido com sucesso!', 'OK', { duration: 3000 });
+            this.snackBar.open('Agenda removida com sucesso!', 'OK', { duration: 3000 });
             this.removeCalendarList(id);
             return;
           }

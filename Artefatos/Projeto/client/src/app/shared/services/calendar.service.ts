@@ -33,7 +33,7 @@ export class CalendarService {
     return this.http.put<CommandResult>(`${this.url}/calendars/${command.id}`, command);
   }
 
-  remove(command: RemoveCalendarCommand): Observable<CommandResult> {
+  removeCalendar(command: RemoveCalendarCommand): Observable<CommandResult> {
     return this.http.delete<CommandResult>(`${this.url}/calendars/${command.id}`, Content.GetParams(command));
   }
 

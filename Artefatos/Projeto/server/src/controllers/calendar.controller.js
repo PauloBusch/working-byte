@@ -36,7 +36,7 @@ controllerCalendar.update = async (req, res) => {
     res.json(result);
 }
 
-controllerCalendar.remove = async (req, res) => {
+controllerCalendar.delete = async (req, res) => {
     const command = Obj.getData(new RemoveCalendarCommand(), req);
     const result = await CommandHandle.Execute(command);
     res.json(result);

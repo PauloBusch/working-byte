@@ -47,7 +47,7 @@ router.get('/calendars', Token.validate, ControllerCalendar.getAll);
 router.get('/calendars/:id', Token.validate, ControllerCalendar.getById);
 router.post('/calendars', Token.validate, ControllerCalendar.create);
 router.put('/calendars/:id', Token.validate, ControllerCalendar.update);
-router.delete('/calendars/:id', Token.validate, ControllerCalendar.remove);
+router.delete('/calendars/:id', Token.validate, ControllerCalendar.delete);
 
 module.exports = {
     Router: router
