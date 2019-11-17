@@ -8,9 +8,10 @@ import { GetCalendarQuery } from '../models/queries/getCalendarQuery';
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { CalendarList } from '../models/view-models/calendar.list';
 import { DataService } from 'src/app/shared/services/data.service';
-import { Random } from 'src/app/shared/utils/random';import { CreateCalendarCommand } from '../models/commands/createCalendarCommand';
+import { Random } from 'src/app/shared/utils/random';
+import { CreateCalendarCommand } from '../models/commands/createCalendarCommand';
 import { UpdateCalendarCommand } from '../models/commands/updateCalendarCommand';
-
+ 
 @Component({
   selector: 'app-calendar-form',
   templateUrl: './calendar-form.component.html',
@@ -126,12 +127,13 @@ export class CalendarFormComponent implements OnInit {
   }
 
   private updateList(values: any) {
-    const Calendar = new CalendarList(
+    const calendar = new CalendarList(
       this.refId,
       values.name,
       values.description
     );
-    this.dataService.update(Calendar);
+    this.dataService.update(calendar);
+
   }
 
   hasError(field: string, error: string): boolean {

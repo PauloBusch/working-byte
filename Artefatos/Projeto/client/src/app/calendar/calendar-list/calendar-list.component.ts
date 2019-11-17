@@ -1,13 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatSnackBar, PageEvent } from '@angular/material';
+
+import { CalendarService } from 'src/app/shared/services/calendar.service';
+import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
 import { Storage } from 'src/app/shared/utils/storage';
 import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CalendarList} from '../models/view-models/calendar.list';
-import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
-import { CalendarService } from '../../shared/services/calendar.service';
 import { RemoveCalendarCommand } from '../models/commands/removeCalendarCommand';
+import { CalendarFormComponent } from '../calendar-form/calendar-form.component';
 import { from } from 'rxjs';
 
 @Component({
@@ -16,6 +18,7 @@ import { from } from 'rxjs';
   styleUrls: ['./calendar-list.component.scss']
 })
 export class CalendarListComponent implements OnInit {
+  
   private listQuery: ListCalendarQuery;
   private calendars = new AsyncQuery<CalendarList>();
 
@@ -63,8 +66,11 @@ export class CalendarListComponent implements OnInit {
   loadCalendars() {
     this.calendars.$list = this.calendarService.getCalendar(this.listQuery);
     this.calendars.subsc = this.calendars.$list.subscribe(result => {
-      this.dataSource = new MatTableDataSource<CalendarList>(result.List);
+    this.dataSource = new MatTableDataSource<CalendarList>(result.List);
     });
+    // this.calendars.$list = this.calendarService.getCalendar(this.listQuery);
+    // this.calendars.subsc = this.calendars.$list.subscribe();
+
   }
 
   pageChange(ev: PageEvent) {

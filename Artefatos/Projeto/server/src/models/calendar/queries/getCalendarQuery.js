@@ -1,5 +1,6 @@
+const { QueryResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 const { Query } = require('../../../utils/interfaces/query');
-const { TypeDb, CalendarDb } = require('../../../mapping');
+const { CalendarDb } = require('../../../mapping');
  
 class GetCalendarQuery extends Query {
     constructor(
