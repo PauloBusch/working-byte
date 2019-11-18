@@ -27,9 +27,9 @@ import { CustomPaginator } from './shared/utils/paginator';
 import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
 import { TrainingsModule } from './trainings/trainings.module';
 import { DietModule } from './diets/diets.module';
-import { EquipamentFormComponent } from './equipaments/equipament-form/equipament-form.component';
-import { EquipamentListComponent } from './equipaments/equipament-list/equipament-list.component';
-import { EquipamentsModule } from './equipaments/equipaments.module';
+import { EquipmentFormComponent } from './equipments/equipment-form/equipment-form.component';
+import { EquipmentListComponent } from './equipments/equipment-list/equipment-list.component';
+import { EquipmentsModule } from './equipments/equipments.module';
 import { CalendarModule } from './calendar/calendar.module';
 
 @NgModule({
@@ -44,11 +44,11 @@ import { CalendarModule } from './calendar/calendar.module';
     LoginModule,
     UsersModule,
     TrainingsModule,
-    EquipamentsModule,
+    EquipmentsModule,
     LogoModule,
     DietModule,
     CalendarModule,
-    
+
 
     BrowserModule,
     AppRoutingModule,

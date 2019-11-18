@@ -13,8 +13,8 @@ import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sh
 import { TrainingListComponent } from './trainings/training-list/training-list.component';
 import { DietListComponent } from './diets/diet-list/diet-list.component';
 import { DietComponent } from './diets/diet-forms/diet-form.component';
-import { EquipamentListComponent } from './equipaments/equipament-list/equipament-list.component';
-import { EquipamentFormComponent } from './equipaments/equipament-form/equipament-form.component';
+import { EquipmentListComponent } from './equipments/equipment-list/equipment-list.component';
+import { EquipmentFormComponent } from './equipments/equipment-form/equipment-form.component';
 import { CalendarFormComponent } from './calendar/calendar-form/calendar-form.component';
 import { CalendarListComponent } from './calendar/calendar-list/calendar-list.component';
 
@@ -30,9 +30,9 @@ const routes: Routes = [
       { path: 'new', component: BottomSheetComponent, data: { form: UserComponent } },
       { path: 'edit/:id', component: BottomSheetComponent, data: { form: UserComponent } }
     ] },
-    { path: 'equipaments', component: EquipamentListComponent, canActivate: [AuthGuard], children: [
-      { path: 'new', component: BottomSheetComponent, data: { form: EquipamentFormComponent } },
-      { path: 'edit/:id', component: BottomSheetComponent, data: { form: EquipamentFormComponent } }
+    { path: 'equipments', component: EquipmentListComponent, canActivate: [AuthGuard], children: [
+      { path: 'new', component: BottomSheetComponent, data: { form: EquipmentFormComponent } },
+      { path: 'edit/:id', component: BottomSheetComponent, data: { form: EquipmentFormComponent } }
     ] },
     { path: 'diets',   component: DietListComponent, canActivate: [AuthGuard], children: [
         {path: 'new', component: BottomSheetComponent, data: {form: DietComponent} },

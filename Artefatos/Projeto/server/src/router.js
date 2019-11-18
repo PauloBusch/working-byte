@@ -4,7 +4,7 @@ const { Token } = require('./utils/auth/authJwt');
 const { ControllerUser } = require('./controllers/users.controller');
 const { ControllerAuth } = require('./controllers/auth.controller');
 const { ControllerEvaluation } = require('./controllers/evaluations.controller');
-const { ControllerEquipament } = require('./controllers/equipament.controller');
+const { ControllerEquipment } = require('./controllers/equipment.controller');
 const { ControllerDiet }= require('./controllers/diet.controller');
 const { ControllerPayment } = require('./controllers/payment.controller');
 const { ControllerCalendar} = require('./controllers/calendar.controller');
@@ -24,12 +24,12 @@ router.post('/evaluations', Token.validate, ControllerEvaluation.create);
 router.put('/evaluations/:id', Token.validate, ControllerEvaluation.update);
 router.delete('/evaluations/:id', Token.validate, ControllerEvaluation.remove);
 
-router.get('/equipamentsTypes', Token.validate, ControllerEquipament.getAllTypes);
-router.get('/equipaments', Token.validate, ControllerEquipament.getAll);
-router.get('/equipaments/:id', Token.validate, ControllerEquipament.getById);
-router.post('/equipaments', Token.validate, ControllerEquipament.create);
-router.put('/equipaments/:id', Token.validate, ControllerEquipament.update);
-router.delete('/equipaments/:id', Token.validate, ControllerEquipament.remove);
+router.get('/equipmentsTypes', Token.validate, ControllerEquipment.getAllTypes);
+router.get('/equipments', Token.validate, ControllerEquipment.getAll);
+router.get('/equipments/:id', Token.validate, ControllerEquipment.getById);
+router.post('/equipments', Token.validate, ControllerEquipment.create);
+router.put('/equipments/:id', Token.validate, ControllerEquipment.update);
+router.delete('/equipments/:id', Token.validate, ControllerEquipment.remove);
 
 router.get('/diets', Token.validate, ControllerDiet.getAll);
 router.get('/diets/:id', Token.validate, ControllerDiet.getById);
