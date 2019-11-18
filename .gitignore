@@ -16,6 +16,8 @@ speed-measure-plugin.json
 
 # IDEs and editors
 /Artefatos/Projeto/client/.idea
+/Artefatos/Projeto/server/.idea
+.idea
 .project
 .classpath
 .vs
