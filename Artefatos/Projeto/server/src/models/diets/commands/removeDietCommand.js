@@ -17,7 +17,7 @@ class RemoveDietCommand extends Command {
         if (!this.id)
             return new Error(EErrorCode.InvalidParams, "Parameter id cannot be null");
 
-        const exists = await DietDb.count({ where: { id: this.id} });
+        const exists = await DietDb.count({ where: { id: this.id, removed: false} });
         if (!exists)
             return new Error(EErrorCode.NotFount, `Diet with id: ${this.id} does not exists`);
 

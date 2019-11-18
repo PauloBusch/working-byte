@@ -15,6 +15,11 @@ const DietsModel = (sequelize, dataTypes) => {
             type: dataTypes.STRING(2000),
             allowNull: false
         },
+        removed: {
+            type: dataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false
+        },
         diet_created: dataTypes.DATE,
         diet_updated: dataTypes.DATE
     }, {
