@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const { UserModel } = require('./models/users/user.model');
 const { EvaluationModel } = require('./models/evaluations/evaluation.model');
-const { EquipamentModel } = require('./models/equipament/equipament.model');
+const { EquipmentModel } = require('./models/equipment/equipment.model');
 const { DietsModel } = require('./models/diets/diets.model');
 const { CalendarModel } = require('./models/calendar/calendar.model');
-const { TypeModel } = require('./models/equipament/types/type.model');
+const { TypeModel } = require('./models/equipment/types/type.model');
 
 const { DbConfig, DbManager } = require('./../config');
 const { PaymentsModel } = require('./models/payments/payments.model');
@@ -23,14 +23,14 @@ const Connection = new Sequelize(DbConfig.database, DbConfig.user, DbConfig.pass
 
 const UserDb = UserModel(Connection, Sequelize);
 const EvaluationDb = EvaluationModel(Connection, Sequelize);
-const EquipamentDb = EquipamentModel(Connection, Sequelize);
+const EquipmentDb = EquipmentModel(Connection, Sequelize);
 const DietDb = DietsModel(Connection, Sequelize);
 const CalendarDb = CalendarModel(Connection, Sequelize);
 const TypeDb = TypeModel(Connection, Sequelize);
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
 UserDb.hasMany(EvaluationDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
-TypeDb.hasMany(EquipamentDb, { foreignKey: 'id_type', as: 'type' });
-EquipamentDb.belongsTo(TypeDb, { foreignKey: 'id_type', as: 'type' });
+TypeDb.hasMany(EquipmentDb, { foreignKey: 'id_type', as: 'type' });
+EquipmentDb.belongsTo(TypeDb, { foreignKey: 'id_type', as: 'type' });
 
 EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliador', as: 'avaliador' });
 EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
@@ -46,7 +46,7 @@ module.exports = {
   PaymentsDb,
   DietDb,
   CalendarDb,
-  EquipamentDb,
+  EquipmentDb,
   EvaluationDb, 
   Connection
 };
