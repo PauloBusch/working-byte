@@ -56,6 +56,7 @@ export class CalendarListComponent implements OnInit {
     } else {
       this.calendars.list[indexCalendar] = calendar;
     }
+    this.dataSource = new MatTableDataSource<CalendarList>(this.calendars.list);
   }
 
   public removeCalendarList(id: string) {
