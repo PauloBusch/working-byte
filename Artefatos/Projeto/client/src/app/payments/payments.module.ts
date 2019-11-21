@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule, MatButtonModule, MatInputModule, MatMenuModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PaymentService } from '../shared/services/payment.service';
 
 
 
@@ -25,6 +26,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     MatInputModule,
     MatMenuModule
+  ],
+  providers: [
+    PaymentService
   ]
 })
 export class PaymentsModule { }
