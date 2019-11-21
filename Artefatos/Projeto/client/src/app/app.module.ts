@@ -31,6 +31,9 @@ import { EquipmentFormComponent } from './equipments/equipment-form/equipment-fo
 import { EquipmentListComponent } from './equipments/equipment-list/equipment-list.component';
 import { EquipmentsModule } from './equipments/equipments.module';
 import { CalendarModule } from './calendar/calendar.module';
+import { PaymentFormComponent } from './payments/payment-form/payment-form.component';
+import { PaymentListComponent } from './payments/payment-list/payment-list.component';
+import { PaymentsModule } from './payments/payments.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,7 @@ import { CalendarModule } from './calendar/calendar.module';
     LogoModule,
     DietModule,
     CalendarModule,
-
+    PaymentsModule,
 
     BrowserModule,
     AppRoutingModule,
