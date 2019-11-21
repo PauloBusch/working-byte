@@ -10,6 +10,7 @@ import { DataService } from 'src/app/shared/services/data.service';
 import { Random } from 'src/app/shared/utils/random';
 import { CreateDietCommand } from '../models/commands/createDietCommand';
 import { UpdateDietCommand } from '../models/commands/updateDietCommand';
+import { TypeList } from '../models/view-models/type.list';
 
 @Component({
   selector: 'app-diet-form',
@@ -22,6 +23,7 @@ export class DietComponent implements OnInit {
   private refId: string;
 
   private form: FormGroup;
+  private type: TypeList[];
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +35,8 @@ export class DietComponent implements OnInit {
   ) { 
     this.form = this.fb.group({
       diet_name: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      type: ['']
       
     })
   }
@@ -84,7 +87,8 @@ export class DietComponent implements OnInit {
     const command = new CreateDietCommand(
       this.refId,
       values.diet_name,
-      values.description
+      values.description,
+      values.type
     );
 
     this.dietService.create(command).subscribe(result => {
@@ -107,7 +111,8 @@ export class DietComponent implements OnInit {
     const command = new UpdateDietCommand(
       this.refId,
       values.diet_name,
-      values.description
+      values.description,
+      values.type
     );
     this.dietService.update(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
@@ -129,7 +134,8 @@ export class DietComponent implements OnInit {
     const diet = new DietList(
       this.refId,
       values.diet_name,
-      values.description
+      values.description,
+      values.type
     );
     this.dataService.update(diet);
   }

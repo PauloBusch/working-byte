@@ -35,6 +35,7 @@ speed-measure-plugin.json
 .history/*
 
 # misc
+/Artefatos/Diagramas/*.asta.lock
 /Artefatos/Projeto/server/.sass-cache
 /Artefatos/Projeto/server/assets/.env
 /Artefatos/Projeto/server/connect.lock

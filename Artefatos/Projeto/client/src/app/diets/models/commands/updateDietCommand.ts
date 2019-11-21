@@ -12,7 +12,7 @@ export class UpdateDietCommand {
         description: string[],
         //id_training: string,
         //id_user: string,
-        //id_diet_type: string
+        id_diet_type: string
 
     ) {
         this.id = id;
@@ -20,6 +20,6 @@ export class UpdateDietCommand {
         this.description = description;
         //this.id_training = id_training;
         //this.id_user = id_user;
-        //this.id_diet_type = id_diet_type;
+        this.id_diet_type = id_diet_type;
     }
 }

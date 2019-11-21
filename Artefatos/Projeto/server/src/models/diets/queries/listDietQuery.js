@@ -40,6 +40,7 @@ class ListDietQuery extends Query{
         const query = {
             attributes: ['id', 'name', 'description'], 
             limit: this.limit,
+            where: { removed: false },
             offset: (this.page - 1) * this.limit,
             order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
         };
