@@ -2,7 +2,7 @@ const { Command } = require('../../../utils/interfaces/command');
 const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
 const { Equipment } = require('../equipment');
-const { EquipmentDb } = require('../../../mapping');
+const { EquipmentDb, TypeDb } = require('../../../mapping');
 const _ = require('lodash');
 
 class CreateEquipmentCommand extends Command {
@@ -32,6 +32,10 @@ class CreateEquipmentCommand extends Command {
         if (!this.type || !this.type.id || !this.type.name)
             return new Error(EErrorCode.InvalidParams, "Parameter type require object { id: value, name: value }");
 
+        const existsCode = await EquipmentDb.count({ where: { code: this.code, removed: false } });
+        if (existsCode)
+            return new Error(EErrorCode.DuplicateUnique, `Equipment with code aready exists`);
+
         return null;
     }
 
@@ -51,6 +55,7 @@ class CreateEquipmentCommand extends Command {
             this.id,
             this.name,
             this.code,
+            true,
             this.type.id
         );
 

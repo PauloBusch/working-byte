@@ -1,5 +1,5 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { Error, EErrorCode, QueryResult } = require('../../../utils/content/dataResult');
+const { QueryResult } = require('../../../utils/content/dataResult');
 const { TypeDb, EquipmentDb } = require('../../../mapping');
 
 const { Op } = require('sequelize');

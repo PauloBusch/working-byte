@@ -1,7 +1,7 @@
 const { QueryHandle } = require('../utils/handle/queryHandle');
 const { GetEquipmentQuery } = require('../models/equipment/queries/getEquipmentQuery');
 const { ListEquipmentQuery } = require('../models/equipment/queries/listEquipmentQuery');
-const { ListTypeQuery } = require('../models/equipment/queries/listTypesQuery');
+const { ListTypesQuery } = require('../models/equipment/queries/listTypesQuery');
 
 const { CommandHandle } = require('../utils/handle/commandHandle');
 const { CreateEquipmentCommand } = require('../models/equipment/commands/createEquipmentCommand');
@@ -25,7 +25,7 @@ controllerEquipment.getAll = async (req, res) => {
 }
 
 controllerEquipment.getAllTypes = async (req, res) => {
-    const query = Obj.getData(new ListTypeQuery(), req);
+    const query = Obj.getData(new ListTypesQuery(), req);
     const result = await QueryHandle.Execute(query);
     res.json(result);
 }

@@ -1,6 +1,6 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { EquipmentDb } = require('../../../mapping');
 const { QueryResult } = require('../../../utils/content/dataResult');
+const { EquipmentDb, TypeDb } = require('../../../mapping');
 
 const Op = require('sequelize');
 
@@ -42,7 +42,12 @@ class ListEquipmentQuery extends Query{
             where: { removed: false },
             limit: this.limit,
             offset: (this.page - 1) * this.limit,
-            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
+            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']],
+            include: [{
+                attributes: ['name'],
+                as: 'type',
+                model: TypeDb
+            }]
         };
 
         if (this.search){
