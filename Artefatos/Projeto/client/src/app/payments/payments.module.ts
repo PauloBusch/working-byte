@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaymentFormComponent } from './payment-form/payment-form.component';
 import { PaymentListComponent } from './payment-list/payment-list.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule, MatButtonModule, MatInputModule, MatMenuModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -11,7 +16,15 @@ import { PaymentListComponent } from './payment-list/payment-list.component';
     PaymentListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule,
+    MatIconModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    MatInputModule,
+    MatMenuModule
   ]
 })
 export class PaymentsModule { }
