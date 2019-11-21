@@ -22,4 +22,18 @@
             <mat-error *ngIf="hasError('description', 'required')">Descreva a Dieta!</mat-error>
         </mat-form-field>
     </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Tipo de dieta:" formControlName="type_diet" maxlength="50"/>
+            <mat-error>Informe o Tipo!</mat-error>
+        </mat-form-field>
+        <button mat-button [matMenuTriggerFor]="type_diet">
+                <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #type_diet="matMenu">
+            <button mat-menu-item>Tipo 1</button>
+            <button mat-menu-item>Tipo 2</button>
+        </mat-menu>
+    </div>
 </form>

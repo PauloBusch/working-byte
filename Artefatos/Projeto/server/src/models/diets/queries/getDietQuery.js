@@ -12,7 +12,7 @@ class GetDietQuery extends Query {
         if (!this.id)
             return new Error(EErrorCode.InvalidParams, "Parameter id cannot be null");
 
-        const exists = await DietDb.count({ where: { id: this.id } });
+        const exists = await DietDb.count({ where: { id: this.id, removed:false } });
         if (!exists)
             return new Error(EErrorCode.NotFount, `Diet with id: ${this.id} does not exists`);
 
@@ -26,7 +26,7 @@ class GetDietQuery extends Query {
     async Execute(){
         const query = { 
             attributes: ['id','name','description'],
-            where: { id: this.id } 
+            where: { id: this.id} 
         };
 
         const diet = await DietDb.findOne(query);
