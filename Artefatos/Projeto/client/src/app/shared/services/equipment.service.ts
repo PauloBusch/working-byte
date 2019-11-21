@@ -48,6 +48,6 @@ export class EquipmentService {
   }
 
   getEquipmentById(query: GetEquipmentQuery): Observable<QueryResult<EquipmentDetails>> {
-    return this.http.get<QueryResult<EquipmentDetails>>(`${this.url}/equipments`, Content.GetParams(query));
+    return this.http.get<QueryResult<EquipmentDetails>>(`${this.url}/equipments/${query.id}`, Content.GetParams(query));
   }
 }

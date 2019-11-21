@@ -59,7 +59,7 @@ export class EquipmentFormComponent implements OnInit {
     const queryEquipments = new GetEquipmentQuery(this.refId);
     this.equipmentService.getEquipmentById(queryEquipments).subscribe(result => {
       if (result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
-        this.snackBar.open('Equipmento inexistente!', 'OK', { duration: 3000 });
+        this.snackBar.open('Equipamento inexistente!', 'OK', { duration: 3000 });
         return;
       }
 
@@ -101,7 +101,7 @@ export class EquipmentFormComponent implements OnInit {
 
     this.equipmentService.create(command).subscribe(result => {
       if (result.ErrorCode === EErrorCode.None) {
-        this.snackBar.open('Equipmento salvo com sucesso', 'OK', { duration: 3000 });
+        this.snackBar.open('Equipamento salvo com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
         this.close();
         return;
@@ -110,7 +110,7 @@ export class EquipmentFormComponent implements OnInit {
         this.snackBar.open('Existem campos inválidos!', 'OK', { duration: 3000 });
         return;
       }
-      const existsCode = 'Equipment with code aready exists';
+      const existsCode = 'Equipament with code aready exists';
       if (result.ErrorCode === EErrorCode.DuplicateUnique && result.Message.search(existsCode) !== -1) {
         this.snackBar.open('Já existe um equipamento com este código!', 'OK', { duration: 3000 });
         return;
@@ -119,7 +119,7 @@ export class EquipmentFormComponent implements OnInit {
     });
   }
 
-  update(values: any){
+  update(values: any) {
     const command = new UpdateEquipmentCommand(
       this.refId,
       values.name,
@@ -129,14 +129,16 @@ export class EquipmentFormComponent implements OnInit {
 
     this.equipmentService.update(command).subscribe(result => {
       if (result.ErrorCode === EErrorCode.None) {
-        this.snackBar.open('Equipment salvo com sucesso!', 'OK', { duration: 3000 });
+        this.snackBar.open('Equipamentop salvo com sucesso!', 'OK', { duration: 3000 });
+        this.updateList(values);
+        this.close();
         return;
       }
       if (result.ErrorCode === EErrorCode.InvalidParams) {
         this.snackBar.open('Existem campos inválidos!', 'OK', { duration: 3000 });
         return;
       }
-      const existsCode = 'Equipment with code aready exists';
+      const existsCode = 'Equipament with code aready exists';
       if (result.ErrorCode === EErrorCode.DuplicateUnique && result.Message.search(existsCode) !== -1) {
         this.snackBar.open('Já existe um equipamento com este código!', 'OK', { duration: 3000 });
         return;

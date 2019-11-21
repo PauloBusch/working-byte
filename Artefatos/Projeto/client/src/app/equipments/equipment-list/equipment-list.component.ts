@@ -15,7 +15,7 @@ import { DataService } from 'src/app/shared/services/data.service';
   styleUrls: ['./equipment-list.component.scss']
 })
 export class EquipmentListComponent implements OnInit, OnDestroy {
-  displayColumns: string[] = ['name', 'code', 'type_name', 'is_disponible'];
+  displayColumns: string[] = ['name', 'code', 'type_name', 'is_disponible', 'actions'];
   dataSource: MatTableDataSource<EquipmentList>;
 
   private listQuery: ListEquipmentQuery;
@@ -59,6 +59,7 @@ export class EquipmentListComponent implements OnInit, OnDestroy {
 
   removeEquipmentList(id: string) {
     this.equipments.list = this.equipments.list.filter(e => e.id !== id);
+    this.dataSource = new MatTableDataSource<EquipmentList>(this.equipments.list);
   }
 
   loadEquipments() {
@@ -89,7 +90,7 @@ export class EquipmentListComponent implements OnInit, OnDestroy {
           this.removeEquipmentList(id);
           return;
         }
-        this.snackBar.open('Falha ao remover o equipmento!', 'OK');
+        this.snackBar.open('Falha ao remover o equipmento!', 'OK', { duration: 3000 });
       });
     });
   }

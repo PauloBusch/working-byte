@@ -1,4 +1,5 @@
 const { Query } = require('../../../utils/interfaces/query');
+const { Error, QueryResult } = require('../../../utils/content/dataResult');
 const { TypeDb, EquipmentDb } = require('../../../mapping');
  
 class GetEquipmentQuery extends Query {
@@ -29,7 +30,8 @@ class GetEquipmentQuery extends Query {
             attributes: ['id','name','code','is_disponible'],
             where: { id: this.id },
             include: [{
-                model: TypeDb
+                model: TypeDb,
+                as: 'type'
             }]
         };
 

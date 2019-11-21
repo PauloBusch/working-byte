@@ -1,7 +1,7 @@
 const { Command } = require('../../../utils/interfaces/command');
-const { CommandlResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
+const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
-const { EquipmentDb } = require('../../../mapping');
+const { EquipmentDb, TypeDb } = require('../../../mapping');
 const { Equipment } = require('../equipment');
 const { Op } = require('sequelize');
 
@@ -34,7 +34,7 @@ class UpdateEquipmentCommand extends Command {
 
         const existsCode = await EquipmentDb.count({ where: { code: this.code, removed: false, id: { [Op.not]: this.id } } });
         if (existsCode)
-            return new Error(EErrorCode.InvalidParams, `Equipment with code aready exists`);
+            return new Error(EErrorCode.DuplicateUnique, `Equipment with code aready exists`);
 
         const exists = await EquipmentDb.count({ where: { id: this.id } });
         if (!exists)
@@ -65,7 +65,7 @@ class UpdateEquipmentCommand extends Command {
         );
 
         const result = await EquipmentDb.update(equipment, query);
-        return new CommandlResult(result ? 1 : 0); 
+        return new CommandResult(result ? 1 : 0); 
     }
 }
 

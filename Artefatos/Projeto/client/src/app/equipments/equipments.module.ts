@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule, MatIconModule, MatPaginatorModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
+import { MatTableModule, MatIconModule, MatPaginatorModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule, MatMenuModule } from '@angular/material';
 import { EquipmentFormComponent } from './equipment-form/equipment-form.component';
 import { EquipmentListComponent } from './equipment-list/equipment-list.component';
 import { AppRoutingModule } from '../app-routing.module';
@@ -22,7 +22,8 @@ import { DataService } from '../shared/services/data.service';
     MatButtonModule,
     FlexLayoutModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatMenuModule
   ],
   providers: [
     DataService
