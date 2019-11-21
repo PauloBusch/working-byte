@@ -12,26 +12,30 @@
         <mat-toolbar class="toobar"><app-logo></app-logo></mat-toolbar>
         <mat-nav-list>
             <a mat-list-item [routerLink]="['/menu/training']" [routerLinkActive]="['is-active']">
-                <mat-icon>calendar_today</mat-icon>
+                <mat-icon>calendar_today</mat-icon>&nbsp;&nbsp;
                 <div>Treinos</div>
             </a>
 
             <a mat-list-item [routerLink]="['/menu/diets']" [routerLinkActive]="['is-active']">
-                <mat-icon>local_dining</mat-icon>
+                <mat-icon>local_dining</mat-icon>&nbsp;&nbsp;
                 <div>Dietas</div>
             </a>
 
             <a mat-list-item [routerLink]="['/menu/users']" [routerLinkActive]="['is-active']">
-                <mat-icon>account_circle</mat-icon>
+                <mat-icon>account_circle</mat-icon>&nbsp;&nbsp;
                 <div>Usuários</div>
             </a>
             <a mat-list-item [routerLink]="['/menu/equipments']" [routerLinkActive]="['is-active']">
-                <mat-icon>fitness_center</mat-icon>
+                <mat-icon>fitness_center</mat-icon>&nbsp;&nbsp;
                 <div>Equipamentos</div>
             </a>
             <a mat-list-item [routerLink]="['/menu/calendars']" [routerLinkActive]="['is-active']">
-                <mat-icon>calendar_today</mat-icon>
+                <mat-icon>calendar_today</mat-icon>&nbsp;&nbsp;
                 <div>Agenda</div>
+            </a>
+            <a mat-list-item [routerLink]="['/menu/payments']" [routerLinkActive]="['is-active']">
+                <mat-icon>payment</mat-icon>&nbsp;&nbsp;
+                <div>Pagamentos</div>
             </a>
         </mat-nav-list>
     </mat-sidenav>

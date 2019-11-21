@@ -1,4 +1,5 @@
 const { Command } = require('../../../utils/interfaces/command');
+const { Obj, Error, CommandResult } = require('../../../utils/content/dataResult'); 
 const { Equipment } = require('../equipment');
 const { EquipmentDb } = require('../../../mapping');
 

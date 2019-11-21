@@ -2,7 +2,7 @@
     <button mat-icon-button type="button" (click)="close()">
         <mat-icon>clear</mat-icon>
     </button>
-    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} de equipmento</h2>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} de equipamento</h2>
     <button mat-icon-button (click)="save()">
         <mat-icon>done</mat-icon>
     </button>
@@ -10,12 +10,20 @@
 <form [formGroup]="form">
     <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="60">
-            <input matInput placeholder="Nome" formControlName="name" maxlength="50">
+            <input matInput placeholder="Nome" formControlName="name" maxlength="50" required>
             <mat-error *ngIf="hasError('name', 'required')">Informe o nome</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="30">
-            <input matInput placeholder="Código" formControlName="code" maxlength="10">
+            <input matInput placeholder="Código" formControlName="code" maxlength="10" required>
             <mat-error *ngIf="hasError('code', 'required')">Informe o código</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row">
+        <mat-form-field fxFlex="100" formGroupName="type">
+            <input matInput placeholder="Tipo" formControlName="name" [matAutocomplete]="typeAutoComplete" required>
+            <mat-autocomplete #typeAutoComplete="matAutocomplete" (optionSelected)="form.controls.type.setValue($event.option.value)"  [displayWith]="displayType">
+                <mat-option *ngFor="let type of filteredTypes | async" [value]="type">{{ type.name }}</mat-option>
+            </mat-autocomplete> 
         </mat-form-field>
     </div>
 </form>

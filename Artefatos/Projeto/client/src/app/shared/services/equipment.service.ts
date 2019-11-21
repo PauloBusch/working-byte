@@ -40,7 +40,7 @@ export class EquipmentService {
   }
 
   getTypes(query: ListTypeQuery): Observable<QueryResult<TypeList>> {
-    return this.http.get<QueryResult<TypeList>>(`${this.url}/equipments/types`, Content.GetParams(query));
+    return this.http.get<QueryResult<TypeList>>(`${this.url}/equipmentsTypes`, Content.GetParams(query));
   }
 
   getEquipments(query: ListEquipmentQuery): Observable<QueryResult<EquipmentList>> {
@@ -48,6 +48,6 @@ export class EquipmentService {
   }
 
   getEquipmentById(query: GetEquipmentQuery): Observable<QueryResult<EquipmentDetails>> {
-    return this.http.get<QueryResult<EquipmentDetails>>(`${this.url}/equipments`, Content.GetParams(query));
+    return this.http.get<QueryResult<EquipmentDetails>>(`${this.url}/equipments/${query.id}`, Content.GetParams(query));
   }
 }

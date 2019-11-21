@@ -1,5 +1,9 @@
 const { Command } = require('../../../utils/interfaces/command');
-const { CommandlResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
+const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
+
+const { EquipmentDb, TypeDb } = require('../../../mapping');
+const { Equipment } = require('../equipment');
+const { Op } = require('sequelize');
 
 class UpdateEquipmentCommand extends Command {
     constructor(
@@ -28,6 +32,10 @@ class UpdateEquipmentCommand extends Command {
         if (!this.type || !this.type.id || !this.type.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name require object { id: value, name: value }");
 
+        const existsCode = await EquipmentDb.count({ where: { code: this.code, removed: false, id: { [Op.not]: this.id } } });
+        if (existsCode)
+            return new Error(EErrorCode.DuplicateUnique, `Equipment with code aready exists`);
+
         const exists = await EquipmentDb.count({ where: { id: this.id } });
         if (!exists)
             return new Error(EErrorCode.NotFount, `Equipment with id: ${this.id} does not exists`);
@@ -52,11 +60,12 @@ class UpdateEquipmentCommand extends Command {
             undefined,
             this.name,
             this.code,
+            undefined,
             this.type.id
         );
 
         const result = await EquipmentDb.update(equipment, query);
-        return new CommandlResult(result ? 1 : 0); 
+        return new CommandResult(result ? 1 : 0); 
     }
 }
 
