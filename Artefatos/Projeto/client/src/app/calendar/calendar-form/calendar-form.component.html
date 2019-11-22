@@ -22,10 +22,10 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="39">
-            <input matInput [matDatepicker]="picker" formControlName="datePicker" placeholder="Data">
+            <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Data">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi #picker></mat-datepicker>
-            <mat-error *ngIf="hasError('datePicker', 'required')">Informe a data</mat-error>
+            <mat-error *ngIf="hasError('date', 'required')">Informe a data</mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="27">
             <input matInput placeholder="Hora Inicio" formControlName="timeInitial" id="timeInitial" type="time">

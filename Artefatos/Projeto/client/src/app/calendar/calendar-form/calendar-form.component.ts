@@ -35,7 +35,7 @@ export class CalendarFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      datePicker:  ['', Validators.required],
+      date:  ['', Validators.required],
       timeInitial: ['', Validators.required],
       timeEnd: ['', Validators.required]
       
@@ -89,7 +89,7 @@ export class CalendarFormComponent implements OnInit {
       this.refId,
       values.name,
       values.description,
-      values.datePicker,
+      values.date,
       values.timeInitial,
       values.timeEnd
     );
@@ -115,7 +115,7 @@ export class CalendarFormComponent implements OnInit {
       this.refId,
       values.name,
       values.description,
-      values.datePicker,
+      values.date,
       values.timeInitial,
       values.timeEnd
     );
@@ -140,7 +140,7 @@ export class CalendarFormComponent implements OnInit {
       this.refId,
       values.name,
       values.description,
-      values.datePicker,
+      values.date,
       values.timeInitial,
       values.timeEnd
     );

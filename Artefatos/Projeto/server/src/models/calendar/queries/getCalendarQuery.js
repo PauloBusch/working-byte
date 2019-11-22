@@ -29,7 +29,10 @@ class GetCalendarQuery extends Query {
         const fields =  [
             'id', 
             'name', 
-            'description'
+            'description',
+            'date',
+            'timeInitial',
+            'timeEnd'
         ];
         const query = { 
             attributes: fields,
