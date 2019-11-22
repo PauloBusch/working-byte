@@ -20,11 +20,11 @@ const CalendarModel = (sequelize, dataTypes) => {
             allowNull: false
         },
         timeInitial: {
-            type: dataTypes.DATE,
+            type: dataTypes.TIME,
             allowNull: false
         },
         timeEnd: {
-            type: dataTypes.DATE,
+            type: dataTypes.TIME,
             allowNull: false
         },
         removed: {

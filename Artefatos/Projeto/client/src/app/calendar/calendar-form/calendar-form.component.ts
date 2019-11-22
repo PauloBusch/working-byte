@@ -89,7 +89,7 @@ export class CalendarFormComponent implements OnInit {
       this.refId,
       values.name,
       values.description,
-      values.date,
+      values.datePicker,
       values.timeInitial,
       values.timeEnd
     );
@@ -115,7 +115,7 @@ export class CalendarFormComponent implements OnInit {
       this.refId,
       values.name,
       values.description,
-      values.date,
+      values.datePicker,
       values.timeInitial,
       values.timeEnd
     );
@@ -140,7 +140,7 @@ export class CalendarFormComponent implements OnInit {
       this.refId,
       values.name,
       values.description,
-      values.date,
+      values.datePicker,
       values.timeInitial,
       values.timeEnd
     );
