@@ -1,5 +1,5 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { DietDb } = require('../../../mapping');
+const { DietDb, TypeDb} = require('../../../mapping');
 const { QueryResult } = require('../../../utils/content/dataResult');
 
 const Op = require('sequelize');
@@ -42,7 +42,12 @@ class ListDietQuery extends Query{
             limit: this.limit,
             where: { removed: false },
             offset: (this.page - 1) * this.limit,
-            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
+            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']],
+            include: [{
+                attributes: ['name'],
+                as: 'type',
+                model: TypeDb
+            }]
         };
 
         if (this.search){

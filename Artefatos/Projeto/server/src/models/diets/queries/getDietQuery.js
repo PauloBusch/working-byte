@@ -1,4 +1,7 @@
 const { Query } = require('../../../utils/interfaces/query');
+const { Error, QueryResult } = require('../../../utils/content/dataResult');
+const { TypeDb, DietDb } = require('../../../mapping');
+ 
  
 class GetDietQuery extends Query {
     constructor(
@@ -26,7 +29,11 @@ class GetDietQuery extends Query {
     async Execute(){
         const query = { 
             attributes: ['id','name','description'],
-            where: { id: this.id} 
+            where: { id: this.id},
+            include: [{
+                model: TypeDb,
+                as: 'type'
+            }]
         };
 
         const diet = await DietDb.findOne(query);
