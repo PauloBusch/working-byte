@@ -1,6 +1,6 @@
 const { NewId } = require('../../../utils/database/random');
 
-const TypeModel = (sequelize, dataTypes) => {
+const DietTypeModel = (sequelize, dataTypes) => {
     const Type = sequelize.define('tipo_dieta', {
         id: {
             type: dataTypes.STRING(8),
@@ -18,5 +18,5 @@ const TypeModel = (sequelize, dataTypes) => {
 }
 
 module.exports = {
-    TypeModel
+    DietTypeModel
 };

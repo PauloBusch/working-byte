@@ -5,7 +5,7 @@ const { EquipmentModel } = require('./models/equipment/equipment.model');
 const { DietsModel } = require('./models/diets/diets.model');
 const { CalendarModel } = require('./models/calendar/calendar.model');
 const { TypeModel } = require('./models/equipment/types/type.model');
-const { DietTYpeModel } = require('./models/diets/types/type.model');
+const { DietTypeModel } = require('./models/diets/types/type.model');
 
 const { DbConfig, DbManager } = require('./../config');
 const { PaymentsModel } = require('./models/payments/payments.model');
@@ -37,8 +37,8 @@ const TypeDb = TypeModel(Connection, Sequelize);
 TypeDb.hasMany(EquipmentDb, { foreignKey: 'id_type', as: 'type' });
 EquipmentDb.belongsTo(TypeDb, { foreignKey: 'id_type', as: 'type' });
 
-const DietyTypeDb = DietTypeModel(Connectio, Sequelize);
-DietyTypeDb.hasMany(DietDb, { foreignKey: 'id_type', as: 'type'});
+const DietTypeDb = DietTypeModel(Connection, Sequelize);
+DietTypeDb.hasMany(DietDb, { foreignKey: 'id_type_diet', as: 'type'});
 DietDb.belongsTo(DietTypeDb, { foreignKey: 'id_type_diet', as: 'type'});
 
 
