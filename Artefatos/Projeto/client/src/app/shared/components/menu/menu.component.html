@@ -33,7 +33,7 @@
                 <mat-icon>calendar_today</mat-icon>&nbsp;&nbsp;
                 <div>Agenda</div>
             </a>
-            <a mat-list-item [routerLink]="['/menu/payments']" [routerLinkActive]="['is-active']">
+            <a mat-list-item *ngIf="isPersonal" [routerLink]="['/menu/payments']" [routerLinkActive]="['is-active']">
                 <mat-icon>payment</mat-icon>&nbsp;&nbsp;
                 <div>Pagamentos</div>
             </a>

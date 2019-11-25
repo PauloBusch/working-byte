@@ -8,9 +8,13 @@ import { MatMenuModule } from '@angular/material';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  private isPersonal: boolean;
 
   constructor(
-  ) { }
+    private appComponent: AppComponent
+  ) {
+    this.isPersonal =  this.appComponent.currentUser.is_personal;
+  }
 
   ngOnInit() {
   }
