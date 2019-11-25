@@ -9,12 +9,18 @@ class CreateCalendarCommand extends Command {
     constructor(
         id,
         name,
-        description
+        description,
+        date,
+        timeInitial,
+        timeEnd
     ){
         super();
         this.id = id;
         this.name = name;
         this.description = description;
+        this.date = date;
+        this.timeInitial = timeInitial;
+        this.timeEnd = timeEnd;
     }
 
     async GetError(){
@@ -25,6 +31,15 @@ class CreateCalendarCommand extends Command {
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
             
         if (!this.description)
+            return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
+        
+            if (!this.date)
+            return new Error(EErrorCode.InvalidParams, "Paramter id cannot be null");
+            
+        if (!this.timeInitial)
+            return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
+            
+        if (!this.timeEnd)
             return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
 
         return null;
@@ -39,7 +54,10 @@ class CreateCalendarCommand extends Command {
         const Cal = new Calendar(
             this.id,
             this.name,
-            this.description
+            this.description,
+            this.date,
+            this.timeInitial,
+            this.timeEnd
         );
 
         const result = await CalendarDb.create(Cal);

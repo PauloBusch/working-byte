@@ -17,6 +17,8 @@ import { EquipmentListComponent } from './equipments/equipment-list/equipment-li
 import { EquipmentFormComponent } from './equipments/equipment-form/equipment-form.component';
 import { CalendarFormComponent } from './calendar/calendar-form/calendar-form.component';
 import { CalendarListComponent } from './calendar/calendar-list/calendar-list.component';
+import { PaymentListComponent } from './payments/payment-list/payment-list.component';
+import { PaymentFormComponent } from './payments/payment-form/payment-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -34,15 +36,18 @@ const routes: Routes = [
       { path: 'new', component: BottomSheetComponent, data: { form: EquipmentFormComponent } },
       { path: 'edit/:id', component: BottomSheetComponent, data: { form: EquipmentFormComponent } }
     ] },
-    { path: 'diets',   component: DietListComponent, canActivate: [AuthGuard], children: [
+    { path: 'diets', component: DietListComponent, canActivate: [AuthGuard], children: [
         {path: 'new', component: BottomSheetComponent, data: {form: DietComponent} },
         {path: 'edit/:id', component: BottomSheetComponent, data: { form: DietComponent} }
     ] },
-    { path: 'calendars',   component: CalendarListComponent, canActivate: [AuthGuard],  children: [
+    { path: 'calendars', component: CalendarListComponent, canActivate: [AuthGuard], children: [
       { path: 'new', component: BottomSheetComponent, data: { form: CalendarFormComponent } },
       { path: 'edit/:id', component: BottomSheetComponent, data: { form: CalendarFormComponent } }
     ] },
-
+    { path: 'payments', component: PaymentListComponent, canActivate: [AuthGuard], children: [
+      { path: 'new', component: BottomSheetComponent, data: { form: PaymentFormComponent } },
+      { path: 'edit/:id', component: BottomSheetComponent, data: { form: PaymentFormComponent } }
+    ] }
   ] },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

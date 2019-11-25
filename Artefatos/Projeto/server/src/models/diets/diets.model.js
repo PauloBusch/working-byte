@@ -15,7 +15,7 @@ const DietsModel = (sequelize, dataTypes) => {
             type: dataTypes.STRING(2000),
             allowNull: false
         },
-        id_type: {
+        id_type_diet: {
             type: dataTypes.STRING(8),
             allowNull: false
         },

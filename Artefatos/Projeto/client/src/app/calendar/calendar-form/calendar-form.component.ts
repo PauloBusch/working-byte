@@ -35,7 +35,7 @@ export class CalendarFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      datePicker:  ['', Validators.required],
+      date:  ['', Validators.required],
       timeInitial: ['', Validators.required],
       timeEnd: ['', Validators.required]
       
@@ -88,7 +88,10 @@ export class CalendarFormComponent implements OnInit {
     const command = new CreateCalendarCommand(
       this.refId,
       values.name,
-      values.description
+      values.description,
+      values.date,
+      values.timeInitial,
+      values.timeEnd
     );
 
     this.calendarService.create(command).subscribe(result => {
@@ -111,7 +114,10 @@ export class CalendarFormComponent implements OnInit {
     const command = new UpdateCalendarCommand(
       this.refId,
       values.name,
-      values.description
+      values.description,
+      values.date,
+      values.timeInitial,
+      values.timeEnd
     );
     this.calendarService.update(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
@@ -133,7 +139,10 @@ export class CalendarFormComponent implements OnInit {
     const calendar = new CalendarList(
       this.refId,
       values.name,
-      values.description
+      values.description,
+      values.date,
+      values.timeInitial,
+      values.timeEnd
     );
     this.dataService.update(calendar);
 
