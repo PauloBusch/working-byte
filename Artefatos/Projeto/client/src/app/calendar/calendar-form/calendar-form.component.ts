@@ -35,7 +35,7 @@ export class CalendarFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      datePicker:  ['', Validators.required],
+      date:  ['', Validators.required],
       timeInitial: ['', Validators.required],
       timeEnd: ['', Validators.required]
       
