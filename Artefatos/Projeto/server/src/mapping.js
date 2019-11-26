@@ -5,7 +5,7 @@ const { EquipmentModel } = require('./models/equipment/equipment.model');
 const { DietsModel } = require('./models/diets/diets.model');
 const { CalendarModel } = require('./models/calendar/calendar.model');
 const { TypeModel } = require('./models/equipment/types/type.model');
-const { DietTypeModel } = require('./models/diets/types/type.model');
+const { DietTypeModel } = require('./models/diets/types/dietType.model')
 const { TrainingModel } = require('./models/training/training.model');
 
 const { DbConfig, DbManager } = require('./../config');

@@ -61,6 +61,7 @@ export class CalendarFormComponent implements OnInit {
       }
 
       const Calendar = result.List[0];
+      Calendar.training = Calendar.training.name;
       this.form.patchValue(Calendar);
     })
   }
