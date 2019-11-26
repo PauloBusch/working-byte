@@ -1,1 +1,27 @@
-<p>payment-form works!</p>
+<div fxLayout="row" class="header">
+    <button mat-icon-button type="button" (click)="close()">
+        <mat-icon>clear</mat-icon>
+    </button>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} de pagamento</h2>
+    <button mat-icon-button (click)="save()">
+        <mat-icon>done</mat-icon>
+    </button>
+</div>
+<form [formGroup]="form">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="100">
+            <input matInput formControlName="name" placeholder="Nome" required>
+            <mat-error>O campo nome é obrigatório!</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row">
+        <mat-form-field fxFlex="48">
+            <input type="number" matInput formControlName="value" placeholder="Valor" min="0" required>
+            <mat-error>O campo valor deve ser válido!</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="48">
+            <input type="number" matInput formControlName="day" placeholder="Dia" min="0" max="32" required>
+            <mat-error>O campo dia deve ser válido!</mat-error>
+        </mat-form-field>
+    </div>
+</form>
