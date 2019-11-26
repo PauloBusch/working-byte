@@ -39,7 +39,6 @@ export class TrainingComponent implements OnInit {
   save() {
     this.training = Object.assign(new Training(), this.form.value);
 	  window.alert("Treino Cadastrado!");
-    debugger;
   }
 
   close() {

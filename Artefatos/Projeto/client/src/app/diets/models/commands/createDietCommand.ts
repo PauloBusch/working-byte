@@ -1,10 +1,12 @@
+import { Identifiers } from '@angular/compiler';
+
 export class CreateDietCommand {
     public id: string;
     public name: string;
     public description: string[];
     public id_training: string;
     public id_user: string;
-    public id_diet_type: string;
+    public type: {id: string, name: string}
 
     constructor(
         id: string,
@@ -12,7 +14,7 @@ export class CreateDietCommand {
         description: string[],
         //id_training: string,
         //id_user: string,
-        id_diet_type: string
+        type: {id: string, name: string}
 
     ) {
         this.id = id;
@@ -20,6 +22,6 @@ export class CreateDietCommand {
         this.description = description;
         //this.id_training = id_training;
         //this.id_user = id_user;
-        this.id_diet_type = id_diet_type;
+        this.type = type;
     }
 }

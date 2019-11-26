@@ -34,12 +34,12 @@ EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliador', as: 'avaliador
 EvaluationDb.belongsTo(UserDb, { foreignKey: 'id_user_avaliado', as: 'avaliado' });
 
 const TypeDb = TypeModel(Connection, Sequelize);
-TypeDb.hasMany(EquipmentDb, { foreignKey: 'id_type', as: 'type' });
-EquipmentDb.belongsTo(TypeDb, { foreignKey: 'id_type', as: 'type' });
+TypeDb.hasMany(EquipmentDb, { foreignKey: 'id_type', as: 'type_equipment' });
+EquipmentDb.belongsTo(TypeDb, { foreignKey: 'id_type', as: 'type_equipment' });
 
 const DietTypeDb = DietTypeModel(Connection, Sequelize);
-DietTypeDb.hasMany(DietDb, { foreignKey: 'id_type', as: 'type'});
-DietDb.belongsTo(DietTypeDb, { foreignKey: 'id_type', as: 'type'})
+DietTypeDb.hasMany(DietDb);
+DietDb.belongsTo(DietTypeDb);
 
 
 const PaymentsDb = PaymentsModel(Connection, Sequelize);
@@ -52,6 +52,7 @@ module.exports = {
   TypeDb,
   PaymentsDb,
   DietDb,
+  DietTypeDb,
   CalendarDb,
   EquipmentDb,
   EvaluationDb, 

@@ -10,8 +10,8 @@ import { DataService } from 'src/app/shared/services/data.service';
 import { Random } from 'src/app/shared/utils/random';
 import { CreateDietCommand } from '../models/commands/createDietCommand';
 import { UpdateDietCommand } from '../models/commands/updateDietCommand';
-import { TypeList } from '../models/view-models/type.list';
-import { ListTypeQuery } from '../models/queries/listTypeQuery';
+import { DietTypeList } from '../models/view-models/diet.type.list';
+import { ListDietTypeQuery } from '../models/queries/listTypeQuery';
 import { Observable } from 'rxjs/internal/Observable';
 import { startWith } from 'rxjs/internal/operators/startWith';
 import { map } from 'rxjs/internal/operators/map';
@@ -28,8 +28,8 @@ export class DietComponent implements OnInit {
   private refId: string;
 
   private form: FormGroup;
-  private types: TypeList[] = [];
-  private filteredTypes: Observable<TypeList[]>;
+  private types: DietTypeList[] = [];
+  private filteredTypes: Observable<DietTypeList[]>;
 
   constructor(
     private fb: FormBuilder,
@@ -72,8 +72,8 @@ export class DietComponent implements OnInit {
   }
 
   loadTypes() {
-    const queryTypes = new ListTypeQuery();
-    this.dietService.getTypes(queryTypes).subscribe(result => {
+    const queryTypes = new ListDietTypeQuery();
+    this.dietService.getDietTypes(queryTypes).subscribe(result => {
       this.types = result.List;
       this.filterTypes();
     });
@@ -150,7 +150,7 @@ export class DietComponent implements OnInit {
       this.refId,
       values.diet_name,
       values.description,
-      { name: values.type.name }
+      {id: values.type.id, name: values.type.name }
     );
     this.dataService.update(diet);
   }
@@ -169,7 +169,7 @@ export class DietComponent implements OnInit {
   filterTypes() {
     this.filteredTypes = this.form.controls.type.valueChanges
     .pipe(
-      startWith<string | TypeList>(''),
+      startWith<string | DietTypeList>(''),
       map(value => typeof value === 'string' ? value : value.name),
       map(name => {
         if (typeof name !== 'string') {

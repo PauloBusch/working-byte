@@ -1,6 +1,6 @@
 const { Query } = require('../../../utils/interfaces/query');
 const { Error, QueryResult } = require('../../../utils/content/dataResult');
-const { TypeDb, DietDb } = require('../../../mapping');
+const { DietTypeDb, DietDb } = require('../../../mapping');
  
  
 class GetDietQuery extends Query {
@@ -31,8 +31,8 @@ class GetDietQuery extends Query {
             attributes: ['id','name','description'],
             where: { id: this.id},
             include: [{
-                model: TypeDb,
-                as: 'type'
+                model: DietTypeDb,
+                as: 'type_diet'
             }]
         };
 

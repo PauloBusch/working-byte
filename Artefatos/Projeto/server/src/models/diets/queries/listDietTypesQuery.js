@@ -1,10 +1,10 @@
 const { Query } = require('../../../utils/interfaces/query');
 const { QueryResult } = require('../../../utils/content/dataResult');
-const { TypeDb, DietDb } = require('../../../mapping');
+const { DietTypeDb, DietDb } = require('../../../mapping');
 
 const { Op } = require('sequelize');
 
-class ListTypesQuery extends Query {
+class ListDietTypesQuery extends Query {
     constructor(
         search,
         id_diet
@@ -25,8 +25,7 @@ class ListTypesQuery extends Query {
     async Execute(){
         const query = {
             attributes: ['id', 'name'],
-            where: {},
-            include: []
+            where: {}
         };
 
         if (this.search){
@@ -38,15 +37,15 @@ class ListTypesQuery extends Query {
             query.include.push({
                 attributes: [],
                 model: DietDb,
-                where: { id_diet: this.id_diet }
+                where: { id: this.id_diet }
             });
         }
 
-        const result = await TypeDb.findAndCountAll(query);
+        const result = await DietTypeDb.findAndCountAll(query);
         return new QueryResult(result.rows.length, result.rows);
     }
 }
 
 module.exports = { 
-    ListTypesQuery
+    ListDietTypesQuery
  }

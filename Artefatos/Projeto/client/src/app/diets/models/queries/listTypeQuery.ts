@@ -1,4 +1,4 @@
-export class ListTypeQuery {
+export class ListDietTypeQuery {
     public search: string;
     public id_diet: string;
 

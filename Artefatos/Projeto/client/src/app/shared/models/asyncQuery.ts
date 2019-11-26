@@ -12,6 +12,9 @@ export class AsyncQuery<Type> {
 
     private _$list: Observable<QueryResult<Type>>;
 
+    constructor(){
+        this.list = [];
+    }
     get $list(): Observable<QueryResult<Type>> {
         return this._$list;
     }

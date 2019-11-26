@@ -31,7 +31,7 @@ class GetEquipmentQuery extends Query {
             where: { id: this.id },
             include: [{
                 model: TypeDb,
-                as: 'type'
+                as: 'type_equpment'
             }]
         };
 

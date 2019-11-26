@@ -63,7 +63,7 @@ export class DietListComponent implements OnInit, OnDestroy {
   }
 
   loadDiets(){
-    this.diets.$list = this.dietService.getDiet(this.listQuery);
+    this.diets.$list = this.dietService.getDiets(this.listQuery);
     this.diets.subsc = this.diets.$list.subscribe(result => {
       this.dataSource = new MatTableDataSource<DietList>(result.List);
     })

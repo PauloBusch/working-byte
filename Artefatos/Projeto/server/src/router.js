@@ -31,6 +31,7 @@ router.post('/equipments', Token.validate, ControllerEquipment.create);
 router.put('/equipments/:id', Token.validate, ControllerEquipment.update);
 router.delete('/equipments/:id', Token.validate, ControllerEquipment.remove);
 
+router.get('/dietTypes', Token.validate, ControllerDiet.getAllTypes);
 router.get('/diets', Token.validate, ControllerDiet.getAll);
 router.get('/diets/:id', Token.validate, ControllerDiet.getById);
 router.post('/diets', Token.validate, ControllerDiet.create);

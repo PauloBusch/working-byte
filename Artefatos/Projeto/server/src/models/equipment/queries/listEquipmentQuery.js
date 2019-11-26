@@ -45,7 +45,7 @@ class ListEquipmentQuery extends Query{
             order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']],
             include: [{
                 attributes: ['name'],
-                as: 'type',
+                as: 'type_equpment',
                 model: TypeDb
             }]
         };
