@@ -1,6 +1,7 @@
 const { QueryHandle } = require('../utils/handle/queryHandle');
 const { GetDietQuery } = require('../models/diets/queries/getDietQuery');
 const { ListDietQuery } = require('../models/diets/queries/listDietQuery');
+const { ListTypesQuery } = require('../models/diets/queries/listTypesQuery');
 
 const { CommandHandle } = require('../utils/handle/commandHandle');
 const { CreateDietCommand } = require('../models/diets/commands/createDietCommand');
@@ -19,6 +20,12 @@ controllerDiet.getById = async (req, res) => {
 
 controllerDiet.getAll = async (req, res) => {
     const query = Obj.getData(new ListDietQuery(), req);
+    const result = await QueryHandle.Execute(query);
+    res.json(result);
+}
+
+controllerDiet.getAllTypes = async (req, res) => {
+    const query = Obj.getData(new ListTypesQuery(), req);
     const result = await QueryHandle.Execute(query);
     res.json(result);
 }

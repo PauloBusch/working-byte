@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatBottomSheet, MatSnackBar } from '@angular/material';
+import { MatBottomSheet, MatSnackBar, MatAutocomplete} from '@angular/material';
 import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 import { GetDietQuery } from '../models/queries/getDietQuery';
 
@@ -11,6 +11,11 @@ import { Random } from 'src/app/shared/utils/random';
 import { CreateDietCommand } from '../models/commands/createDietCommand';
 import { UpdateDietCommand } from '../models/commands/updateDietCommand';
 import { TypeList } from '../models/view-models/type.list';
+import { ListTypeQuery } from '../models/queries/listTypeQuery';
+import { Observable } from 'rxjs/internal/Observable';
+import { startWith } from 'rxjs/internal/operators/startWith';
+import { map } from 'rxjs/internal/operators/map';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-diet-form',
@@ -23,7 +28,8 @@ export class DietComponent implements OnInit {
   private refId: string;
 
   private form: FormGroup;
-  private type: TypeList[];
+  private types: TypeList[] = [];
+  private filteredTypes: Observable<TypeList[]>;
 
   constructor(
     private fb: FormBuilder,
@@ -36,9 +42,8 @@ export class DietComponent implements OnInit {
     this.form = this.fb.group({
       diet_name: ['', Validators.required],
       description: ['', Validators.required],
-      type: ['']
-      
-    })
+      type: this.fb.group({ id: this.random.NewId(), name: ''})
+    });
   }
 
   ngOnInit(){
@@ -47,10 +52,12 @@ export class DietComponent implements OnInit {
 
   loadData(params: { id:string }) {
     this.refId = params.id;
+    this.loadTypes();
     if(!this.refId){
       this.isNew = true;
       return;
     }
+
 
     const query = new GetDietQuery(this.refId);
     this.dietService.getDietById(query).subscribe(result => {
@@ -64,6 +71,14 @@ export class DietComponent implements OnInit {
     })
   }
 
+  loadTypes() {
+    const queryTypes = new ListTypeQuery();
+    this.dietService.getTypes(queryTypes).subscribe(result => {
+      this.types = result.List;
+      this.filterTypes();
+    });
+  }
+  
   close() {
     this.bottomSheet.dismiss();
   }
@@ -135,12 +150,39 @@ export class DietComponent implements OnInit {
       this.refId,
       values.diet_name,
       values.description,
-      values.type
+      { name: values.type.name }
     );
     this.dataService.update(diet);
   }
 
   hasError(field: string, error: string): boolean {
     return this.form.get(field).hasError(error);
+  }
+
+  displayType(value?: any): string | undefined {
+    if (!value) {
+      return undefined;
+    }
+    return typeof value === 'object' ? value.name : value;
+  }
+
+  filterTypes() {
+    this.filteredTypes = this.form.controls.type.valueChanges
+    .pipe(
+      startWith<string | TypeList>(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => {
+        if (typeof name !== 'string') {
+          return;
+        }
+
+        if (!name) {
+          return this.types.slice();
+        }
+
+        const filterValue = _.deburr(name).toLowerCase();
+        return this.types.filter(type => _.deburr(type.name).toLowerCase().indexOf(filterValue) !== -1);
+      })
+    );
   }
 }

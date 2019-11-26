@@ -14,6 +14,8 @@ import { GetDietQuery } from 'src/app/diets/models/queries/getDietQuery';
 import { Content } from '../utils/content';
 import { DietList } from 'src/app/diets/models/view-models/diet.list';
 import { DietDetails } from 'src/app/diets/models/view-models/diet.details';
+import { TypeList } from 'src/app/diets/models/view-models/type.list';
+import { ListTypeQuery } from 'src/app/diets/models/queries/listTypeQuery';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,10 @@ export class DietService {
 
   getDiet(query: ListDietQuery): Observable<QueryResult<DietList>> {
     return this.http.get<QueryResult<DietList>>(`${this.url}/diets`, Content.GetParams(query));
+  }
+
+  getTypes(query: ListTypeQuery): Observable<QueryResult<TypeList>> {
+    return this.http.get<QueryResult<TypeList>>(`${this.url}/dietTypes`, Content.GetParams(query));
   }
 
   getDietById(query: GetDietQuery): Observable<QueryResult<DietDetails>> {

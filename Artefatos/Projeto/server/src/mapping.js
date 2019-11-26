@@ -40,8 +40,8 @@ TypeDb.hasMany(EquipmentDb, { foreignKey: 'id_type', as: 'type' });
 EquipmentDb.belongsTo(TypeDb, { foreignKey: 'id_type', as: 'type' });
 
 const DietTypeDb = DietTypeModel(Connection, Sequelize);
-DietTypeDb.hasMany(DietDb, { foreignKey: 'id_type_diet', as: 'type'});
-DietDb.belongsTo(DietTypeDb, { foreignKey: 'id_type_diet', as: 'type'});
+DietTypeDb.hasMany(DietDb, { foreignKey: 'id_type', as: 'type'});
+DietDb.belongsTo(DietTypeDb, { foreignKey: 'id_type', as: 'type'})
 
 TrainingDb.hasMany(CalendarDb, { foreignKey: 'id_training', as : 'training'});
 CalendarDb.belongsTo(TrainingDb, { foreignKey: 'id_training', as : 'training'});

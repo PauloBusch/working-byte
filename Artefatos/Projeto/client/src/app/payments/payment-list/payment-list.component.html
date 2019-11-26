@@ -28,8 +28,8 @@
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #paymentMenu="matMenu">
-                <button mat-menu-item [routerLink]="['edit', eqp.id]">Editar</button>
-                <button mat-menu-item (click)="remove(eqp.id)">Remover</button>
+                <button mat-menu-item [routerLink]="['edit', p.id]">Editar</button>
+                <button mat-menu-item (click)="remove(p.id)">Remover</button>
             </mat-menu>
         </td>
     </ng-container>

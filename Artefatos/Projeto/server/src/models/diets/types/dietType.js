@@ -1,6 +1,6 @@
 const { EntityBase } = require('../../../utils/database/entityBase');
 
-class Type extends EntityBase {
+class DietType extends EntityBase {
 
     constructor(id, name){
         super(id);
@@ -9,5 +9,5 @@ class Type extends EntityBase {
 }
 
 module.exports = {
-    Type
+    DietType
 };

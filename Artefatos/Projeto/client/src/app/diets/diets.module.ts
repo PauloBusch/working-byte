@@ -4,8 +4,8 @@ import { MatBottomSheetModule, MatProgressSpinnerModule,
     MatCheckboxModule, MatMenuModule, MatToolbarModule, 
     MatIconModule, MatListModule, MatPaginatorModule, 
     MatSelectModule, MatSidenavModule, MatButtonModule,
-     MatSnackBarModule, MatCardModule, MatInputModule, 
-     MatFormFieldModule } from '@angular/material';
+     MatSnackBarModule, MatCardModule, MatInputModule,
+     MatAutocompleteModule, MatFormFieldModule } from '@angular/material';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,6 +37,7 @@ import { DataService } from '../shared/services/data.service';
         MatListModule,
         MatSidenavModule,
         MatTableModule,
+        MatAutocompleteModule,
 
         FormsModule,
         ReactiveFormsModule,
