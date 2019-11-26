@@ -21,9 +21,13 @@ class GetPaymentQuery extends Query {
         return null;
     }
 
-    async HasPermission(){
+    async HasPermission() {
+        return true;
+    }
+
+    async Execute(){
         const query = { where: { id: this.id } };
-        const payment = PaymentsDb.findOne(query);
+        const payment = await PaymentsDb.findOne(query);
 
         return new QueryResult(1, [payment]);
     }

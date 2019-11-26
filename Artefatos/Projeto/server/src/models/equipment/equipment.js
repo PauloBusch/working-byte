@@ -1,3 +1,4 @@
+const { NewId } = require('../../utils/database/random');  
 const { EntityBase } = require('../../utils/database/entityBase');
 
 class Equipment extends EntityBase {
@@ -14,6 +15,12 @@ class Equipment extends EntityBase {
         this.code = code;
         this.is_disponible = is_disponible;
         this.id_type = id_type;
+    }
+
+    remove(){
+        super.remove();
+
+        this.code = `${this.code} - ${NewId()}`;
     }
 }
 
