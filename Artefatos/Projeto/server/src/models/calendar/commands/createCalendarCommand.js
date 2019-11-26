@@ -9,7 +9,7 @@ class CreateCalendarCommand extends Command {
     constructor(
         id,
         name,
-        description,
+        training,
         date,
         timeInitial,
         timeEnd
@@ -17,7 +17,7 @@ class CreateCalendarCommand extends Command {
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.training = training;
         this.date = date;
         this.timeInitial = timeInitial;
         this.timeEnd = timeEnd;
@@ -30,7 +30,7 @@ class CreateCalendarCommand extends Command {
         if (!this.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
             
-        if (!this.description)
+        if (!this.training)
             return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
         
             if (!this.date)
@@ -54,7 +54,7 @@ class CreateCalendarCommand extends Command {
         const Cal = new Calendar(
             this.id,
             this.name,
-            this.description,
+            this.training,
             this.date,
             this.timeInitial,
             this.timeEnd

@@ -14,7 +14,7 @@ class UpdateCalendarCommand extends Command {
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.training = training;
     }
 
     async GetError(){
@@ -24,7 +24,7 @@ class UpdateCalendarCommand extends Command {
         if (!this.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
 
-        if (!this.description)
+        if (!this.training)
             return new Error(EErrorCode.InvalidParams, "Parameter code cannot be null");
 
         const exists = await CalendarDb.count({ where: { id: this.id } });
@@ -43,7 +43,7 @@ class UpdateCalendarCommand extends Command {
         const calendar = new Calendar(
             undefined,
             this.name,
-            this.description
+            this.training
         );
 
         const result = await CalendarDb.update(calendar, query);

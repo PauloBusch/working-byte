@@ -1,5 +1,5 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { CalendarDb } = require('../../../mapping');
+const { CalendarDb, TrainingDb } = require('../../../mapping');
 const { QueryResult } = require('../../../utils/content/dataResult');
 
 const Op = require('sequelize');
@@ -38,18 +38,22 @@ class ListCalendarQuery extends Query{
 
     async Execute(){
         const query = {
-            attributes: ['id', 'name', 'description'], 
+            attributes: ['id', 'name'], 
             where: { removed: false },
             limit: this.limit,
             offset: (this.page - 1) * this.limit,
-            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
+            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']],
+            include: [{
+                attributes: ['name'],
+                as: 'training',
+                model: TrainingDb
+            }]
         };
 
         if (this.search){
             const searchLike = `%${this.search}%`;
             query.where[Op.or] = [
-                { name: { [Op.like]: searchLike } },
-                { description: { [Op.like]: searchLike } }
+                { name: { [Op.like]: searchLike } }
             ];
         }
 

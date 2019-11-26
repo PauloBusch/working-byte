@@ -11,8 +11,8 @@ const CalendarModel = (sequelize, dataTypes) => {
             type: dataTypes.STRING(50),
             allowNull: false
         },
-        description: {
-            type: dataTypes.STRING(10),
+        id_training: {
+            type: dataTypes.STRING(8),
             allowNull: false
         },
         date: {
