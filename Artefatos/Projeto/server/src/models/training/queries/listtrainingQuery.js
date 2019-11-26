@@ -1,10 +1,10 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { CalendarDb, TrainingDb } = require('../../../mapping');
+const { TrainingDb } = require('../../../mapping');
 const { QueryResult } = require('../../../utils/content/dataResult');
 
 const Op = require('sequelize');
 
-class ListCalendarQuery extends Query{
+class ListTrainingQuery extends Query{
     constructor(
         search,
         page,
@@ -38,31 +38,27 @@ class ListCalendarQuery extends Query{
 
     async Execute(){
         const query = {
-            attributes: ['id', 'name'], 
+            attributes: ['id', 'name', 'description'], 
             where: { removed: false },
             limit: this.limit,
             offset: (this.page - 1) * this.limit,
-            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']],
-            include: [{
-                attributes: ['name'],
-                as: 'training',
-                model: TrainingDb
-            }]
+            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
         };
 
         if (this.search){
             const searchLike = `%${this.search}%`;
             query.where[Op.or] = [
-                { name: { [Op.like]: searchLike } }
+                { name: { [Op.like]: searchLike } },
+                { description: { [Op.like]: searchLike } }
             ];
         }
 
 
-        const calendars = await CalendarDb.findAndCountAll(query);
-        return new QueryResult(calendars.count, calendars.rows);
+        const training = await TrainingDb.findAndCountAll(query);
+        return new QueryResult(training.count, training.rows);
     }
 }
 
 module.exports = {
-    ListCalendarQuery
+    ListTrainingQuery
 }

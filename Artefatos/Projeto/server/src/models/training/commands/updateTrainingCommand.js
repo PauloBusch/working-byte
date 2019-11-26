@@ -1,11 +1,11 @@
 const { Command } = require('../../../utils/interfaces/command');
 const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
-const { Calendar } = require('../calendar');
-const { CalendarDb } = require('../../../mapping');
+const { Training } = require('../training');
+const { TrainingDb } = require('../../../mapping');
 const { Op } = require('sequelize');
 
-class UpdateCalendarCommand extends Command {
+class UpdateTrainingCommand extends Command {
     constructor(
         id,
         name,
@@ -14,7 +14,7 @@ class UpdateCalendarCommand extends Command {
         super();
         this.id = id;
         this.name = name;
-        this.training = training;
+        this.description = description;
     }
 
     async GetError(){
@@ -24,12 +24,12 @@ class UpdateCalendarCommand extends Command {
         if (!this.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
 
-        if (!this.training)
+        if (!this.description)
             return new Error(EErrorCode.InvalidParams, "Parameter code cannot be null");
 
-        const exists = await CalendarDb.count({ where: { id: this.id } });
+        const exists = await TrainingDb.count({ where: { id: this.id } });
         if (!exists)
-            return new Error(EErrorCode.NotFount, `Calendar with id: ${this.id} does not exists`);
+            return new Error(EErrorCode.NotFount, `Training with id: ${this.id} does not exists`);
 
         return null;
     }   
@@ -40,18 +40,18 @@ class UpdateCalendarCommand extends Command {
 
     async Execute(){
         const query = { where: { id: this.id } };
-        const calendar = new Calendar(
+        const training = new Training(
             undefined,
             this.name,
-            this.training
+            this.description
         );
 
-        const result = await CalendarDb.update(calendar, query);
+        const result = await TrainingDb.update(training, query);
         return new CommandResult(result ? 1 : 0); 
     }
 }
 
 module.exports = {
-    UpdateCalendarCommand
+    UpdateTrainingCommand
 }
 

@@ -1,6 +1,6 @@
 const { QueryResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 const { Query } = require('../../../utils/interfaces/query');
-const { CalendarDb } = require('../../../mapping');
+const { CalendarDb, TrainingDb } = require('../../../mapping');
  
 class GetCalendarQuery extends Query {
     constructor(
@@ -28,15 +28,19 @@ class GetCalendarQuery extends Query {
     async Execute(){
         const fields =  [
             'id', 
-            'name', 
-            'description',
+            'name',
             'date',
             'timeInitial',
             'timeEnd'
         ];
         const query = { 
             attributes: fields,
-            where: { id: this.id }
+            where: { id: this.id },
+            include: [{
+                attributes: ['name'],
+                as: 'training',
+                model: TrainingDb
+            }]
          };
 
         const calendar = await CalendarDb.findOne(query);

@@ -4,7 +4,7 @@ class Calendar extends EntityBase {
     constructor(
         id, 
         name,
-        description,
+        id_training,
         date,
         timeInitial,
         timeEnd
@@ -13,7 +13,7 @@ class Calendar extends EntityBase {
         super(id);
         //this.id = id;
         this.name = name;
-        this.description = description;
+        this.id_training = id_training;
         this.date = date;
         this.timeInitial = timeInitial;
         this.timeEnd = timeEnd;

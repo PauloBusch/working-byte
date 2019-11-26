@@ -34,7 +34,7 @@ export class CalendarFormComponent implements OnInit {
   ) { 
     this.form = this.fb.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      training: ['', Validators.required],
       date:  ['', Validators.required],
       timeInitial: ['', Validators.required],
       timeEnd: ['', Validators.required]
@@ -61,6 +61,7 @@ export class CalendarFormComponent implements OnInit {
       }
 
       const Calendar = result.List[0];
+      Calendar.training = Calendar.training.name;
       this.form.patchValue(Calendar);
     })
   }
@@ -88,7 +89,7 @@ export class CalendarFormComponent implements OnInit {
     const command = new CreateCalendarCommand(
       this.refId,
       values.name,
-      values.description,
+      values.training,
       values.date,
       values.timeInitial,
       values.timeEnd
@@ -114,7 +115,7 @@ export class CalendarFormComponent implements OnInit {
     const command = new UpdateCalendarCommand(
       this.refId,
       values.name,
-      values.description,
+      values.training,
       values.date,
       values.timeInitial,
       values.timeEnd
@@ -139,7 +140,7 @@ export class CalendarFormComponent implements OnInit {
     const calendar = new CalendarList(
       this.refId,
       values.name,
-      values.description,
+      values.training,
       values.date,
       values.timeInitial,
       values.timeEnd

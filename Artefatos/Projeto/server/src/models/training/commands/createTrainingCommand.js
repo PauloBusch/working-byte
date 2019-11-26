@@ -1,15 +1,15 @@
 const { Command } = require('../../../utils/interfaces/command');
 const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
-const { Calendar } = require('../calendar');
-const { CalendarDb } = require('../../../mapping');
+const { Training } = require('../training');
+const { TrainingDb } = require('../../../mapping');
 const _ = require('lodash');
 
-class CreateCalendarCommand extends Command {
+class CreateTrainingCommand extends Command {
     constructor(
         id,
         name,
-        training,
+        description,
         date,
         timeInitial,
         timeEnd
@@ -17,7 +17,7 @@ class CreateCalendarCommand extends Command {
         super();
         this.id = id;
         this.name = name;
-        this.training = training;
+        this.description = description;
         this.date = date;
         this.timeInitial = timeInitial;
         this.timeEnd = timeEnd;
@@ -30,7 +30,7 @@ class CreateCalendarCommand extends Command {
         if (!this.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
             
-        if (!this.training)
+        if (!this.description)
             return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
         
             if (!this.date)
@@ -51,20 +51,20 @@ class CreateCalendarCommand extends Command {
 
     async Execute(){
 
-        const Cal = new Calendar(
+        const Cal = new Training(
             this.id,
             this.name,
-            this.training,
+            this.description,
             this.date,
             this.timeInitial,
             this.timeEnd
         );
 
-        const result = await CalendarDb.create(Cal);
+        const result = await TrainingDb.create(Cal);
         return new CommandResult(result ? 1 : 0);
     }
 }
 
 module.exports = {
-    CreateCalendarCommand
+    CreateTrainingCommand
 }

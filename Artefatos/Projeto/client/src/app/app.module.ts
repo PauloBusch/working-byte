@@ -77,6 +77,7 @@ import { PaymentsModule } from './payments/payments.module';
     AuthGuard,
     ConfirmDialogService,
     HttpClientModule,
+    AppComponent,
     HttpInterceptorProviders,
     { provide: MatPaginatorIntl, useValue: CustomPaginator() },
     { provide: LOCALE_ID, useValue: 'pt-BR' }

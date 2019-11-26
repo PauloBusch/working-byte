@@ -5,7 +5,8 @@ const { EquipmentModel } = require('./models/equipment/equipment.model');
 const { DietsModel } = require('./models/diets/diets.model');
 const { CalendarModel } = require('./models/calendar/calendar.model');
 const { TypeModel } = require('./models/equipment/types/type.model');
-const { DietTypeModel } = require('./models/diets/types/dietType.model');
+const { DietTypeModel } = require('./models/diets/types/dietType.model')
+const { TrainingModel } = require('./models/training/training.model');
 
 const { DbConfig, DbManager } = require('./../config');
 const { PaymentsModel } = require('./models/payments/payments.model');
@@ -25,6 +26,7 @@ const Connection = new Sequelize(DbConfig.database, DbConfig.user, DbConfig.pass
 const EquipmentDb = EquipmentModel(Connection, Sequelize);
 const DietDb = DietsModel(Connection, Sequelize);
 const CalendarDb = CalendarModel(Connection, Sequelize);
+const TrainingDb = TrainingModel(Connection, Sequelize);
 
 const UserDb = UserModel(Connection, Sequelize);
 const EvaluationDb = EvaluationModel(Connection, Sequelize);
@@ -41,6 +43,9 @@ const DietTypeDb = DietTypeModel(Connection, Sequelize);
 DietTypeDb.hasMany(DietDb);
 DietDb.belongsTo(DietTypeDb);
 
+TrainingDb.hasMany(CalendarDb, { foreignKey: 'id_training', as : 'training'});
+CalendarDb.belongsTo(TrainingDb, { foreignKey: 'id_training', as : 'training'});
+
 
 const PaymentsDb = PaymentsModel(Connection, Sequelize);
 
@@ -56,5 +61,6 @@ module.exports = {
   CalendarDb,
   EquipmentDb,
   EvaluationDb, 
+  TrainingDb,
   Connection
 };

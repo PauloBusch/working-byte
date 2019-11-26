@@ -3,7 +3,7 @@ import { Time } from '@angular/common';
 export class CreateCalendarCommand{
     public id: string;
     public name: string;
-    public description: string[];
+    public training: string[];
     public date: Date;
     public timeInitial: Time;
     public timeEnd: Time;
@@ -12,14 +12,14 @@ export class CreateCalendarCommand{
 
     id: string,
     name: string,
-    description: string[],
+    training: string[],
     date: Date,
     timeInitial: Time,
     timeEnd: Time
     ){
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.training = training;
         this.date = date;
         this.timeInitial = timeInitial;
         this.timeEnd = timeEnd;

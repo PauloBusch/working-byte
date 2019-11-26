@@ -12,7 +12,11 @@ export class AsyncQuery<Type> {
 
     private _$list: Observable<QueryResult<Type>>;
 
+<<<<<<< HEAD
     constructor(){
+=======
+    constructor() {
+>>>>>>> cc8efc9698f245330eca203d1d1f12b544747947
         this.list = [];
     }
     get $list(): Observable<QueryResult<Type>> {
