@@ -11,6 +11,8 @@ import { DataService } from 'src/app/shared/services/data.service';
 import { Random } from 'src/app/shared/utils/random';
 import { CreateCalendarCommand } from '../models/commands/createCalendarCommand';
 import { UpdateCalendarCommand } from '../models/commands/updateCalendarCommand';
+import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
+import { ListCalendarTrainingQuery } from '../models/queries/listCalendarTrainingQuery';
  
 @Component({
   selector: 'app-calendar-form',
@@ -21,6 +23,7 @@ import { UpdateCalendarCommand } from '../models/commands/updateCalendarCommand'
 export class CalendarFormComponent implements OnInit {
   private isNew: boolean;
   private refId: string;
+  private listQuery: ListCalendarQuery;
 
   private form: FormGroup;
 
@@ -64,6 +67,16 @@ export class CalendarFormComponent implements OnInit {
       Calendar.training = Calendar.training.name;
       this.form.patchValue(Calendar);
     })
+  }
+
+  loadTraining() {
+    this.calendarService.getTraining(this.listQuery).subscribe(result => {
+      if(!result){
+        return null;
+      }else{
+        return result;
+      }
+    });
   }
 
   close() {
