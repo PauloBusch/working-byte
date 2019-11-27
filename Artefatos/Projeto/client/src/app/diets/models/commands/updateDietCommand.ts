@@ -4,7 +4,7 @@ export class UpdateDietCommand {
     public description: string[];
     public id_training: string;
     public id_user: string;
-    public id_diet_type: string;
+    public id_diet_type: {id: string};
 
     constructor(
         id: string,
@@ -12,7 +12,7 @@ export class UpdateDietCommand {
         description: string[],
         //id_training: string,
         //id_user: string,
-        id_diet_type: string
+        id_diet_type: {id: string}
 
     ) {
         this.id = id;

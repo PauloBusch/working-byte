@@ -27,7 +27,8 @@ export class DietListComponent implements OnInit, OnDestroy {
     private dietService: DietService,
     private ConfirmDialogService: ConfirmDialogService,
     private snackBar: MatSnackBar,
-    private dataService: DataService<DietList>) {
+    private dataService: DataService<DietList>
+    ) {
       const limit = Storage.get('diet.limit', 10);
       const page = Storage.get('diet.page', 1);
       const sortAsc = Storage.get('diet.sortAsc', true);

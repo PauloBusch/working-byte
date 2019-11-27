@@ -1,5 +1,5 @@
 const { Command } = require('../../../utils/interfaces/command');
-const { CommandResult, EErrorCode } = require('../../../utils/content/dataResult');
+const { CommandResult, EErrorCode, Error } = require('../../../utils/content/dataResult');
 
 const { Diets } = require('../diets');
 const { DietDb, DietTypeDb } = require('../../../mapping');

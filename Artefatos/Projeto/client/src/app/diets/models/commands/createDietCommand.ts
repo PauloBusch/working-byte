@@ -6,7 +6,7 @@ export class CreateDietCommand {
     public description: string[];
     public id_training: string;
     public id_user: string;
-    public type: {id: string, name: string}
+    public id_type_diet: string
 
     constructor(
         id: string,
@@ -14,7 +14,7 @@ export class CreateDietCommand {
         description: string[],
         //id_training: string,
         //id_user: string,
-        type: {id: string, name: string}
+        id_type_diet: string
 
     ) {
         this.id = id;
@@ -22,6 +22,6 @@ export class CreateDietCommand {
         this.description = description;
         //this.id_training = id_training;
         //this.id_user = id_user;
-        this.type = type;
+        this.id_type_diet = id_type_diet;
     }
 }

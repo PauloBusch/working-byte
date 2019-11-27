@@ -24,12 +24,12 @@ import * as _ from 'lodash';
 })
 
 export class DietComponent implements OnInit {
-  private isNew: boolean;
-  private refId: string;
+  public isNew: boolean;
+  public refId: string;
 
-  private form: FormGroup;
-  private types: DietTypeList[] = [];
-  private filteredTypes: Observable<DietTypeList[]>;
+  public form: FormGroup;
+  public types: DietTypeList[] = [];
+  public filteredTypes: Observable<DietTypeList[]>;
 
   constructor(
     private fb: FormBuilder,

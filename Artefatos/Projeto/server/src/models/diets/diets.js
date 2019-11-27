@@ -5,13 +5,13 @@ class Diets extends EntityBase {
         id,
         name,
         description,
-        id_type
+        id_type_diet
     ){
         super();
         this.id = id;
         this.name = name;
         this.description = description;
-        this.id_type = id_type;
+        this.id_type_diet = id_type_diet;
     }
 }
 
