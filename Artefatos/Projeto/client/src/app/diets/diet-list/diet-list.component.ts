@@ -16,8 +16,8 @@ import { RemoveDietCommand } from '../models/commands/removeDietCommand';
   styleUrls: ['./diet-list.component.scss']
 })
 export class DietListComponent implements OnInit, OnDestroy {
-    private listQuery: ListDietQuery;
-    private diets = new AsyncQuery<DietList>();
+    public listQuery: ListDietQuery;
+    public diets = new AsyncQuery<DietList>();
 
     displayedColumns: string[] = ['name', 'description', 'type_diet', 'symbol'];
     dataSource: MatTableDataSource<DietList>;
@@ -30,7 +30,7 @@ export class DietListComponent implements OnInit, OnDestroy {
     private dataService: DataService<DietList>) {
       const limit = Storage.get('diet.limit', 10);
       const page = Storage.get('diet.page', 1);
-      const sortAsc = Storage.get('diet.sortAsc', false);
+      const sortAsc = Storage.get('diet.sortAsc', true);
       const columnSort = Storage.get('diet.columnSort', 'diet_created');
       this.listQuery = new ListDietQuery(page, limit, sortAsc, columnSort);
    }

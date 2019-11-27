@@ -3,7 +3,7 @@ import { Time } from '@angular/common';
 export class CalendarDetails {
     public id: string;
     public name: string;
-    public training: { name: string};
+    public training: any;
     public date: Date;
     public timeInitial: Time;
     public timeEnd: Time;
@@ -11,7 +11,7 @@ export class CalendarDetails {
     constructor(
         id: string,
         name: string,
-        training: string,
+        training: any,
         date: Date,
         timeInitial: Time,
         timeEnd: Time
