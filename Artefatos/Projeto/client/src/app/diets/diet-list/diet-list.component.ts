@@ -32,7 +32,7 @@ export class DietListComponent implements OnInit, OnDestroy {
       const page = Storage.get('diet.page', 1);
       const sortAsc = Storage.get('diet.sortAsc', true);
       const columnSort = Storage.get('diet.columnSort', 'diet_created');
-      this.listQuery = new ListDietQuery(page, limit, sortAsc, columnSort);
+      this.listQuery = new ListDietQuery(page, limit, sortAsc, columnSort );
    }
 
   ngOnInit() {
