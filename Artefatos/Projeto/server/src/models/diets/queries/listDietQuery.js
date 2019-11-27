@@ -43,7 +43,7 @@ class ListDietQuery extends Query{
             order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']],
             include: [{
                 attributes: ['name'],
-                as: 'tipe_diet',
+                as: 'type_diet',
                 model: DietTypeDb
             }]
         };

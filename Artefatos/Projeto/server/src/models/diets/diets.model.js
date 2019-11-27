@@ -20,6 +20,10 @@ const DietsModel = (sequelize, dataTypes) => {
             defaultValue: false,
             allowNull: false
         },
+        id_type_diet: {
+            type: dataTypes.STRING(8),
+            allowNull: true
+        },
         diet_created: dataTypes.DATE,
         diet_updated: dataTypes.DATE
     }, {
