@@ -1,4 +1,4 @@
-export class ListCalendarQuery {
+export class ListCalendarTrainingQuery {
     public search: string;
     public limit: number;
     public page: number;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
 import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 
@@ -11,6 +11,12 @@ import { DataService } from 'src/app/shared/services/data.service';
 import { Random } from 'src/app/shared/utils/random';
 import { CreateCalendarCommand } from '../models/commands/createCalendarCommand';
 import { UpdateCalendarCommand } from '../models/commands/updateCalendarCommand';
+import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
+import { ListCalendarTrainingQuery } from '../models/queries/listCalendarTrainingQuery';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { Training } from 'src/app/trainings/models/training.model';
+import { CalendarTrainingList } from '../models/view-models/calendarTraining.list';
  
 @Component({
   selector: 'app-calendar-form',
@@ -21,6 +27,15 @@ import { UpdateCalendarCommand } from '../models/commands/updateCalendarCommand'
 export class CalendarFormComponent implements OnInit {
   private isNew: boolean;
   private refId: string;
+  private listQuery: ListCalendarQuery;
+  myControl = new FormControl();
+
+  options: CalendarTrainingList[] = [
+    {id:'1',name: 'Mary', description:''},
+    {id:'2',name: 'joana', description:''},
+    {id:'1',name: 'josué', description:''}
+  ];
+  filteredOptions: Observable<CalendarTrainingList[]>;
 
   private form: FormGroup;
 
@@ -42,8 +57,23 @@ export class CalendarFormComponent implements OnInit {
     })
   }
 
-  ngOnInit(){
+  displayFn(user?: CalendarTrainingList): string | undefined {
+    return user ? user.name : undefined;
+  }
 
+  private _filter(name: string): CalendarTrainingList[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter(option => option.id.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  ngOnInit(){
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filter(name) : this.options.slice())
+      );
   }
 
   loadData(params: { id:string }) {
@@ -64,6 +94,16 @@ export class CalendarFormComponent implements OnInit {
       Calendar.training = Calendar.training.name;
       this.form.patchValue(Calendar);
     })
+  }
+
+  loadTraining() {
+    this.calendarService.getTraining(this.listQuery).subscribe(result => {
+      if(!result){
+        return null;
+      }else{
+        return result;
+      }
+    });
   }
 
   close() {
