@@ -28,6 +28,7 @@ export class CalendarFormComponent implements OnInit {
   private isNew: boolean;
   private refId: string;
   private listQuery: ListCalendarQuery;
+  private training: CalendarTrainingList[];
   myControl = new FormControl();
 
   options: CalendarTrainingList[] = [
