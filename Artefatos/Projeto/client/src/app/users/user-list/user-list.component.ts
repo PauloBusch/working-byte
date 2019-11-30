@@ -12,6 +12,7 @@ import { Storage } from 'src/app/shared/utils/storage';
 import { UserComponent } from '../user-form/user-form.component';
 import { UserList } from '../models/view-models/user.list';
 import { DataService } from 'src/app/shared/services/data.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -23,16 +24,23 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   private listQuery: ListUserQuery;
   private users = new AsyncQuery<UserList>();
+  private isPersonal: boolean;
+  private firstName: string;
+  private id: string;
 
   constructor(
     private userService: UserService,
     private confirmDialogService: ConfirmDialogService,
     private snackBar: MatSnackBar,
-    private dataService: DataService<UserList>
+    private dataService: DataService<UserList>,
+    private appComponent: AppComponent
   ) {
     const limit = Storage.get('users.limit', 5);
     const page = Storage.get('users.page', 1);
     this.listQuery = new ListUserQuery(limit, page, false, 'user_created');
+    this.isPersonal =  this.appComponent.currentUser.is_personal;
+    this.firstName = this.appComponent.currentUser.first_name;
+    this.id = this.appComponent.currentUser.id;
   } 
 
   ngOnInit() {
@@ -62,6 +70,10 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   loadUsers() {
+    if(!this.isPersonal){
+      this.listQuery.id = this.id;
+      
+    }
     this.users.$list = this.userService.getUsers(this.listQuery);
     this.users.subsc = this.users.$list.subscribe();
   }
