@@ -15,6 +15,7 @@ import { CreateCalendarCommand } from 'src/app/calendar/models/commands/createCa
 import { UpdateCalendarCommand } from 'src/app/calendar/models/commands/updateCalendarCommand';
 import { GetCalendarQuery } from 'src/app/calendar/models/queries/getCalendarQuery';
 import { CalendarTrainingList } from 'src/app/calendar/models/view-models/calendarTraining.list';
+import { ListCalendarTrainingQuery } from 'src/app/calendar/models/queries/listCalendarTrainingQuery';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class CalendarService {
     return this.http.get<QueryResult<CalendarList>>(`${this.url}/calendars`, Content.GetParams(query));
   }
 
-  getTraining(query: ListCalendarQuery): Observable<QueryResult<CalendarTrainingList>> {
+  getTraining(query: ListCalendarTrainingQuery): Observable<QueryResult<CalendarTrainingList>> {
     return this.http.get<QueryResult<CalendarTrainingList>>(`${this.url}/calendars/trainings`, Content.GetParams(query));
   }
 

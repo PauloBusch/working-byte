@@ -28,14 +28,15 @@ export class CalendarFormComponent implements OnInit {
   private isNew: boolean;
   private refId: string;
   private listQuery: ListCalendarQuery;
-  private training: CalendarTrainingList[];
+  //private training: CalendarTrainingList[];
   myControl = new FormControl();
 
-  options: CalendarTrainingList[] = [
-    {id:'1',name: 'Mary', description:''},
-    {id:'2',name: 'joana', description:''},
-    {id:'1',name: 'josué', description:''}
-  ];
+  options: CalendarTrainingList[];
+  // options: CalendarTrainingList[] = [
+  //    {id:'1',name: 'Mary', description:''},
+  //    {id:'2',name: 'joana', description:''},
+  //    {id:'3',name: 'josué', description:''}
+  //  ];
   filteredOptions: Observable<CalendarTrainingList[]>;
 
   private form: FormGroup;
@@ -47,6 +48,7 @@ export class CalendarFormComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private calendarService: CalendarService,
     private dataService: DataService<CalendarList>
+    
   ) { 
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -55,7 +57,8 @@ export class CalendarFormComponent implements OnInit {
       timeInitial: ['', Validators.required],
       timeEnd: ['', Validators.required]
       
-    })
+    });
+    this.loadTrainings();
   }
 
   displayFn(user?: CalendarTrainingList): string | undefined {
@@ -69,16 +72,23 @@ export class CalendarFormComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.loadTrainings();
+ 
+    
+  }
+
+  filter(){
     this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.options.slice())
-      );
+    .pipe(
+      startWith(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filter(name) : this.options.slice())
+    );
   }
 
   loadData(params: { id:string }) {
     this.refId = params.id;
+  
     if(!this.refId){
       this.isNew = true;
       return;
@@ -92,26 +102,19 @@ export class CalendarFormComponent implements OnInit {
       }
 
       const Calendar = result.List[0];
-      Calendar.training = Calendar.training.name;
+
       this.form.patchValue(Calendar);
+      this.loadTrainings();
     })
   }
 
-  loadTraining() {
-    this.calendarService.getTraining(this.listQuery).subscribe(result => {
-      if(!result){
-        return null;
-      }else{
-        return result;
-      }
-    });
-  }
-
   loadTrainings() {
-    const queryTraining = new ListCalendarQuery();
-    this.calendarService.getTraining(queryTraining).subscribe(result => {
-      this.training = result.List;
-    });
+     const queryTraining = new ListCalendarTrainingQuery();
+     this.calendarService.getTraining(queryTraining).subscribe(result => {
+      this.options = result.List;
+      this.filter();
+     });
+
   }
 
   close() {
@@ -188,7 +191,7 @@ export class CalendarFormComponent implements OnInit {
     const calendar = new CalendarList(
       this.refId,
       values.name,
-      values.training.id,
+      values.training,
       values.date,
       values.timeInitial,
       values.timeEnd

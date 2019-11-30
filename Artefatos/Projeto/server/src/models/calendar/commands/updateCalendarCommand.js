@@ -9,7 +9,7 @@ class UpdateCalendarCommand extends Command {
     constructor(
         id,
         name,
-        description
+        training
     ){
         super();
         this.id = id;

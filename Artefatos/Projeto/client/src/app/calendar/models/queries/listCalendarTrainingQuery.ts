@@ -6,10 +6,10 @@ export class ListCalendarTrainingQuery {
     public columnSort: string;
 
     constructor(
-        page: number,
-        limit: number,
-        sortAsc: boolean,
-        columnSort: string,
+        page: number = 1,
+        limit: number = 1000,
+        sortAsc: boolean = false,
+        columnSort: string = "training_created",
         search: string = null
     ) {
         this.page = page;

@@ -45,7 +45,7 @@ router.post('/payments', Token.validate, ControllerPayment.create);
 router.put('/payments/:id', Token.validate, ControllerPayment.update);
 router.delete('/payments/:id', Token.validate, ControllerPayment.remove);
 
-router.get('/calendars/training', Token.validate, ControllerTraining.getAll);
+router.get('/calendars/trainings', Token.validate, ControllerTraining.getAll);
 router.get('/calendars', Token.validate, ControllerCalendar.getAll);
 router.get('/calendars/:id', Token.validate, ControllerCalendar.getById);
 router.post('/calendars', Token.validate, ControllerCalendar.create);
