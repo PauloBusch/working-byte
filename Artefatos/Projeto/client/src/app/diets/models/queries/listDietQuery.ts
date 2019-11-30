@@ -4,7 +4,7 @@ export class ListDietQuery {
     public page: number;
     public sortAsc: boolean;
     public columnSort: string;
-    public id_type: string;
+    public id_type_diet: string;
 
     constructor(
         page: number,
@@ -12,13 +12,13 @@ export class ListDietQuery {
         sortAsc: boolean,
         columnSort: string,
         search: string = null,
-        id_type: string = null
+        id_type_diet: string = null
     ) {
         this.page = page;
         this.limit = limit;
         this.sortAsc = sortAsc;
         this.columnSort = columnSort;
         this.search = search;
-        this.id_type = id_type;
+        this.id_type_diet = id_type_diet;
     }
 }

@@ -1,7 +1,7 @@
 const { NewId } = require('../../../utils/database/random');
 
 const DietTypeModel = (sequelize, dataTypes) => {
-    const dietType = sequelize.define('diet_type', {
+    const dietType = sequelize.define('diet_types', {
         id: {
             type: dataTypes.STRING(8),
             defaultValue: NewId,

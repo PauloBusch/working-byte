@@ -18,8 +18,8 @@ export class EquipmentListComponent implements OnInit, OnDestroy {
   displayColumns: string[] = ['name', 'code', 'type_name', 'is_disponible', 'actions'];
   dataSource: MatTableDataSource<EquipmentList>;
 
-  private listQuery: ListEquipmentQuery;
-  private equipments = new AsyncQuery<EquipmentList>();
+  public listQuery: ListEquipmentQuery;
+  public equipments = new AsyncQuery<EquipmentList>();
 
   constructor(
     private equipmentService: EquipmentService,

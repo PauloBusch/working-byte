@@ -2,7 +2,7 @@ const { Command } = require('../../../utils/interfaces/command');
 const { CommandResult, EErrorCode } = require('../../../utils/content/dataResult');
 
 const { Diets } = require('../diets');
-const { DietDb } = require('../../../mapping');
+const { DietDb, DietTypeDb } = require('../../../mapping');
 const _ = require('lodash');
 
 class UpdateDietCommand extends Command {
@@ -44,9 +44,9 @@ class UpdateDietCommand extends Command {
         const queryType = { where: { id: this.type.id } };
         const existsType = await TypeDb.count(queryType);
         if (existsType)
-            await TypeDb.update(this.type, queryType);
+            await DietTypeDb.update(this.type, queryType);
         else
-            await TypeDb.create(this.type);
+            await DietTypeDb.create(this.type);
 
         const diet = new Diets(
             this.id,

@@ -28,7 +28,6 @@ export class DietService {
   ) { }
 
   create(command: CreateDietCommand): Observable<CommandResult> {
-    debugger;
     return this.http.post<CommandResult>(`${this.url}/diets`, command);
   }
 
