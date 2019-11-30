@@ -25,7 +25,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   private listQuery: ListUserQuery;
   private users = new AsyncQuery<UserList>();
   private isPersonal: boolean;
-  private firstName: string;
   private id: string;
 
   constructor(
@@ -39,7 +38,6 @@ export class UserListComponent implements OnInit, OnDestroy {
     const page = Storage.get('users.page', 1);
     this.listQuery = new ListUserQuery(limit, page, false, 'user_created');
     this.isPersonal =  this.appComponent.currentUser.is_personal;
-    this.firstName = this.appComponent.currentUser.first_name;
     this.id = this.appComponent.currentUser.id;
   } 
 

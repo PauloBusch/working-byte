@@ -1,4 +1,4 @@
-<a mat-fab [routerLink]="['new']" color="primary">
+<a mat-fab [routerLink]="['new']" color="primary" *ngIf="isPersonal">
   <mat-icon>add</mat-icon>
 </a>
 
@@ -9,11 +9,11 @@
   <div class="page-header" fxLayout="row">
     <div fxFlex="10" fxLayoutAlign="start center">
       <div fxFlex="100">
-        <h2>Usuários</h2>
+        <h2>{{ isPersonal ? "Usuários" : "Usuário" }}</h2>
       </div>
     </div>
     
-    <div fxFlex="80" fxLayoutAlign="center center">
+    <div *ngIf="isPersonal" fxFlex="80" fxLayoutAlign="center center">
 
       <mat-form-field fxFlex="40" floatLabel="never">
         <input matInput placeholder="Localizar usuário" 
@@ -34,7 +34,7 @@
       
     </div>
 
-    <div fxFlex="none" class="actions" fxLayoutAlign="end center">
+    <div *ngIf="isPersonal" fxFlex="none" class="actions" fxLayoutAlign="end center">
       <button mat-icon-button type="button" (click)="loadUsers()" matTooltip="Atualizar">
         <mat-icon>refresh</mat-icon>
       </button>
@@ -66,7 +66,7 @@
     </div>
   </div>
   <div>
-    <mat-paginator 
+    <mat-paginator *ngIf="isPersonal"
       [length]="users.length"
       [pageSize]="listQuery.limit" 
       [pageIndex]="listQuery.page -1"

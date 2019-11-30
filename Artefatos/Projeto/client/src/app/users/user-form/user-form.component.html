@@ -47,12 +47,12 @@
             <input matInput placeholder="Idade" formControlName="age"/>
             <mat-error *ngIf="hasError('age', 'required')">Informe a idade</mat-error>
         </mat-form-field>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-            <mat-checkbox color="primary" formControlName="is_personal">É personal</mat-checkbox>
+        <div  fxLayout="row" fxLayoutAlign="space-between">
+            <mat-checkbox color="primary" formControlName="is_personal" *ngIf="isNew">É personal</mat-checkbox>
         </div>
-        <mat-form-field fxFlex="30">
+        <mat-form-field fxFlex="30" >
             <mat-label>Sexo</mat-label>
-            <mat-select matInput formControlName="sexo">
+            <mat-select matInput formControlName="sexo" >
                 <mat-option [value]="'M'">Masculino</mat-option>
                 <mat-option [value]="'F'">Feminino</mat-option>
                 <mat-option [value]="'O'">Outro</mat-option>
