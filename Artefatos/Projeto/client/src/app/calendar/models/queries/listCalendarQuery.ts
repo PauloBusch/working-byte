@@ -6,10 +6,10 @@ export class ListCalendarQuery {
     public columnSort: string;
 
     constructor(
-        page: number,
-        limit: number,
-        sortAsc: boolean,
-        columnSort: string,
+        page: number = null,
+        limit: number = null,
+        sortAsc: boolean = null,
+        columnSort: string = null,
         search: string = null
     ) {
         this.page = page;

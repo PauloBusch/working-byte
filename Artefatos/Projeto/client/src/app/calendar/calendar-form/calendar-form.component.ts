@@ -106,6 +106,13 @@ export class CalendarFormComponent implements OnInit {
     });
   }
 
+  loadTrainings() {
+    const queryTraining = new ListCalendarQuery();
+    this.calendarService.getTraining(queryTraining).subscribe(result => {
+      this.training = result.List;
+    });
+  }
+
   close() {
     this.bottomSheet.dismiss();
   }
@@ -129,7 +136,7 @@ export class CalendarFormComponent implements OnInit {
     const command = new CreateCalendarCommand(
       this.refId,
       values.name,
-      values.training,
+      values.training.id,
       values.date,
       values.timeInitial,
       values.timeEnd
@@ -155,7 +162,7 @@ export class CalendarFormComponent implements OnInit {
     const command = new UpdateCalendarCommand(
       this.refId,
       values.name,
-      values.training,
+      values.training.id,
       values.date,
       values.timeInitial,
       values.timeEnd
@@ -180,7 +187,7 @@ export class CalendarFormComponent implements OnInit {
     const calendar = new CalendarList(
       this.refId,
       values.name,
-      values.training,
+      values.training.id,
       values.date,
       values.timeInitial,
       values.timeEnd
