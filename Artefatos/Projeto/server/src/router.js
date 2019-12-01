@@ -9,6 +9,7 @@ const { ControllerDiet }= require('./controllers/diet.controller');
 const { ControllerPayment } = require('./controllers/payment.controller');
 const { ControllerCalendar} = require('./controllers/calendar.controller');
 const { ControllerTraining} = require('./controllers/training.controller');
+const { ControllerExercise } = require('./controllers/exercise.controller')
 
 router.post('/login', ControllerAuth.login);
 router.get('/logout', ControllerAuth.logout);
@@ -53,6 +54,12 @@ router.put('/calendars/:id', Token.validate, ControllerCalendar.update);
 router.delete('/calendars/:id', Token.validate, ControllerCalendar.delete);
 
 router.get('/training', Token.validate, ControllerTraining.getAll);
+router.get('/training/:id', Token.validate, ControllerTraining.getById);
+router.post('/training', Token.validate, ControllerTraining.create);
+router.put('/training/:id', Token.validate, ControllerTraining.update);
+router.delete('/training/:id', Token.validate, ControllerTraining.delete);
+
+router.get('/training', Token.validate, ControllerExercise.getAll);
 router.get('/training/:id', Token.validate, ControllerTraining.getById);
 router.post('/training', Token.validate, ControllerTraining.create);
 router.put('/training/:id', Token.validate, ControllerTraining.update);
