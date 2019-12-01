@@ -30,7 +30,8 @@ export class CalendarListComponent implements OnInit {
   private listQuery: ListCalendarQuery;
   private calendars = new AsyncQuery<CalendarList>();
   private isPersonal: boolean;
-  animal: string;
+  private id_athlete: string;
+  objt: any;
   name: string;
 
   displayedColumns: string[];
@@ -58,6 +59,7 @@ export class CalendarListComponent implements OnInit {
       const columnSort = Storage.get('calendar.columnSort', 'calendar_created');
       this.listQuery = new ListCalendarQuery(page, limit, sortAsc, columnSort);
       this.isPersonal = appComponent.currentUser.is_personal;
+      this.id_athlete = appComponent.currentUser.id;
       this.mostrarOption();
    }
 
@@ -89,13 +91,14 @@ export class CalendarListComponent implements OnInit {
   }
 
   loadCalendars() {
+    if(!this.isPersonal){
+      this.listQuery.id_athlete = this.id_athlete;  
+    }
+    
     this.calendars.$list = this.calendarService.getCalendar(this.listQuery);
     this.calendars.subsc = this.calendars.$list.subscribe(result => {
     this.dataSource = new MatTableDataSource<CalendarList>(result.List);
     });
-    // this.calendars.$list = this.calendarService.getCalendar(this.listQuery);
-    // this.calendars.subsc = this.calendars.$list.subscribe();
-
   }
 
   pageChange(ev: PageEvent) {
@@ -129,29 +132,12 @@ export class CalendarListComponent implements OnInit {
     const dialogRef = this.dialog.open(CalendarTrainingComponent, {
       height: '400px',
       width: '600px',
-      data: {name: this.name, values: value}
+      data: {objt: this.objt, values: value}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
-      alert(this.animal);
+      this.objt = result;
     });
   }
 }
-
-// @Component({
-//   selector: 'dialog-overview-example-dialog',
-//   templateUrl: 'dialog-overview-example-dialog.html',
-// })
-// export class DialogOverviewExampleDialog {
-
-//   constructor(
-//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-
-// }

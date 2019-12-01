@@ -45,6 +45,8 @@ DietDb.belongsTo(DietTypeDb, { foreignKey: 'id_type_diet', as: 'type_diet' });
 
 TrainingDb.hasMany(CalendarDb, { foreignKey: 'id_training', as : 'training'});
 CalendarDb.belongsTo(TrainingDb, { foreignKey: 'id_training', as : 'training'});
+// UserDb.hasMany(TrainingDb, {foreignKey: 'id_athlete', as : 'id_athlete'});
+// TrainingDb.belongsTo(UserDb, {foreignKey: 'id_athlete', as : 'id_athlete'});
 
 
 const PaymentsDb = PaymentsModel(Connection, Sequelize);

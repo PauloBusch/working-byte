@@ -12,8 +12,20 @@ const TrainingModel = (sequelize, dataTypes) => {
             allowNull: false
         },
         description: {
+            type: dataTypes.STRING(100),
+            allowNull: true
+        },
+        id_personal: {
             type: dataTypes.STRING(10),
-            allowNull: false
+            allowNull: true
+        },
+        id_athlete: {
+            type: dataTypes.STRING(10),
+            allowNull: true
+        },
+        frequency: {
+            type: dataTypes.STRING(20),
+            allowNull: true
         },
         removed: {
             type: dataTypes.BOOLEAN,

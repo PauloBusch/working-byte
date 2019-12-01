@@ -1,5 +1,5 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { TrainingDb } = require('../../../mapping');
+const { TrainingDb} = require('../../../mapping');
 const { QueryResult } = require('../../../utils/content/dataResult');
 
 const Op = require('sequelize');
@@ -11,7 +11,8 @@ class ListTrainingQuery extends Query{
         limit,
         name,
         sortAsc,
-        columnSort
+        columnSort,
+        id_athlete
     ){
         super();
         this.search = search;
@@ -20,6 +21,7 @@ class ListTrainingQuery extends Query{
         this.name = name;
         this.sortAsc = sortAsc;
         this.columnSort = columnSort;
+        this.id_athlete = id_athlete;
     }
 
     async GetError(){
@@ -43,7 +45,17 @@ class ListTrainingQuery extends Query{
             limit: this.limit,
             offset: (this.page - 1) * this.limit,
             order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
+            // include: [{
+            //     attributes: ['name'],
+            //     as: 'atleta',
+            //     model: UserDb
+            // }]
         };
+
+        
+         if (this.id_athlete){
+             query.where = [{removed: false, id_athlete: this.id_athlete}]
+        }
 
         if (this.search){
             const searchLike = `%${this.search}%`;
@@ -52,6 +64,7 @@ class ListTrainingQuery extends Query{
                 { description: { [Op.like]: searchLike } }
             ];
         }
+
 
 
         const training = await TrainingDb.findAndCountAll(query);

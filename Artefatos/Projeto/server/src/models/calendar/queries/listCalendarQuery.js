@@ -11,7 +11,8 @@ class ListCalendarQuery extends Query{
         limit,
         name,
         sortAsc,
-        columnSort
+        columnSort,
+        id_athlete
     ){
         super();
         this.search = search;
@@ -20,6 +21,7 @@ class ListCalendarQuery extends Query{
         this.name = name;
         this.sortAsc = sortAsc;
         this.columnSort = columnSort;
+        this.id_athlete = id_athlete;
     }
 
     async GetError(){
@@ -57,6 +59,14 @@ class ListCalendarQuery extends Query{
             ];
         }
 
+        if(this.id_athlete){
+            query.include = [{
+                attributes: ['name'],
+                as: 'training',
+                where: { removed: false, id_athlete: this.id_athlete },
+                model: TrainingDb
+            }];
+        }
 
         const calendars = await CalendarDb.findAndCountAll(query);
         return new QueryResult(calendars.count, calendars.rows);
