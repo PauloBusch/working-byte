@@ -1,6 +1,6 @@
-<a mat-fab [routerLink]="['new']" color="primary">
+<a mat-fab *ngIf="isPersonal" [routerLink]="['new']" color="primary">
     <mat-icon>add</mat-icon>
-  </a>
+</a>
   
   <router-outlet></router-outlet>
 <p>Agenda!</p>
@@ -8,17 +8,23 @@
 
 <table mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Agenda </th>
-      <td mat-cell *matCellDef="let calendar">{{ calendar.name }}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Descrição </th>
-      <td mat-cell *matCellDef="let calendar">{{ calendar.training.name }}</td>
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef> Data </th>
+      <td mat-cell *matCellDef="let calendar">{{ calendar.date  | date: 'EEEE  dd/MM/yyyy'}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="option">
+
+    <ng-container matColumnDef="hrInicio">
+      <th mat-header-cell *matHeaderCellDef> Hr Inicio/Termino</th>
+      <td mat-cell *matCellDef="let calendar">{{ calendar.timeInitial }} a {{calendar.timeEnd}}</td>
+    </ng-container>
+      
+      <ng-container matColumnDef="training">
+          <th mat-header-cell *matHeaderCellDef> Treino </th>
+          <td mat-cell *matCellDef="let calendar"><button mat-raised-button (click)="openDialog(calendar.training.name)">{{ calendar.training.name }}</button></td>
+      </ng-container>
+
+    <ng-container matColumnDef="option"  *ngIf="isPersonal">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let calendar">
         <button class="button-icon" mat-icon-button [matMenuTriggerFor]="dietMenu"><mat-icon>more_vert</mat-icon></button>

@@ -38,7 +38,7 @@ class ListCalendarQuery extends Query{
 
     async Execute(){
         const query = {
-            attributes: ['id', 'name'], 
+            attributes: ['id', 'name', 'date', 'timeInitial', 'timeEnd'], 
             where: { removed: false },
             limit: this.limit,
             offset: (this.page - 1) * this.limit,

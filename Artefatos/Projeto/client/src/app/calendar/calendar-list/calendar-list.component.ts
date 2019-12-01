@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource, MatSnackBar, PageEvent } from '@angular/material';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { MatTableDataSource, MatSnackBar, PageEvent, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { CommonModule, DatePipe } from '@angular/common';
+import { from } from 'rxjs';
 
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
@@ -9,7 +11,14 @@ import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/c
 import { DataService } from 'src/app/shared/services/data.service';
 import { CalendarList} from '../models/view-models/calendar.list';
 import { RemoveCalendarCommand } from '../models/commands/removeCalendarCommand';
-import { from } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
+import { CalendarTrainingComponent } from '../calendar-training/calendar-training.component';
+import { TrainingComponent } from 'src/app/trainings/training-form/training.component';
+export interface DialogData {
+  values: string;
+  name: string;
+}
+
 
 @Component({
   selector: 'app-calendar-list',
@@ -20,20 +29,36 @@ export class CalendarListComponent implements OnInit {
   
   private listQuery: ListCalendarQuery;
   private calendars = new AsyncQuery<CalendarList>();
+  private isPersonal: boolean;
+  animal: string;
+  name: string;
 
-  displayedColumns: string[] = ['name', 'description', 'option'];
+  displayedColumns: string[];
   dataSource: MatTableDataSource<CalendarList>;
+
+  mostrarOption(){
+    if(this.isPersonal){
+      this.displayedColumns = [ 'data', 'hrInicio', 'training', 'option'];
+    }else{
+      this.displayedColumns = [ 'data', 'hrInicio', 'training'];
+    }
+  }
 
   constructor(
     private calendarService: CalendarService,
     private confirmDialogService: ConfirmDialogService,
     private snackBar: MatSnackBar,
-    private dataService: DataService<CalendarList>) {
+    private dataService: DataService<CalendarList>,
+    private appComponent: AppComponent,
+    public dialog: MatDialog
+    ) {
       const limit = Storage.get('calendar.limit', 10);
       const page = Storage.get('calendar.page', 1);
       const sortAsc = Storage.get('calendar.sortAsc', false);
       const columnSort = Storage.get('calendar.columnSort', 'calendar_created');
       this.listQuery = new ListCalendarQuery(page, limit, sortAsc, columnSort);
+      this.isPersonal = appComponent.currentUser.is_personal;
+      this.mostrarOption();
    }
 
   ngOnInit() {
@@ -99,4 +124,34 @@ export class CalendarListComponent implements OnInit {
       );
     });
   }
+
+  openDialog(value): void {
+    const dialogRef = this.dialog.open(CalendarTrainingComponent, {
+      height: '400px',
+      width: '600px',
+      data: {name: this.name, values: value}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+      alert(this.animal);
+    });
+  }
 }
+
+// @Component({
+//   selector: 'dialog-overview-example-dialog',
+//   templateUrl: 'dialog-overview-example-dialog.html',
+// })
+// export class DialogOverviewExampleDialog {
+
+//   constructor(
+//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+
+// }
