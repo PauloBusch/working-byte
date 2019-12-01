@@ -16,7 +16,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="100">            
-            <input type="text" placeholder="Treino" formControlName="training" aria-label="Treino" matInput [matAutocomplete]="auto">
+            <input type="text" placeholder="Treino"  formControlName="training" aria-label="Treino" matInput [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" (optionSelected)="form.controls.training.setValue($event.option.value)" [value]="option">
                 {{option.name}}

@@ -28,15 +28,8 @@ export class CalendarFormComponent implements OnInit {
   private isNew: boolean;
   private refId: string;
   private listQuery: ListCalendarQuery;
-  //private training: CalendarTrainingList[];
-  myControl = new FormControl();
 
   options: CalendarTrainingList[];
-  // options: CalendarTrainingList[] = [
-  //    {id:'1',name: 'Mary', description:''},
-  //    {id:'2',name: 'joana', description:''},
-  //    {id:'3',name: 'josué', description:''}
-  //  ];
   filteredOptions: Observable<CalendarTrainingList[]>;
 
   private form: FormGroup;
@@ -68,7 +61,7 @@ export class CalendarFormComponent implements OnInit {
   private _filter(name: string): CalendarTrainingList[] {
     const filterValue = name.toLowerCase();
 
-    return this.options.filter(option => option.id.toLowerCase().indexOf(filterValue) === 0);
+    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnInit(){
@@ -77,12 +70,11 @@ export class CalendarFormComponent implements OnInit {
     
   }
 
-  filter(){
-    this.filteredOptions = this.myControl.valueChanges
+  filterTraining(){
+    this.filteredOptions = this.form.controls.training.valueChanges
     .pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : value.name),
-      map(name => name ? this._filter(name) : this.options.slice())
+      map(value => this._filter(value))
     );
   }
 
@@ -112,7 +104,7 @@ export class CalendarFormComponent implements OnInit {
      const queryTraining = new ListCalendarTrainingQuery();
      this.calendarService.getTraining(queryTraining).subscribe(result => {
       this.options = result.List;
-      this.filter();
+      this.filterTraining();
      });
 
   }
