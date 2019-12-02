@@ -1,48 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIconModule } from '@angular/material';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatBottomSheet, MatSnackBar } from '@angular/material';
-import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
-
-import { GetCalendarQuery } from '../models/queries/getCalendarQuery';
-import { CalendarService } from 'src/app/shared/services/calendar.service';
-import { CalendarList } from '../models/view-models/calendar.list';
-import { DataService } from 'src/app/shared/services/data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Random } from 'src/app/shared/utils/random';
-import { CreateCalendarCommand } from '../models/commands/createCalendarCommand';
-import { UpdateCalendarCommand } from '../models/commands/updateCalendarCommand';
-import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
-import { ListCalendarTrainingQuery } from '../models/queries/listCalendarTrainingQuery';
+import { MatSnackBar, MatBottomSheet } from '@angular/material';
+import { TrainingService } from 'src/app/shared/services/training.service';
+import { DataService } from 'src/app/shared/services/data.service';
+import { TrainingList } from '../models/view-models/training.list';
+import { ListTrainingQuery } from '../models/queries/ListTrainingQuery';
+import { TrainingExerciseList } from '../models/view-models/trainingExercise.list';
 import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-//import { Training } from 'src/app/trainings/models/training.model';
-import { CalendarTrainingList } from '../models/view-models/calendarTraining.list';
- 
-@Component({
-  selector: 'app-calendar-form',
-  templateUrl: './calendar-form.component.html',
-  styleUrls: ['./calendar-form.component.scss']
-})
+import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
+import { UpdateTrainingCommand } from '../models/commands/updateTrainingCommand';
+import { CreateTrainingCommand } from '../models/commands/createTrainingCommand';
+import { ListTrainingExerciseQuery } from '../models/queries/ListTrainingExerciseQuery';
+import { GetTrainingQuery } from '../models/queries/GetTrainingQuery';
+import { startWith, map } from 'rxjs/operators';
 
-export class CalendarFormComponent implements OnInit {
+@Component({
+  selector: 'app-training-form',
+  templateUrl: './training-form.component.html',
+  styleUrls: ['./training-form.component.scss']
+})
+export class TrainingFormComponent implements OnInit {
   private isNew: boolean;
   private refId: string;
-  private listQuery: ListCalendarQuery;
+  private listQuery: ListTrainingQuery;
 
-  options: CalendarTrainingList[];
-  filteredOptions: Observable<CalendarTrainingList[]>;
+  options: TrainingExerciseList[];
+  filteredExercise: Observable<TrainingExerciseList[]>;
 
   private form: FormGroup;
-
   constructor(
     private fb: FormBuilder,
     private random: Random,
     private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet,
-    private calendarService: CalendarService,
-    private dataService: DataService<CalendarList>
-    
-  ) { 
+    private calendarService: TrainingService,
+    private dataService: DataService<TrainingList>
+
+  ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       training: ['', Validators.required],
@@ -51,30 +46,24 @@ export class CalendarFormComponent implements OnInit {
       timeEnd: ['', Validators.required]
       
     });
-    this.loadTrainings();
-  }
-
-  displayFn(user?: CalendarTrainingList): string | undefined {
-    return user ? user.name : undefined;
-  }
-
-  private _filter(name: string): CalendarTrainingList[] {
+    this.loadExercise();
+   }
+   private _filterExercise(name: string): TrainingExerciseList[] {
     const filterValue = name.toLowerCase();
 
     return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnInit(){
-    this.loadTrainings();
- 
-    
+    this.loadExercise();
+
   }
 
-  filterTraining(){
-    this.filteredOptions = this.form.controls.training.valueChanges
+  filterExerciseOption(){
+    this.filteredExercise = this.form.controls.training.valueChanges
     .pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map(value => this._filterExercise(value))
     );
   }
 
@@ -86,8 +75,8 @@ export class CalendarFormComponent implements OnInit {
       return;
     }
 
-    const query = new GetCalendarQuery(this.refId);
-    this.calendarService.getCalendarById(query).subscribe(result => {
+    const query = new GetTrainingQuery(this.refId);
+    this.calendarService.getTrainingById(query).subscribe(result => {
       if(result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
         this.snackBar.open('Agendas não encontrada', 'OK', { duration: 3000 });
         return;
@@ -96,15 +85,17 @@ export class CalendarFormComponent implements OnInit {
       const Calendar = result.List[0];
 
       this.form.patchValue(Calendar);
-      this.loadTrainings();
+      this.loadExercise();
     })
   }
 
-  loadTrainings() {
-     const queryTraining = new ListCalendarTrainingQuery();
-     this.calendarService.getTraining(queryTraining).subscribe(result => {
+  loadExercise() {
+
+     const queryTrainingExe = new ListTrainingExerciseQuery();
+     this.calendarService.getExercise(queryTrainingExe).subscribe(result => {
       this.options = result.List;
-      this.filterTraining();
+      
+      this.filterExerciseOption();
      });
 
   }
@@ -129,7 +120,7 @@ export class CalendarFormComponent implements OnInit {
 
   private create(values: any) {
     this.refId = this.random.NewId();
-    const command = new CreateCalendarCommand(
+    const command = new CreateTrainingCommand(
       this.refId,
       values.name,
       values.training.id,
@@ -155,7 +146,7 @@ export class CalendarFormComponent implements OnInit {
   }
 
   private update(values: any) {
-    const command = new UpdateCalendarCommand(
+    const command = new UpdateTrainingCommand(
       this.refId,
       values.name,
       values.training.id,
@@ -180,13 +171,10 @@ export class CalendarFormComponent implements OnInit {
   }
 
   private updateList(values: any) {
-    const calendar = new CalendarList(
+    const calendar = new TrainingList(
       this.refId,
       values.name,
-      values.training,
-      values.date,
-      values.timeInitial,
-      values.timeEnd
+      values.training
     );
     this.dataService.update(calendar);
 

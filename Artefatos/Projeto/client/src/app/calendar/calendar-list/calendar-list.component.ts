@@ -13,7 +13,7 @@ import { CalendarList} from '../models/view-models/calendar.list';
 import { RemoveCalendarCommand } from '../models/commands/removeCalendarCommand';
 import { AppComponent } from 'src/app/app.component';
 import { CalendarTrainingComponent } from '../calendar-training/calendar-training.component';
-import { TrainingComponent } from 'src/app/trainings/training-form/training.component';
+//import { TrainingComponent } from 'src/app/trainings/training-form/training.component';
 export interface DialogData {
   values: string;
   name: string;

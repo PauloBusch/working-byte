@@ -6,16 +6,19 @@ import { environment } from '../../../environments/environment';
 import { CommandResult } from 'src/app/shared/models/CommandRestult.model';
 import { QueryResult } from 'src/app/shared/models/QueryResult.model';
 
-import { RemoveTrainingCommand } from 'src/app/trainings/models/commands/removeTrainingCommand';
-import { ListTrainingQuery } from 'src/app/trainings/models/queries/listTrainingQuery';
 import { Content } from '../utils/content';
-import { TrainingList } from 'src/app/trainings/models/view-models/training.list';
-import { TrainingDetails } from 'src/app/trainings/models/view-models/training.details';
-import { CreateTrainingCommand } from 'src/app/trainings/models/commands/createTrainingCommand';
-import { UpdateTrainingCommand } from 'src/app/trainings/models/commands/updateTrainingCommand';
-import { GetTrainingQuery } from 'src/app/trainings/models/queries/getTrainingQuery';
-import { TrainingExerciseList } from 'src/app/trainings/models/view-models/trainingExercise.list';
-import { ListTrainingExerciseQuery } from 'src/app/trainings/models/queries/listTrainingExerciseQuery';
+import { CreateTrainingCommand } from 'src/app/training/models/commands/createTrainingCommand';
+import { UpdateTrainingCommand } from 'src/app/training/models/commands/updateTrainingCommand';
+import { RemoveTrainingCommand } from 'src/app/training/models/commands/removeTrainingCommand';
+import { ListTrainingQuery } from 'src/app/training/models/queries/ListTrainingQuery';
+import { TrainingList } from 'src/app/training/models/view-models/training.list';
+import { ListTrainingExerciseQuery } from 'src/app/training/models/queries/ListTrainingExerciseQuery';
+import { TrainingExerciseList } from 'src/app/training/models/view-models/trainingExercise.list';
+import { GetTrainingQuery } from 'src/app/training/models/queries/GetTrainingQuery';
+import { TrainingDetails } from 'src/app/training/models/view-models/training.details';
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -40,11 +43,11 @@ export class TrainingService {
   }
 
   getTraining(query: ListTrainingQuery): Observable<QueryResult<TrainingList>> {
-    return this.http.get<QueryResult<TrainingList>>(`${this.url}/trainings`, Content.GetParams(query));
+    return this.http.get<QueryResult<TrainingList>>(`${this.url}/calendars/trainings`, Content.GetParams(query));
   }
 
   getExercise(query: ListTrainingExerciseQuery): Observable<QueryResult<TrainingExerciseList>> {
-    return this.http.get<QueryResult<TrainingExerciseList>>(`${this.url}/trainings/exercises`, Content.GetParams(query));
+    return this.http.get<QueryResult<TrainingExerciseList>>(`${this.url}/trainings/exercise`, Content.GetParams(query));
   }
 
   getTrainingById(query: GetTrainingQuery): Observable<QueryResult<TrainingDetails>> {

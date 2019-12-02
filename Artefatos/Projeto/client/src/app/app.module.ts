@@ -29,6 +29,7 @@ import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm
 import { CustomPaginator } from './shared/utils/paginator';
 import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
 import { TrainingsModule } from './trainings/trainings.module';
+import { TrainingModule } from './training/training.module';
 import { DietModule } from './diets/diets.module';
 import { EquipmentFormComponent } from './equipments/equipment-form/equipment-form.component';
 import { EquipmentListComponent } from './equipments/equipment-list/equipment-list.component';
@@ -55,6 +56,7 @@ import { PaymentsModule } from './payments/payments.module';
     DietModule,
     CalendarModule,
     PaymentsModule,
+    TrainingModule,
 
     BrowserModule,
     AppRoutingModule,
