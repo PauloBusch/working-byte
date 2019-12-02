@@ -25,18 +25,24 @@
                 <mat-option value="Costas">Costas</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field fxFlex="30">
-            <input formControlName="rep" matInput type="number" placeholder="Repetições">
-        </mat-form-field>
+
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
+
+        <mat-form-field fxFlex="30">
+            <input formControlName="rep" matInput type="number" placeholder="Repetições">
+        </mat-form-field>
+
         <mat-form-field fxFlex="48">
             <input formControlName="weight" matInput type="number" placeholder="Carga">
         </mat-form-field>
     
         <mat-form-field fxFlex="48">
-            <input formControlName="id_equip" matInput type="text" placeholder="Aparelho">
+            <mat-label>Equipamento</mat-label>
+            <mat-select [(value)]='id_equipment'>
+                <mat-option>{{ equipment.name }}</mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
 

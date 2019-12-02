@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Training } from '../models/training.model';
 import { MatBottomSheet } from '@angular/material';
+import { EquipmentList } from 'src/app/equipments/models/view-models/equipment.list';
 
 @Component({
   selector: 'app-training',
@@ -9,10 +10,13 @@ import { MatBottomSheet } from '@angular/material';
   styleUrls: ['./training.component.scss']
 })
 export class TrainingComponent implements OnInit {
-  private isNew: boolean;
+  public  isNew: boolean;
 
-  private training: Training;
-  private form: FormGroup;
+  public training: Training;
+  public form: FormGroup;
+  public id_type: number = 10;
+  public id_equipment: number = 20;
+  public equipment = { id: 10, name: 'teste' };
 
 
   constructor(
