@@ -24,12 +24,12 @@ import * as _ from 'lodash';
   styleUrls: ['./equipment-form.component.scss']
 })
 export class EquipmentFormComponent implements OnInit {
-  private isNew: boolean;
-  private refId: string;
+  public isNew: boolean;
+  public refId: string;
 
-  private form: FormGroup;
-  private types: TypeList[] = [];
-  private filteredTypes: Observable<TypeList[]>;
+  public form: FormGroup;
+  public types: TypeList[] = [];
+  public filteredTypes: Observable<TypeList[]>;
 
   constructor(
     private fb: FormBuilder,

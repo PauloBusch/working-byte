@@ -12,7 +12,8 @@ class ListUserQuery extends Query {
         limit,
         page,        
         sortAsc,
-        columnSort
+        columnSort,
+        id
     ){
         super();
         this.search = search;
@@ -21,6 +22,7 @@ class ListUserQuery extends Query {
         this.page = page;
         this.sortAsc = sortAsc;
         this.columnSort = columnSort;
+        this.id = id;
     }
 
     async GetError(){
@@ -64,6 +66,10 @@ class ListUserQuery extends Query {
                 { email: { [Op.like]: searchLike } },
                 { login: { [Op.like]: searchLike } }
             ]
+        }
+
+        if (this.id){
+            query.where = [{removed: false, id: this.id}]
         }
 
         if (this.is_personal != null && this.is_personal != undefined)

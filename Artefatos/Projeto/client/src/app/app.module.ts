@@ -12,6 +12,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr)
 
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { TrainingComponent } from './trainings/training-form/training.component';
@@ -56,6 +59,7 @@ import { PaymentsModule } from './payments/payments.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    
 
     MatCardModule,
     FormsModule,

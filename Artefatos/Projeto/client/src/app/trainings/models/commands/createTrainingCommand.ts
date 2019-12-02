@@ -1,9 +1,9 @@
 import { Time } from '@angular/common';
 
-export class UpdateCalendarCommand{
+export class CreateTrainingCommand{
     public id: string;
     public name: string;
-    public training: string;
+    public exercise: string[];
     public date: Date;
     public timeInitial: Time;
     public timeEnd: Time;
@@ -12,14 +12,14 @@ export class UpdateCalendarCommand{
 
     id: string,
     name: string,
-    training: string,
+    exercise: string[],
     date: Date,
     timeInitial: Time,
     timeEnd: Time
     ){
         this.id = id;
         this.name = name;
-        this.training = training;
+        this.exercise = exercise;
         this.date = date;
         this.timeInitial = timeInitial;
         this.timeEnd = timeEnd;

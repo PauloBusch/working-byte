@@ -1,11 +1,11 @@
 const { Command } = require('../../../utils/interfaces/command');
 const { CommandResult, Error, EErrorCode } = require('../../../utils/content/dataResult');
 
-const { Calendar } = require('../calendar');
-const { CalendarDb } = require('../../../mapping');
+const { Exercise } = require('../exercise');
+const { ExerciseDb } = require('../../../mapping');
 const { Op } = require('sequelize');
 
-class UpdateCalendarCommand extends Command {
+class UpdateExerciseCommand extends Command {
     constructor(
         id,
         name,
@@ -27,9 +27,9 @@ class UpdateCalendarCommand extends Command {
         if (!this.training)
             return new Error(EErrorCode.InvalidParams, "Parameter code cannot be null");
 
-        const exists = await CalendarDb.count({ where: { id: this.id } });
+        const exists = await ExerciseDb.count({ where: { id: this.id } });
         if (!exists)
-            return new Error(EErrorCode.NotFount, `Calendar with id: ${this.id} does not exists`);
+            return new Error(EErrorCode.NotFount, `Exercise with id: ${this.id} does not exists`);
 
         return null;
     }   
@@ -40,18 +40,18 @@ class UpdateCalendarCommand extends Command {
 
     async Execute(){
         const query = { where: { id: this.id } };
-        const calendar = new Calendar(
+        const exercise = new Exercise(
             undefined,
             this.name,
             this.training
         );
 
-        const result = await CalendarDb.update(calendar, query);
+        const result = await ExerciseDb.update(exercise, query);
         return new CommandResult(result ? 1 : 0); 
     }
 }
 
 module.exports = {
-    UpdateCalendarCommand
+    UpdateExerciseCommand
 }
 

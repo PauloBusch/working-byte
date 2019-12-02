@@ -1,4 +1,4 @@
-export class ListCalendarTrainingQuery {
+export class ListTrainingExerciseQuery {
     public search: string;
     public limit: number;
     public page: number;
@@ -9,7 +9,7 @@ export class ListCalendarTrainingQuery {
         page: number = 1,
         limit: number = 1000,
         sortAsc: boolean = false,
-        columnSort: string = "training_created",
+        columnSort: string = "exercise_created",
         search: string = null
     ) {
         this.page = page;

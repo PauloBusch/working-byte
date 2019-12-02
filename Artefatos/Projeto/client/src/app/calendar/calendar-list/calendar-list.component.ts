@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource, MatSnackBar, PageEvent } from '@angular/material';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { MatTableDataSource, MatSnackBar, PageEvent, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { CommonModule, DatePipe } from '@angular/common';
+import { from } from 'rxjs';
 
 import { CalendarService } from 'src/app/shared/services/calendar.service';
 import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
@@ -9,7 +11,14 @@ import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/c
 import { DataService } from 'src/app/shared/services/data.service';
 import { CalendarList} from '../models/view-models/calendar.list';
 import { RemoveCalendarCommand } from '../models/commands/removeCalendarCommand';
-import { from } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
+import { CalendarTrainingComponent } from '../calendar-training/calendar-training.component';
+import { TrainingComponent } from 'src/app/trainings/training-form/training.component';
+export interface DialogData {
+  values: string;
+  name: string;
+}
+
 
 @Component({
   selector: 'app-calendar-list',
@@ -20,20 +29,38 @@ export class CalendarListComponent implements OnInit {
   
   private listQuery: ListCalendarQuery;
   private calendars = new AsyncQuery<CalendarList>();
+  private isPersonal: boolean;
+  private id_athlete: string;
+  objt: any;
+  name: string;
 
-  displayedColumns: string[] = ['name', 'description', 'option'];
+  displayedColumns: string[];
   dataSource: MatTableDataSource<CalendarList>;
+
+  mostrarOption(){
+    if(this.isPersonal){
+      this.displayedColumns = [ 'data', 'hrInicio', 'training', 'option'];
+    }else{
+      this.displayedColumns = [ 'data', 'hrInicio', 'training'];
+    }
+  }
 
   constructor(
     private calendarService: CalendarService,
     private confirmDialogService: ConfirmDialogService,
     private snackBar: MatSnackBar,
-    private dataService: DataService<CalendarList>) {
+    private dataService: DataService<CalendarList>,
+    private appComponent: AppComponent,
+    public dialog: MatDialog
+    ) {
       const limit = Storage.get('calendar.limit', 10);
       const page = Storage.get('calendar.page', 1);
       const sortAsc = Storage.get('calendar.sortAsc', false);
       const columnSort = Storage.get('calendar.columnSort', 'calendar_created');
       this.listQuery = new ListCalendarQuery(page, limit, sortAsc, columnSort);
+      this.isPersonal = appComponent.currentUser.is_personal;
+      this.id_athlete = appComponent.currentUser.id;
+      this.mostrarOption();
    }
 
   ngOnInit() {
@@ -64,13 +91,14 @@ export class CalendarListComponent implements OnInit {
   }
 
   loadCalendars() {
+    if(!this.isPersonal){
+      this.listQuery.id_athlete = this.id_athlete;  
+    }
+    
     this.calendars.$list = this.calendarService.getCalendar(this.listQuery);
     this.calendars.subsc = this.calendars.$list.subscribe(result => {
     this.dataSource = new MatTableDataSource<CalendarList>(result.List);
     });
-    // this.calendars.$list = this.calendarService.getCalendar(this.listQuery);
-    // this.calendars.subsc = this.calendars.$list.subscribe();
-
   }
 
   pageChange(ev: PageEvent) {
@@ -97,6 +125,19 @@ export class CalendarListComponent implements OnInit {
           this.snackBar.open('Falha ao remover o usuário!', 'OK', { duration: 3000 });
         }
       );
+    });
+  }
+
+  openDialog(value): void {
+    const dialogRef = this.dialog.open(CalendarTrainingComponent, {
+      height: '400px',
+      width: '600px',
+      data: {objt: this.objt, values: value}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.objt = result;
     });
   }
 }

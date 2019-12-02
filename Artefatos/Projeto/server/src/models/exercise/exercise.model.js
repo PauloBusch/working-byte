@@ -1,7 +1,7 @@
 const { NewId } = require('../../utils/database/random');
 
-const TrainingModel = (sequelize, dataTypes) => {
-    const Training = sequelize.define('training', {
+const ExerciseModel = (sequelize, dataTypes) => {
+    const Exercise = sequelize.define('exercise', {
         id: {
             type: dataTypes.STRING(8),
             defaultValue: NewId,
@@ -11,32 +11,32 @@ const TrainingModel = (sequelize, dataTypes) => {
             type: dataTypes.STRING(50),
             allowNull: false
         },
-        description: {
-            type: dataTypes.STRING(100),
+        repetition: {
+            type: dataTypes.INTEGER ,
             allowNull: true
         },
-        id_personal: {
-            type: dataTypes.STRING(10),
+        charge: {
+            type: dataTypes.INTEGER ,
             allowNull: true
         },
-        id_athlete: {
-            type: dataTypes.STRING(10),
+        sessions: {
+            type: dataTypes.INTEGER ,
             allowNull: true
         },
-        frequency: {
-            type: dataTypes.STRING(20),
-            allowNull: true
+        id_equipment: {
+            type: dataTypes.STRING(8),
+            allowNull: false
         },
         removed: {
             type: dataTypes.BOOLEAN,
             defaultValue: false,
             allowNull: false
         },
-        training_created: dataTypes.DATE,
-        training_updated: dataTypes.DATE
+        exercise_created: dataTypes.DATE,
+        exercise_updated: dataTypes.DATE
     },{
-        createdAt: 'training_created',
-        updatedAt: 'training_updated',
+        createdAt: 'exercise_created',
+        updatedAt: 'exercise_updated',
         indexes: [{
             name: 'UQ_code',
             unique: true,
@@ -44,9 +44,9 @@ const TrainingModel = (sequelize, dataTypes) => {
         }]
     });
 
-    return Training;
+    return Exercise;
 }
 
 module.exports = {
-    TrainingModel
+    ExerciseModel
 }

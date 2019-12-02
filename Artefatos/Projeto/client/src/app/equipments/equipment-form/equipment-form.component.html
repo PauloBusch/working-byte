@@ -18,12 +18,12 @@
             <mat-error *ngIf="hasError('code', 'required')">Informe o código</mat-error>
         </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <!--<div fxLayout="row">
         <mat-form-field fxFlex="100" formGroupName="type">
             <input matInput placeholder="Tipo" formControlName="name" [matAutocomplete]="typeAutoComplete" required>
             <mat-autocomplete #typeAutoComplete="matAutocomplete" (optionSelected)="form.controls.type.setValue($event.option.value)"  [displayWith]="displayType">
                 <mat-option *ngFor="let type of filteredTypes | async" [value]="type">{{ type.name }}</mat-option>
             </mat-autocomplete> 
         </mat-form-field>
-    </div>
+    </div>-->
 </form>

@@ -23,7 +23,7 @@
 
             <a mat-list-item [routerLink]="['/menu/users']" [routerLinkActive]="['is-active']">
                 <mat-icon>account_circle</mat-icon>&nbsp;&nbsp;
-                <div>Usuários</div>
+                <div>{{ isPersonal ? "Usuários" : "Usuário" }}</div>
             </a>
             <a mat-list-item [routerLink]="['/menu/equipments']" [routerLinkActive]="['is-active']">
                 <mat-icon>fitness_center</mat-icon>&nbsp;&nbsp;

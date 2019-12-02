@@ -1,10 +1,10 @@
 const { Query } = require('../../../utils/interfaces/query');
-const { TrainingDb} = require('../../../mapping');
+const { ExerciseDb, EquipmentDb } = require('../../../mapping');
 const { QueryResult } = require('../../../utils/content/dataResult');
 
 const Op = require('sequelize');
 
-class ListTrainingQuery extends Query{
+class ListExerciseQuery extends Query{
     constructor(
         search,
         page,
@@ -12,7 +12,7 @@ class ListTrainingQuery extends Query{
         name,
         sortAsc,
         columnSort,
-        id_athlete
+        id_equipment
     ){
         super();
         this.search = search;
@@ -21,7 +21,7 @@ class ListTrainingQuery extends Query{
         this.name = name;
         this.sortAsc = sortAsc;
         this.columnSort = columnSort;
-        this.id_athlete = id_athlete;
+        this.id_equipment = id_equipment;
     }
 
     async GetError(){
@@ -40,38 +40,30 @@ class ListTrainingQuery extends Query{
 
     async Execute(){
         const query = {
-            attributes: ['id', 'name', 'description'], 
+            attributes: ['id', 'name', 'repetition', 'charge', 'sessions'], 
             where: { removed: false },
             limit: this.limit,
             offset: (this.page - 1) * this.limit,
-            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']]
-            // include: [{
-            //     attributes: ['name'],
-            //     as: 'atleta',
-            //     model: UserDb
-            // }]
+            order: [[this.columnSort, this.sortAsc ? 'asc' : 'desc']],
+            include: [{
+                attributes: ['name'],
+                as: 'equipment',
+                model: EquipmentDb
+            }]
         };
-
-        
-         if (this.id_athlete){
-             query.where = [{removed: false, id_athlete: this.id_athlete}]
-        }
 
         if (this.search){
             const searchLike = `%${this.search}%`;
             query.where[Op.or] = [
-                { name: { [Op.like]: searchLike } },
-                { description: { [Op.like]: searchLike } }
+                { name: { [Op.like]: searchLike } }
             ];
         }
 
-
-
-        const training = await TrainingDb.findAndCountAll(query);
-        return new QueryResult(training.count, training.rows);
+        const exercises = await ExerciseDb.findAndCountAll(query);
+        return new QueryResult(exercises.count, exercises.rows);
     }
 }
 
 module.exports = {
-    ListTrainingQuery
+    ListExerciseQuery
 }

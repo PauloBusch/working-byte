@@ -7,6 +7,7 @@ const { CalendarModel } = require('./models/calendar/calendar.model');
 const { TypeModel } = require('./models/equipment/types/type.model');
 const { DietTypeModel } = require('./models/diets/types/dietType.model')
 const { TrainingModel } = require('./models/training/training.model');
+const { ExerciseModel } = require('./models/exercise/exercise.model');
 
 const { DbConfig, DbManager } = require('./../config');
 const { PaymentsModel } = require('./models/payments/payments.model');
@@ -27,6 +28,7 @@ const EquipmentDb = EquipmentModel(Connection, Sequelize);
 const DietDb = DietsModel(Connection, Sequelize);
 const CalendarDb = CalendarModel(Connection, Sequelize);
 const TrainingDb = TrainingModel(Connection, Sequelize);
+const ExerciseDb = ExerciseModel(Connection, Sequelize);
 
 const UserDb = UserModel(Connection, Sequelize);
 const EvaluationDb = EvaluationModel(Connection, Sequelize);
@@ -45,6 +47,12 @@ DietDb.belongsTo(DietTypeDb, { foreignKey: 'id_type_diet', as: 'type_diet' });
 
 TrainingDb.hasMany(CalendarDb, { foreignKey: 'id_training', as : 'training'});
 CalendarDb.belongsTo(TrainingDb, { foreignKey: 'id_training', as : 'training'});
+UserDb.hasMany(TrainingDb, {foreignKey: 'id_athlete', as : 'athlete'});
+TrainingDb.belongsTo(UserDb, {foreignKey: 'id_athlete', as : 'athlete'}); 
+ExerciseDb.hasMany(TrainingDb, {foreignKey: 'id_exercise', as : 'exercise'});
+TrainingDb.belongsTo(TrainingDb, {foreignKey: 'id_exercise', as : 'exercise'});
+EquipmentDb.hasMany(ExerciseDb, {foreignKey: 'id_equipment', as : 'equipment'});
+ExerciseDb.belongsTo(EquipmentDb, {foreignKey: 'id_equipment', as : 'equipment'});
 
 
 const PaymentsDb = PaymentsModel(Connection, Sequelize);
