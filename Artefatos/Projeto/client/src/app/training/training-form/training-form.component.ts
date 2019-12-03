@@ -1,76 +1,69 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Training } from '../models/training.model';
-import { MatBottomSheet, MatSnackBar } from '@angular/material';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Random } from 'src/app/shared/utils/random';
+import { MatSnackBar, MatBottomSheet } from '@angular/material';
+import { TrainingService } from 'src/app/shared/services/training.service';
+import { DataService } from 'src/app/shared/services/data.service';
 import { TrainingList } from '../models/view-models/training.list';
+import { ListTrainingQuery } from '../models/queries/ListTrainingQuery';
+import { TrainingExerciseList } from '../models/view-models/trainingExercise.list';
+import { Observable } from 'rxjs';
 import { EErrorCode } from 'src/app/shared/models/EErrorCode.model';
 import { UpdateTrainingCommand } from '../models/commands/updateTrainingCommand';
 import { CreateTrainingCommand } from '../models/commands/createTrainingCommand';
-import { ListTrainingExerciseQuery } from '../models/queries/listTrainingExerciseQuery';
-import { GetTrainingQuery } from '../models/queries/getTrainingQuery';
+import { ListTrainingExerciseQuery } from '../models/queries/ListTrainingExerciseQuery';
+import { GetTrainingQuery } from '../models/queries/GetTrainingQuery';
 import { startWith, map } from 'rxjs/operators';
-import { TrainingExerciseList } from '../models/view-models/trainingExercise.list';
-import { DataService } from 'src/app/shared/services/data.service';
-import { TrainingService } from 'src/app/shared/services/training.service';
-import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-training',
-  templateUrl: './training.component.html',
-  styleUrls: ['./training.component.scss']
+  selector: 'app-training-form',
+  templateUrl: './training-form.component.html',
+  styleUrls: ['./training-form.component.scss']
 })
-export class TrainingComponent implements OnInit {
-  public isNew: boolean;
-  public refId: string;
-  public listQuery: ListTrainingExerciseQuery;
+export class TrainingFormComponent implements OnInit {
+  private isNew: boolean;
+  private refId: string;
+  private listQuery: ListTrainingQuery;
 
   options: TrainingExerciseList[];
-  filteredOptions: Observable<TrainingExerciseList[]>;
+  filteredExercise: Observable<TrainingExerciseList[]>;
 
-  public form: FormGroup;
-
+  private form: FormGroup;
   constructor(
     private fb: FormBuilder,
     private random: Random,
     private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet,
-    private trainingService: TrainingService,
+    private calendarService: TrainingService,
     private dataService: DataService<TrainingList>
-    
-  ) { 
+
+  ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      exercise: ['', Validators.required],
+      training: ['', Validators.required],
       date:  ['', Validators.required],
       timeInitial: ['', Validators.required],
       timeEnd: ['', Validators.required]
       
     });
     this.loadExercise();
-  }
-
-  displayFn(user?: TrainingExerciseList): string | undefined {
-    return user ? user.name : undefined;
-  }
-
-  private _filter(name: string): TrainingExerciseList[] {
+   }
+   private _filterExercise(name: string): TrainingExerciseList[] {
     const filterValue = name.toLowerCase();
 
     return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnInit(){
- 
- 
-    
+    this.loadExercise();
+
   }
 
-  filterTraining(){
-    this.filteredOptions = this.form.controls.training.valueChanges
+  filterExerciseOption(){
+    this.filteredExercise = this.form.controls.training.valueChanges
     .pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map(value => this._filterExercise(value))
     );
   }
 
@@ -83,24 +76,26 @@ export class TrainingComponent implements OnInit {
     }
 
     const query = new GetTrainingQuery(this.refId);
-    this.trainingService.getTrainingById(query).subscribe(result => {
+    this.calendarService.getTrainingById(query).subscribe(result => {
       if(result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
         this.snackBar.open('Agendas não encontrada', 'OK', { duration: 3000 });
         return;
       }
 
-      const Training = result.List[0];
+      const Calendar = result.List[0];
 
-      this.form.patchValue(Training);
+      this.form.patchValue(Calendar);
       this.loadExercise();
     })
   }
 
   loadExercise() {
-     const queryExercise = new ListTrainingExerciseQuery();
-     this.trainingService.getExercise(queryExercise).subscribe(result => {
+
+     const queryTrainingExe = new ListTrainingExerciseQuery();
+     this.calendarService.getExercise(queryTrainingExe).subscribe(result => {
       this.options = result.List;
-      this.filterTraining();
+      
+      this.filterExerciseOption();
      });
 
   }
@@ -134,7 +129,7 @@ export class TrainingComponent implements OnInit {
       values.timeEnd
     );
 
-    this.trainingService.create(command).subscribe(result => {
+    this.calendarService.create(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
         this.snackBar.open('Agenda Salva com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
@@ -159,7 +154,7 @@ export class TrainingComponent implements OnInit {
       values.timeInitial,
       values.timeEnd
     );
-    this.trainingService.update(command).subscribe(result => {
+    this.calendarService.update(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
         this.snackBar.open('Agenda editada com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
@@ -176,15 +171,12 @@ export class TrainingComponent implements OnInit {
   }
 
   private updateList(values: any) {
-    const training = new TrainingList(
+    const calendar = new TrainingList(
       this.refId,
       values.name,
-      values.training,
-      values.date,
-      values.timeInitial,
-      values.timeEnd
+      values.training
     );
-    this.dataService.update(training);
+    this.dataService.update(calendar);
 
   }
 

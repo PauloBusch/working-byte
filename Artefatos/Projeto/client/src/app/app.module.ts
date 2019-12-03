@@ -17,7 +17,7 @@ import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr)
 
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { TrainingComponent } from './trainings/training-form/training.component';
+//import { TrainingComponent } from './trainings/training-form/training.component';
 import { MenuComponent } from './shared/components/menu/menu.component';
 import { LoginModule } from './login/login.module';
 import { UsersModule } from './users/users.module';
@@ -28,7 +28,8 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
 import { ConfirmDialogService } from './shared/components/confirm-dialog/confirm-dialog.service';
 import { CustomPaginator } from './shared/utils/paginator';
 import { BottomSheetComponent } from './shared/components/bottom-sheet/bottom-sheet.component';
-import { TrainingsModule } from './trainings/trainings.module';
+//import { TrainingsModule } from './trainings/trainings.module';
+import { TrainingModule } from './training/training.module';
 import { DietModule } from './diets/diets.module';
 import { EquipmentFormComponent } from './equipments/equipment-form/equipment-form.component';
 import { EquipmentListComponent } from './equipments/equipment-list/equipment-list.component';
@@ -49,12 +50,13 @@ import { PaymentsModule } from './payments/payments.module';
   imports: [
     LoginModule,
     UsersModule,
-    TrainingsModule,
+    //TrainingsModule,
     EquipmentsModule,
     LogoModule,
     DietModule,
     CalendarModule,
     PaymentsModule,
+    TrainingModule,
 
     BrowserModule,
     AppRoutingModule,

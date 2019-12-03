@@ -15,7 +15,7 @@ import { ListCalendarQuery } from '../models/queries/listCalendarQuery';
 import { ListCalendarTrainingQuery } from '../models/queries/listCalendarTrainingQuery';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { Training } from 'src/app/trainings/models/training.model';
+//import { Training } from 'src/app/trainings/models/training.model';
 import { CalendarTrainingList } from '../models/view-models/calendarTraining.list';
  
 @Component({
