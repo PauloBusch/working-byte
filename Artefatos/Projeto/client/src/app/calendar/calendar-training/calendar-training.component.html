@@ -1,6 +1,10 @@
 <h1 mat-dialog-title>Bem vindo!!!</h1>
 <div mat-dialog-content >
-  <p>Treino:  {{ data.values }}</p>
+  <table>
+    <tr>Treino:  {{ data.values.name }}</tr>
+    <tr></tr>
+    <tr>Description:  {{ data.values.description }}</tr>
+  </table>
   <!-- <mat-form-field>
     <input matInput [(ngModel)]="data.values" >
   </mat-form-field> -->

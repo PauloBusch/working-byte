@@ -19,6 +19,8 @@ export class TrainingListComponent implements OnInit {
   private listQuery: ListTrainingQuery;
   private training = new AsyncQuery<TrainingList>();
   options: TrainingList[];
+  displayedColumns: string[] = [ 'id', 'name', 'description'];
+  dataSource: MatTableDataSource<TrainingList>;
 
   constructor(
     private trainingService: TrainingService
@@ -34,9 +36,16 @@ export class TrainingListComponent implements OnInit {
   }
 
   loadTraining(){
-    this.trainingService.getTraining(this.listQuery).subscribe(result => {
-      this.options = result.List;
+    // this.trainingService.getTraining(this.listQuery).subscribe(result => {
+    //   //this.options = result.List;
+    //   this.dataSource = new MatTableDataSource<TrainingList>(result.List);
 
+
+    // });
+
+    this.training.$list = this.trainingService.getTraining(this.listQuery);
+    this.training.subsc = this.training.$list.subscribe(result => {
+    this.dataSource = new MatTableDataSource<TrainingList>(result.List);
     });
   }
 }

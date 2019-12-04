@@ -21,7 +21,7 @@
       
       <ng-container matColumnDef="training">
           <th mat-header-cell *matHeaderCellDef> Treino </th>
-          <td mat-cell *matCellDef="let calendar"><button mat-raised-button (click)="openDialog(calendar.training.name)">{{ calendar.training.name }}</button></td>
+          <td mat-cell *matCellDef="let calendar"><button mat-raised-button (click)="openDialog(calendar.training)">{{ calendar.training.name }}</button></td>
       </ng-container>
 
     <ng-container matColumnDef="option"  *ngIf="isPersonal">

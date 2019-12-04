@@ -38,7 +38,8 @@ import { AppRoutingModule } from '../app-routing.module';
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ]
 })
 export class TrainingModule { }
