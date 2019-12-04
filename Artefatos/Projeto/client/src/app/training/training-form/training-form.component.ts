@@ -40,10 +40,8 @@ export class TrainingFormComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      training: ['', Validators.required],
-      date:  ['', Validators.required],
-      timeInitial: ['', Validators.required],
-      timeEnd: ['', Validators.required]
+      description: ['', Validators.required],
+
       
     });
     this.loadExercise();
@@ -91,12 +89,12 @@ export class TrainingFormComponent implements OnInit {
 
   loadExercise() {
 
-     const queryTrainingExe = new ListTrainingExerciseQuery();
-     this.calendarService.getExercise(queryTrainingExe).subscribe(result => {
-      this.options = result.List;
+    //  const queryTrainingExe = new ListTrainingExerciseQuery();
+    //  this.calendarService.getExercise(queryTrainingExe).subscribe(result => {
+    //   this.options = result.List;
       
-      this.filterExerciseOption();
-     });
+    //   this.filterExerciseOption();
+    //  });
 
   }
 
@@ -105,6 +103,7 @@ export class TrainingFormComponent implements OnInit {
   }
 
   save() {
+
     if (this.form.invalid) {
       this.snackBar.open('Preencha os campos obrigatórios', 'OK', { duration: 3000 });
       return;
@@ -123,10 +122,7 @@ export class TrainingFormComponent implements OnInit {
     const command = new CreateTrainingCommand(
       this.refId,
       values.name,
-      values.training.id,
-      values.date,
-      values.timeInitial,
-      values.timeEnd
+      values.description
     );
 
     this.calendarService.create(command).subscribe(result => {

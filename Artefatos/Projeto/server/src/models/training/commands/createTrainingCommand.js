@@ -9,18 +9,12 @@ class CreateTrainingCommand extends Command {
     constructor(
         id,
         name,
-        description,
-        date,
-        timeInitial,
-        timeEnd
+        description
     ){
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.date = date;
-        this.timeInitial = timeInitial;
-        this.timeEnd = timeEnd;
+        this.description = description
     }
 
     async GetError(){
@@ -33,14 +27,6 @@ class CreateTrainingCommand extends Command {
         if (!this.description)
             return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
         
-            if (!this.date)
-            return new Error(EErrorCode.InvalidParams, "Paramter id cannot be null");
-            
-        if (!this.timeInitial)
-            return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
-            
-        if (!this.timeEnd)
-            return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
 
         return null;
     }

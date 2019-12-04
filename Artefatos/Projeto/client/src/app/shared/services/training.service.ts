@@ -31,7 +31,7 @@ export class TrainingService {
   ) { }
 
   create(command: CreateTrainingCommand): Observable<CommandResult> {
-    return this.http.post<CommandResult>(`${this.url}/trainings`, command);
+    return this.http.post<CommandResult>(`${this.url}/training`, command);
   }
 
   update(command: UpdateTrainingCommand): Observable<CommandResult> {

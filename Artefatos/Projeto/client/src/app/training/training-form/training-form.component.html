@@ -11,10 +11,17 @@
     <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="100">
             <input matInput placeholder="Nome" formControlName="name" maxlength="50">
-            <!-- <mat-error *ngIf="hasError('name', 'required')">Informe o nome</mat-error> -->
+            <mat-error *ngIf="hasError('name', 'required')">Informe o nome</mat-error>
         </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
+            <mat-form-field fxFlex="100">
+                <input matInput placeholder="Descrição" formControlName="description" maxlength="50">
+                <mat-error *ngIf="hasError('description', 'required')">Informe o nome</mat-error>
+            </mat-form-field>
+    </div>
+
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="100">            
             <input type="text" placeholder="Exercicio"  formControlName="training" aria-label="Treino" matInput [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
@@ -23,6 +30,6 @@
               </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-    </div>
+    </div> -->
 
 </form>
