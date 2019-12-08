@@ -1,0 +1,71 @@
+<div fxLayout="row" class="header">
+    <button mat-icon-button type="button" (click)="close()">
+        <mat-icon>clear</mat-icon>
+    </button>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} de exercicios</h2>
+    <button mat-icon-button  type="submit" form="form" (click)="save()">
+        <mat-icon>done</mat-icon>
+    </button>
+</div>
+<form [formGroup]="form">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Nome" formControlName="name" maxlength="50">
+            <mat-error *ngIf="hasError('name', 'required')">Informe o nome</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+            <mat-form-field fxFlex="100">
+                <input matInput placeholder="Descrição" formControlName="description" maxlength="50">
+                <mat-error *ngIf="hasError('description', 'required')">Informe o nome</mat-error>
+            </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Equipamento" formControlName="equipment" maxlength="50">
+            <mat-error *ngIf="hasError('equipment', 'required')">Informe o equipamento</mat-error>
+        </mat-form-field>
+    </div>
+
+</form>
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <mat-slider fxFlex="60"
+        thumbLabel
+        tickInterval="1"
+        ster="4"
+        min="1"
+        max="100"
+        [(ngModel)]="valueRep"
+        >
+    </mat-slider>
+    <mat-form-field fxFlex="30">
+            <input matInput type="number" placeholder="Repetições" [(ngModel)]="valueRep">
+    </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <mat-slider fxFlex="60"
+    thumbLabel
+    tickInterval="1"
+    ster="4"
+    min="1"
+    max="100"
+    [(ngModel)]="charge"
+    ></mat-slider>
+    <mat-form-field fxFlex="30">
+        <input matInput type="number" placeholder="Carga" [(ngModel)]="charge">
+    </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-slider fxFlex="60"
+        thumbLabel
+        tickInterval="1"
+        ster="4"
+        min="1"
+        max="30"
+        [(ngModel)]="session"
+        ></mat-slider>
+        <mat-form-field fxFlex="30">
+            <input matInput type="number" placeholder="Sessoes" [(ngModel)]="session">
+        </mat-form-field>
+    </div>

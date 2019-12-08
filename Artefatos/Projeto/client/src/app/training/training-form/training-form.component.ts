@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Random } from 'src/app/shared/utils/random';
-import { MatSnackBar, MatBottomSheet } from '@angular/material';
+import { MatSnackBar, MatBottomSheet, MatDialog } from '@angular/material';
 import { TrainingService } from 'src/app/shared/services/training.service';
 import { DataService } from 'src/app/shared/services/data.service';
 import { TrainingList } from '../models/view-models/training.list';
@@ -14,6 +14,11 @@ import { CreateTrainingCommand } from '../models/commands/createTrainingCommand'
 import { ListTrainingExerciseQuery } from '../models/queries/ListTrainingExerciseQuery';
 import { GetTrainingQuery } from '../models/queries/GetTrainingQuery';
 import { startWith, map } from 'rxjs/operators';
+import { ExerciseFormComponent } from '../exercise-form/exercise-form.component';
+export interface DialogData {
+  values: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-training-form',
@@ -22,14 +27,17 @@ import { startWith, map } from 'rxjs/operators';
 })
 export class TrainingFormComponent implements OnInit {
   private isNew: boolean;
-  private refId: string;
+  private refId : string;
   private listQuery: ListTrainingQuery;
 
   options: TrainingExerciseList[];
   filteredExercise: Observable<TrainingExerciseList[]>;
 
   private form: FormGroup;
+  objt: any;
+  datas: any = "Teste"
   constructor(
+    public dialog: MatDialog,
     private fb: FormBuilder,
     private random: Random,
     private snackBar: MatSnackBar,
@@ -38,9 +46,11 @@ export class TrainingFormComponent implements OnInit {
     private dataService: DataService<TrainingList>
 
   ) {
+
+  
     this.form = this.fb.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.required]
 
       
     });
@@ -66,6 +76,7 @@ export class TrainingFormComponent implements OnInit {
   }
 
   loadData(params: { id:string }) {
+
     this.refId = params.id;
   
     if(!this.refId){
@@ -179,4 +190,18 @@ export class TrainingFormComponent implements OnInit {
   hasError(field: string, error: string): boolean {
     return this.form.get(field).hasError(error);
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ExerciseFormComponent, {
+      height: '500px',
+      width: '600px',
+      data:  this.datas
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.objt = result;
+    });
+  }
+
 }

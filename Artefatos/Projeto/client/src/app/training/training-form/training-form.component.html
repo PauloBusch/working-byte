@@ -2,7 +2,7 @@
     <button mat-icon-button type="button" (click)="close()">
         <mat-icon>clear</mat-icon>
     </button>
-    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} da agenda</h2>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} de treino</h2>
     <button mat-icon-button  type="submit" form="form" (click)="save()">
         <mat-icon>done</mat-icon>
     </button>
@@ -20,7 +20,10 @@
                 <mat-error *ngIf="hasError('description', 'required')">Informe o nome</mat-error>
             </mat-form-field>
     </div>
-
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-label>Exercicios :</mat-label>
+        <button mat-icon-button (click)="openDialog()"><mat-icon>add</mat-icon></button>
+    </div>
     <!-- <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="100">            
             <input type="text" placeholder="Exercicio"  formControlName="training" aria-label="Treino" matInput [matAutocomplete]="auto">
@@ -33,3 +36,6 @@
     </div> -->
 
 </form>
+<div class="listExercise" fxLayout="row" fxLayoutAlign="space-between">
+    Teste
+</div>

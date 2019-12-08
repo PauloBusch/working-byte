@@ -5,7 +5,7 @@ import { MatBottomSheetModule, MatProgressSpinnerModule,
     MatIconModule, MatListModule, MatPaginatorModule, 
     MatSelectModule, MatSidenavModule, MatButtonModule,
      MatSnackBarModule, MatCardModule, MatInputModule,
-     MatAutocompleteModule, MatFormFieldModule } from '@angular/material';
+     MatAutocompleteModule, MatFormFieldModule, MatTabsModule } from '@angular/material';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,7 +48,8 @@ import { DataService } from '../shared/services/data.service';
 
         MatCardModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatTabsModule
     ],
     providers: [
         DietService,
