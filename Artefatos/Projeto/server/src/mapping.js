@@ -49,10 +49,10 @@ TrainingDb.hasMany(CalendarDb, { foreignKey: 'id_training', as : 'training'});
 CalendarDb.belongsTo(TrainingDb, { foreignKey: 'id_training', as : 'training'});
 UserDb.hasMany(TrainingDb, {foreignKey: 'id_athlete', as : 'athlete'});
 TrainingDb.belongsTo(UserDb, {foreignKey: 'id_athlete', as : 'athlete'}); 
-ExerciseDb.hasMany(TrainingDb, {foreignKey: 'id_exercise', as : 'exercise'});
-TrainingDb.belongsTo(TrainingDb, {foreignKey: 'id_exercise', as : 'exercise'});
-EquipmentDb.hasMany(ExerciseDb, {foreignKey: 'id_equipment', as : 'equipment'});
-ExerciseDb.belongsTo(EquipmentDb, {foreignKey: 'id_equipment', as : 'equipment'});
+// ExerciseDb.hasMany(TrainingDb, {foreignKey: 'id_exercise', as : 'exercise'});
+// TrainingDb.belongsTo(TrainingDb, {foreignKey: 'id_exercise', as : 'exercise'});
+// EquipmentDb.hasMany(ExerciseDb, {foreignKey: 'id_equipment', as : 'equipment'});
+// ExerciseDb.belongsTo(EquipmentDb, {foreignKey: 'id_equipment', as : 'equipment'});
 
 
 const PaymentsDb = PaymentsModel(Connection, Sequelize);
@@ -70,5 +70,6 @@ module.exports = {
   EquipmentDb,
   EvaluationDb, 
   TrainingDb,
+  ExerciseDb,
   Connection
 };

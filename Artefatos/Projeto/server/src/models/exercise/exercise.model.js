@@ -9,7 +9,19 @@ const ExerciseModel = (sequelize, dataTypes) => {
         },
         name: {
             type: dataTypes.STRING(50),
-            allowNull: false
+            allowNull: true
+        },
+        description: {
+            type: dataTypes.STRING(150),
+            allowNull: true
+        },
+        id_training: {
+            type: dataTypes.STRING(8),
+            allowNull: true
+        },
+        id_equipment: {
+            type: dataTypes.STRING(8),
+            allowNull: true
         },
         repetition: {
             type: dataTypes.INTEGER ,
@@ -23,10 +35,7 @@ const ExerciseModel = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER ,
             allowNull: true
         },
-        id_equipment: {
-            type: dataTypes.STRING(8),
-            allowNull: false
-        },
+
         removed: {
             type: dataTypes.BOOLEAN,
             defaultValue: false,

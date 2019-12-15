@@ -59,6 +59,9 @@ router.post('/training', Token.validate, ControllerTraining.create);
 router.put('/training/:id', Token.validate, ControllerTraining.update);
 router.delete('/training/:id', Token.validate, ControllerTraining.delete);
 
+router.post('/exercise', Token.validate,ControllerExercise.create);
+router.get('/exercise/:id', Token.validate, ControllerExercise.getByIdTraining);
+
 module.exports = {
     Router: router
 }

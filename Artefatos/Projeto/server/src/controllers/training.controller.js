@@ -4,6 +4,7 @@ const { ListTrainingQuery } = require('../models/training/queries/listTrainingQu
 
 const { CommandHandle } = require('../utils/handle/commandHandle');
 const { CreateTrainingCommand } = require('../models/training/commands/createTrainingCommand');
+const { CreateExerciseCommand } = require('../models/exercise/commands/createExerciseCommand');
 const { UpdateTrainingCommand } = require('../models/training/commands/updateTrainingCommand');
 const { RemoveTrainingCommand } = require('../models/training/commands/removeTrainingCommand.js');
 
@@ -29,6 +30,7 @@ controllerTraining.create = async (req, res) => {
     const result = await CommandHandle.Execute(command);
     res.json(result);
 }
+
 
 controllerTraining.update = async (req, res) => {
     const command = Obj.getData(new UpdateTrainingCommand(), req);
