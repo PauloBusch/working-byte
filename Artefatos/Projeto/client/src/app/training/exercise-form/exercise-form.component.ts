@@ -4,6 +4,8 @@ import { DialogData } from '../training-form/training-form.component';
 import { TrainingListComponent } from '../training-list/training-list.component';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import {coerceNumberProperty} from '@angular/cdk/coercion';
+import { TrainingExerciseDetails } from '../models/view-models/trainingExercise.details';
+import { tick } from '@angular/core/testing';
 
 
 @Component({
@@ -17,6 +19,8 @@ export class ExerciseFormComponent implements OnInit {
   charge = 0;
   session = 0;
 
+  exercise: TrainingExerciseDetails = new TrainingExerciseDetails("", "", "", "", "", 0, 0, 0 );
+
   formatLabel(value: number) {
     if (value >= 10) {
       return Math.round(value / 10) + 'k';
@@ -26,10 +30,11 @@ export class ExerciseFormComponent implements OnInit {
   }
 
 
+
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: TrainingExerciseDetails) {
       this.form = this.fb.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
@@ -39,6 +44,7 @@ export class ExerciseFormComponent implements OnInit {
   }
 
   close(): void {
+    this.exercise = null;
     this.dialogRef.close();
   }
 

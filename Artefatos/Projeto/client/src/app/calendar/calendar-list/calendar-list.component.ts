@@ -137,6 +137,7 @@ export class CalendarListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      alert(result.name);
       this.objt = result;
     });
   }

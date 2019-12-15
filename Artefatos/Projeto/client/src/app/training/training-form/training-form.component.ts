@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Random } from 'src/app/shared/utils/random';
-import { MatSnackBar, MatBottomSheet, MatDialog } from '@angular/material';
+import { MatSnackBar, MatBottomSheet, MatDialog, MatTableDataSource } from '@angular/material';
 import { TrainingService } from 'src/app/shared/services/training.service';
 import { DataService } from 'src/app/shared/services/data.service';
 import { TrainingList } from '../models/view-models/training.list';
@@ -15,6 +15,10 @@ import { ListTrainingExerciseQuery } from '../models/queries/ListTrainingExercis
 import { GetTrainingQuery } from '../models/queries/GetTrainingQuery';
 import { startWith, map } from 'rxjs/operators';
 import { ExerciseFormComponent } from '../exercise-form/exercise-form.component';
+import { TrainingExerciseDetails } from '../models/view-models/trainingExercise.details';
+import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
+import { Alert } from 'selenium-webdriver';
+import { CreateTrainingExerciseCommand } from '../models/commands/createTrainingExerciseCommand';
 export interface DialogData {
   values: string;
   name: string;
@@ -29,21 +33,25 @@ export class TrainingFormComponent implements OnInit {
   private isNew: boolean;
   private refId : string;
   private listQuery: ListTrainingQuery;
-
+  private exercises = new AsyncQuery<TrainingExerciseDetails>();
   options: TrainingExerciseList[];
   filteredExercise: Observable<TrainingExerciseList[]>;
+  displayedColumns: string[] = ['delete', 'name', 'description', 'edit'];
+  dataSource: MatTableDataSource<TrainingExerciseDetails>;
 
   private form: FormGroup;
   objt: any;
   datas: any = "Teste"
   constructor(
+    
     public dialog: MatDialog,
     private fb: FormBuilder,
     private random: Random,
     private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet,
-    private calendarService: TrainingService,
-    private dataService: DataService<TrainingList>
+    private trainingService: TrainingService,
+    private dataService: DataService<TrainingList>,
+    private dataServiceTE: DataService<TrainingExerciseDetails[]>
 
   ) {
 
@@ -54,7 +62,6 @@ export class TrainingFormComponent implements OnInit {
 
       
     });
-    this.loadExercise();
    }
    private _filterExercise(name: string): TrainingExerciseList[] {
     const filterValue = name.toLowerCase();
@@ -63,7 +70,6 @@ export class TrainingFormComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.loadExercise();
 
   }
 
@@ -76,37 +82,44 @@ export class TrainingFormComponent implements OnInit {
   }
 
   loadData(params: { id:string }) {
-
     this.refId = params.id;
-  
     if(!this.refId){
       this.isNew = true;
       return;
     }
 
     const query = new GetTrainingQuery(this.refId);
-    this.calendarService.getTrainingById(query).subscribe(result => {
+    this.trainingService.getTrainingById(query).subscribe(result => {
       if(result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
         this.snackBar.open('Agendas não encontrada', 'OK', { duration: 3000 });
         return;
       }
 
-      const Calendar = result.List[0];
-
-      this.form.patchValue(Calendar);
+      const Training = result.List[0];
       this.loadExercise();
+      this.form.patchValue(Training);
+  
     })
   }
 
   loadExercise() {
+    // this.training.$list = this.trainingService.getTraining(this.listQuery);
+    // this.training.subsc = this.training.$list.subscribe(result => {
+    // this.dataSource = new MatTableDataSource<TrainingList>(result.List);
+    // });
 
-    //  const queryTrainingExe = new ListTrainingExerciseQuery();
-    //  this.calendarService.getExercise(queryTrainingExe).subscribe(result => {
-    //   this.options = result.List;
+
+    const query = new GetTrainingQuery(this.refId);
+    this.exercises.$list = this.trainingService.getExerciseByIdTraining(query);
+    this.exercises.subsc = this.exercises.$list.subscribe(result => {
+      if(result.ErrorCode === EErrorCode.NotFound || result.Rows === 0){
+        this.snackBar.open('Não possui exercicios', 'OK', { duration: 3000 });
+        return;
+      }
       
-    //   this.filterExerciseOption();
-    //  });
-
+      this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(result.List);
+      alert(result.List[1].name);
+    });
   }
 
   close() {
@@ -136,10 +149,11 @@ export class TrainingFormComponent implements OnInit {
       values.description
     );
 
-    this.calendarService.create(command).subscribe(result => {
+    this.trainingService.create(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
         this.snackBar.open('Agenda Salva com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
+        this.createExercise();
         this.close();
         return;
       }
@@ -150,18 +164,35 @@ export class TrainingFormComponent implements OnInit {
 
       this.snackBar.open(result.Message, 'OK', { duration: 3000 });
     });
+
+    
+  }
+
+  private createExercise(){
+    for(let commandExercise of this.exercises.list){
+      commandExercise.id_training = this.refId;
+      const exerciseComannd = new CreateTrainingExerciseCommand(
+        commandExercise.id,
+        commandExercise.name,
+        commandExercise.description,
+        commandExercise.id_training,
+        commandExercise.id_equipment,
+        commandExercise.repetition,
+        commandExercise.charge,
+        commandExercise.sessions
+      );
+      //commandExercise.id_training = "2";
+      this.trainingService.createExercise(exerciseComannd).subscribe();
+    }
   }
 
   private update(values: any) {
     const command = new UpdateTrainingCommand(
       this.refId,
       values.name,
-      values.training.id,
-      values.date,
-      values.timeInitial,
-      values.timeEnd
+      values.description
     );
-    this.calendarService.update(command).subscribe(result => {
+    this.trainingService.update(command).subscribe(result => {
       if (result.ErrorCode ===  EErrorCode.None) {
         this.snackBar.open('Agenda editada com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
@@ -175,15 +206,17 @@ export class TrainingFormComponent implements OnInit {
      
       this.snackBar.open(result.Message, 'OK', { duration: 3000 });
     });
+
   }
 
   private updateList(values: any) {
-    const calendar = new TrainingList(
+    const trainings = new TrainingList(
       this.refId,
       values.name,
-      values.training
+      values.description
     );
-    this.dataService.update(calendar);
+    this.dataService.update(trainings);
+
 
   }
 
@@ -191,17 +224,28 @@ export class TrainingFormComponent implements OnInit {
     return this.form.get(field).hasError(error);
   }
 
+
   openDialog(): void {
+    
+    
     const dialogRef = this.dialog.open(ExerciseFormComponent, {
       height: '500px',
       width: '600px',
-      data:  this.datas
+      data:  TrainingExerciseDetails
+    });
+    dialogRef.beforeClosed().subscribe(result => {
+      
+      result.id = this.random.NewId();
+      this.exercises.list.push(result);
+      alert(this.exercises.list[0].sessions);
+      this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(this.exercises.list);
+
+      console.log('The dialog was closed');
+
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.objt = result;
-    });
   }
+
+
 
 }

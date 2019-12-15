@@ -16,6 +16,9 @@ import { ListTrainingExerciseQuery } from 'src/app/training/models/queries/ListT
 import { TrainingExerciseList } from 'src/app/training/models/view-models/trainingExercise.list';
 import { GetTrainingQuery } from 'src/app/training/models/queries/GetTrainingQuery';
 import { TrainingDetails } from 'src/app/training/models/view-models/training.details';
+import { CreateTrainingExerciseCommand } from 'src/app/training/models/commands/createTrainingExerciseCommand';
+import { GetExerciseQuery } from 'src/app/training/models/queries/GetExercise';
+import { TrainingExerciseDetails } from 'src/app/training/models/view-models/trainingExercise.details';
 
 
 
@@ -34,12 +37,16 @@ export class TrainingService {
     return this.http.post<CommandResult>(`${this.url}/training`, command);
   }
 
+  createExercise(command: CreateTrainingExerciseCommand): Observable<CommandResult> {
+    return this.http.post<CommandResult>(`${this.url}/exercise`, command);
+  }
+
   update(command: UpdateTrainingCommand): Observable<CommandResult> {
-    return this.http.put<CommandResult>(`${this.url}/trainings/${command.id}`, command);
+    return this.http.put<CommandResult>(`${this.url}/training/${command.id}`, command);
   }
 
   removeTraining(command: RemoveTrainingCommand): Observable<CommandResult> {
-    return this.http.delete<CommandResult>(`${this.url}/trainings/${command.id}`, Content.GetParams(command));
+    return this.http.delete<CommandResult>(`${this.url}/training/${command.id}`, Content.GetParams(command));
   }
 
   getTraining(query: ListTrainingQuery): Observable<QueryResult<TrainingList>> {
@@ -47,10 +54,14 @@ export class TrainingService {
   }
 
   getExercise(query: ListTrainingExerciseQuery): Observable<QueryResult<TrainingExerciseList>> {
-    return this.http.get<QueryResult<TrainingExerciseList>>(`${this.url}/trainings/exercise`, Content.GetParams(query));
+    return this.http.get<QueryResult<TrainingExerciseList>>(`${this.url}/training/exercise`, Content.GetParams(query));
+  }
+
+  getExerciseByIdTraining(query: GetTrainingQuery): Observable<QueryResult<TrainingExerciseDetails>> {
+    return this.http.get<QueryResult<TrainingExerciseDetails>>(`${this.url}/exercise/${query.id}`, Content.GetParams(query));
   }
 
   getTrainingById(query: GetTrainingQuery): Observable<QueryResult<TrainingDetails>> {
-    return this.http.get<QueryResult<TrainingDetails>>(`${this.url}/trainings/${query.id}`, Content.GetParams(query));
+    return this.http.get<QueryResult<TrainingDetails>>(`${this.url}/training/${query.id}`, Content.GetParams(query));
   }
 }
