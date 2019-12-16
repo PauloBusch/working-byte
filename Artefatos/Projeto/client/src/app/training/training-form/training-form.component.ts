@@ -19,6 +19,8 @@ import { TrainingExerciseDetails } from '../models/view-models/trainingExercise.
 import { AsyncQuery } from 'src/app/shared/models/asyncQuery';
 import { Alert } from 'selenium-webdriver';
 import { CreateTrainingExerciseCommand } from '../models/commands/createTrainingExerciseCommand';
+import { UpdateTrainingExerciseCommand } from '../models/commands/updateTrainingExerciseCommand';
+import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 export interface DialogData {
   values: string;
   name: string;
@@ -51,7 +53,8 @@ export class TrainingFormComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private trainingService: TrainingService,
     private dataService: DataService<TrainingList>,
-    private dataServiceTE: DataService<TrainingExerciseDetails[]>
+    private dataServiceTE: DataService<TrainingExerciseDetails[]>,
+    private confirmDialogService: ConfirmDialogService,
 
   ) {
 
@@ -103,12 +106,6 @@ export class TrainingFormComponent implements OnInit {
   }
 
   loadExercise() {
-    // this.training.$list = this.trainingService.getTraining(this.listQuery);
-    // this.training.subsc = this.training.$list.subscribe(result => {
-    // this.dataSource = new MatTableDataSource<TrainingList>(result.List);
-    // });
-
-
     const query = new GetTrainingQuery(this.refId);
     this.exercises.$list = this.trainingService.getExerciseByIdTraining(query);
     this.exercises.subsc = this.exercises.$list.subscribe(result => {
@@ -118,7 +115,6 @@ export class TrainingFormComponent implements OnInit {
       }
       
       this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(result.List);
-      alert(result.List[1].name);
     });
   }
 
@@ -171,6 +167,7 @@ export class TrainingFormComponent implements OnInit {
   private createExercise(){
     for(let commandExercise of this.exercises.list){
       commandExercise.id_training = this.refId;
+      commandExercise.id = this.random.NewId();
       const exerciseComannd = new CreateTrainingExerciseCommand(
         commandExercise.id,
         commandExercise.name,
@@ -181,7 +178,6 @@ export class TrainingFormComponent implements OnInit {
         commandExercise.charge,
         commandExercise.sessions
       );
-      //commandExercise.id_training = "2";
       this.trainingService.createExercise(exerciseComannd).subscribe();
     }
   }
@@ -196,6 +192,7 @@ export class TrainingFormComponent implements OnInit {
       if (result.ErrorCode ===  EErrorCode.None) {
         this.snackBar.open('Agenda editada com sucesso', 'OK', { duration: 3000 });
         this.updateList(values);
+        this.updateExercise();
         this.close();
         return;
       }
@@ -207,6 +204,23 @@ export class TrainingFormComponent implements OnInit {
       this.snackBar.open(result.Message, 'OK', { duration: 3000 });
     });
 
+  }
+
+  private updateExercise(){
+    for(let commandExercise of this.exercises.list){
+      commandExercise.id_training = this.refId;
+      const exerciseComannd = new UpdateTrainingExerciseCommand(
+        commandExercise.id,
+        commandExercise.name,
+        commandExercise.description,
+        commandExercise.id_training,
+        commandExercise.id_equipment,
+        commandExercise.repetition,
+        commandExercise.charge,
+        commandExercise.sessions
+      );
+      this.trainingService.updateExercise(exerciseComannd).subscribe();
+    }
   }
 
   private updateList(values: any) {
@@ -224,22 +238,44 @@ export class TrainingFormComponent implements OnInit {
     return this.form.get(field).hasError(error);
   }
 
+  remove() {
+    this.confirmDialogService.confirmRemove('Deseja remover o usuário?').subscribe(confirm => {
+      if (!confirm) {
+        return;
+      }
+      this.snackBar.open('Falha ao remover o exercicio!', 'OK', { duration: 3000 });
+    //   const command = new RemoveTrainingCommand(id);
+    //   console.log("aqui");
+    //   this.trainingService.removeTraining(command).subscribe((result) => {
+    //       if (result.Rows > 0) {
+    //         this.snackBar.open('Agenda removida com sucesso!', 'OK', { duration: 3000 });
+    //         this.removeTrainingList(id);
+    //         return;
+    //       }
+    //       this.snackBar.open('Falha ao remover o usuário!', 'OK', { duration: 3000 });
+    //     }
+    //   );
+    // 
+    });
+  }
 
-  openDialog(): void {
+  openDialog(exerciseData: any = null): void {
     
     
     const dialogRef = this.dialog.open(ExerciseFormComponent, {
       height: '500px',
       width: '600px',
-      data:  TrainingExerciseDetails
+      data:  exerciseData
     });
     dialogRef.beforeClosed().subscribe(result => {
-      
-      result.id = this.random.NewId();
+      if(result.id == null){
       this.exercises.list.push(result);
-      alert(this.exercises.list[0].sessions);
-      this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(this.exercises.list);
+      
 
+      this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(this.exercises.list);
+      }else{
+
+      }
       console.log('The dialog was closed');
 
     });

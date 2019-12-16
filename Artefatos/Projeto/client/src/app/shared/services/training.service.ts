@@ -19,6 +19,7 @@ import { TrainingDetails } from 'src/app/training/models/view-models/training.de
 import { CreateTrainingExerciseCommand } from 'src/app/training/models/commands/createTrainingExerciseCommand';
 import { GetExerciseQuery } from 'src/app/training/models/queries/GetExercise';
 import { TrainingExerciseDetails } from 'src/app/training/models/view-models/trainingExercise.details';
+import { UpdateTrainingExerciseCommand } from 'src/app/training/models/commands/updateTrainingExerciseCommand';
 
 
 
@@ -43,6 +44,10 @@ export class TrainingService {
 
   update(command: UpdateTrainingCommand): Observable<CommandResult> {
     return this.http.put<CommandResult>(`${this.url}/training/${command.id}`, command);
+  }
+
+  updateExercise(command: UpdateTrainingExerciseCommand): Observable<CommandResult> {
+    return this.http.put<CommandResult>(`${this.url}/exercise/${command.id}`, command);
   }
 
   removeTraining(command: RemoveTrainingCommand): Observable<CommandResult> {

@@ -19,7 +19,7 @@ export class ExerciseFormComponent implements OnInit {
   charge = 0;
   session = 0;
 
-  exercise: TrainingExerciseDetails = new TrainingExerciseDetails("", "", "", "", "", 0, 0, 0 );
+  exercise: TrainingExerciseDetails = new TrainingExerciseDetails(null, "", "", "", "", 0, 0, 0 );
 
   formatLabel(value: number) {
     if (value >= 10) {
@@ -32,16 +32,31 @@ export class ExerciseFormComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: TrainingExerciseDetails) {
+      private fb: FormBuilder,
+      public dialogRef: MatDialogRef<any>,
+      @Inject(MAT_DIALOG_DATA) public data: TrainingExerciseDetails
+    ) {
       this.form = this.fb.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
         equipment: ['', Validators.required]
 
       });
-  }
+
+      this.loadData();
+    }
+
+    loadData() {
+      
+      if(!this.data){
+        // this.isNew = true;
+        
+        return;
+      }
+      this.exercise = this.data;
+      alert("vlr =" + this.exercise.description);
+
+    }
 
   close(): void {
     this.exercise = null;

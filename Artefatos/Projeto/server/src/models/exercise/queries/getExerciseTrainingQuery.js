@@ -30,6 +30,8 @@ class GetExerciseTrainingQuery extends Query {
             'id', 
             'name', 
             'description', 
+            'id_equipment',
+            'repetition',
             'charge', 
             'sessions'
         ];
