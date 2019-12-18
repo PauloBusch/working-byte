@@ -6,7 +6,7 @@ export class CreateTrainingExerciseCommand{
     public description: string;
     public id_training: string;
     public id_equipment: string;
-    public repeat: number;
+    public repetition: number;
     public charge: number;
     public sessions: number;
 
@@ -16,7 +16,7 @@ export class CreateTrainingExerciseCommand{
         description: string,
         id_training: string,
         id_equipment: string,
-        repeat: number,
+        repetition: number,
         charge: number,
         sessions: number
     ) {
@@ -25,7 +25,7 @@ export class CreateTrainingExerciseCommand{
         this.description = description;
         this.id_equipment = id_equipment;
         this.id_training = id_training;
-        this.repeat = repeat;
+        this.repetition = repetition;
         this.charge = charge;
         this.sessions = sessions;
     }

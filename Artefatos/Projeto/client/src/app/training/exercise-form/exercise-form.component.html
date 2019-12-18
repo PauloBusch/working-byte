@@ -10,27 +10,27 @@
 <form [formGroup]="form">
     <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="100">
-            <input matInput placeholder="Nome" formControlName="name" [(ngModel)]="exercise.name" maxlength="50">
+            <input matInput placeholder="Nome"  formControlName="name" [(ngModel)]="exercise.name" maxlength="50">
             <mat-error *ngIf="hasError('name', 'required')">Informe o nome</mat-error>
         </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
             <mat-form-field fxFlex="100">
-                <input matInput placeholder="Descrição" formControlName="description" [(ngModel)]="exercise.description" maxlength="50">
+                <input matInput placeholder="Descrição"  formControlName="description" [(ngModel)]="exercise.description" maxlength="150">
                 <mat-error *ngIf="hasError('description', 'required')">Informe o nome</mat-error>
             </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="100">
-            <input matInput placeholder="Equipamento" formControlName="equipment" [(ngModel)]="exercise.id_equipment" maxlength="50">
+            <input matInput placeholder="Equipamento"  formControlName="equipment" [(ngModel)]="exercise.id_equipment" maxlength="8">
             <mat-error *ngIf="hasError('equipment', 'required')">Informe o equipamento</mat-error>
         </mat-form-field>
     </div>
 
 </form>
 <div fxLayout="row" fxLayoutAlign="space-between">
-    <mat-slider fxFlex="60"
+    <mat-slider  fxFlex="60"
         thumbLabel
         tickInterval="1"
         ster="4"
@@ -40,7 +40,7 @@
         >
     </mat-slider>
     <mat-form-field fxFlex="30">
-            <input matInput type="number" placeholder="Repetições" [(ngModel)]="exercise.repetition">
+            <input matInput type="number"  placeholder="Repetições" [(ngModel)]="exercise.repetition">
     </mat-form-field>
 </div>
 <div fxLayout="row" fxLayoutAlign="space-between">

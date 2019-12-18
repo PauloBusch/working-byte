@@ -21,10 +21,6 @@ import { Alert } from 'selenium-webdriver';
 import { CreateTrainingExerciseCommand } from '../models/commands/createTrainingExerciseCommand';
 import { UpdateTrainingExerciseCommand } from '../models/commands/updateTrainingExerciseCommand';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
-export interface DialogData {
-  values: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-training-form',
@@ -269,13 +265,11 @@ export class TrainingFormComponent implements OnInit {
     });
     dialogRef.beforeClosed().subscribe(result => {
       if(result.id == null){
-      this.exercises.list.push(result);
-      
-
-      this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(this.exercises.list);
+        this.exercises.list.push(result);
       }else{
-
+        this.exercises.list[this.exercises.list.indexOf(result)] = result;
       }
+      this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(this.exercises.list);
       console.log('The dialog was closed');
 
     });
