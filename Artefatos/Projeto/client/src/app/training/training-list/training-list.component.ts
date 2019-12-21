@@ -23,7 +23,7 @@ export class TrainingListComponent implements OnInit {
   private listQuery: ListTrainingQuery;
   private training = new AsyncQuery<TrainingList>();
   options: TrainingList[];
-  displayedColumns: string[] = [ 'id', 'name', 'description', 'option'];
+  displayedColumns: string[] = [ 'name', 'description', 'option'];
   dataSource: MatTableDataSource<TrainingList>;
 
   constructor(

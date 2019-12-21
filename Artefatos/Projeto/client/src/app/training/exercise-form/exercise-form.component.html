@@ -20,17 +20,10 @@
                 <mat-error *ngIf="hasError('description', 'required')">Informe o nome</mat-error>
             </mat-form-field>
     </div>
-<!-- 
-    <div fxLayout="row" fxLayoutAlign="space-between">
-        <mat-form-field fxFlex="100">
-            <input matInput placeholder="Equipamento"  formControlName="equipment" [(ngModel)]="exercise.id_equipment" maxlength="8">
-            <mat-error *ngIf="hasError('equipment', 'required')">Informe o equipamento</mat-error>
-        </mat-form-field>
-    </div> -->
     <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field fxFlex="100">            
             <input matInput placeholder="Equipamento"  formControlName="equipment" aria-label="Equipamento" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="form.controls.equipment.setValue($event.option.value.name); exercise.id_equipment = $event.option.value.id"  [displayWith]="displayFn">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="form.controls.equipment.setValue($event.option.value.name); exercise.equipment = $event.option.value"  [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{ option.name }}
               </mat-option>

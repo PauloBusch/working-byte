@@ -6,10 +6,6 @@
 
 <table mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let training">{{ training.id}}</td>
-    </ng-container>
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
         <td mat-cell *matCellDef="let training">{{ training.name}}</td>

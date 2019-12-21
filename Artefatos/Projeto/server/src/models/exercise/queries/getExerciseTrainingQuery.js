@@ -40,11 +40,11 @@ class GetExerciseTrainingQuery extends Query {
             limit: 100,
             page: 1,
             where: { id_training: this.id },
-            // include: [{
-            //     attributes: ['name'],
-            //     as: 'equipment',
-            //     model: EquipmentDb
-            // }]
+            include: [{
+                attributes: ['id','name'],
+                as: 'equipment',
+                model: EquipmentDb
+            }]
          };
 
         const exercise = await ExerciseDb.findAndCountAll(query);

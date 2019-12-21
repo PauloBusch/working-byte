@@ -40,8 +40,7 @@ export class TrainingFormComponent implements OnInit {
   private form: FormGroup;
   objt: any;
   datas: any = "Teste"
-  constructor(
-    
+  constructor( 
     public dialog: MatDialog,
     private fb: FormBuilder,
     private random: Random,
@@ -51,20 +50,14 @@ export class TrainingFormComponent implements OnInit {
     private dataService: DataService<TrainingList>,
     private dataServiceTE: DataService<TrainingExerciseDetails[]>,
     private confirmDialogService: ConfirmDialogService,
-
   ) {
-
-  
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required]
-
-      
     });
    }
    private _filterExercise(name: string): TrainingExerciseList[] {
     const filterValue = name.toLowerCase();
-
     return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
@@ -93,7 +86,6 @@ export class TrainingFormComponent implements OnInit {
         this.snackBar.open('Agendas não encontrada', 'OK', { duration: 3000 });
         return;
       }
-
       const Training = result.List[0];
       this.loadExercise();
       this.form.patchValue(Training);
@@ -109,8 +101,9 @@ export class TrainingFormComponent implements OnInit {
         this.snackBar.open('Não possui exercicios', 'OK', { duration: 3000 });
         return;
       }
-      
+      alert(result.List[0].equipment.name);
       this.dataSource =  new MatTableDataSource<TrainingExerciseDetails>(result.List);
+
     });
   }
 
@@ -153,11 +146,8 @@ export class TrainingFormComponent implements OnInit {
         this.snackBar.open('Existem campos inválidos', 'OK', { duration: 3000 });
         return;
       }
-
       this.snackBar.open(result.Message, 'OK', { duration: 3000 });
-    });
-
-    
+    });   
   }
 
   private createExercise(){
@@ -169,7 +159,7 @@ export class TrainingFormComponent implements OnInit {
         commandExercise.name,
         commandExercise.description,
         commandExercise.id_training,
-        commandExercise.id_equipment,
+        commandExercise.equipment.id,
         commandExercise.repetition,
         commandExercise.charge,
         commandExercise.sessions
@@ -210,7 +200,7 @@ export class TrainingFormComponent implements OnInit {
         commandExercise.name,
         commandExercise.description,
         commandExercise.id_training,
-        commandExercise.id_equipment,
+        commandExercise.equipment.id,
         commandExercise.repetition,
         commandExercise.charge,
         commandExercise.sessions

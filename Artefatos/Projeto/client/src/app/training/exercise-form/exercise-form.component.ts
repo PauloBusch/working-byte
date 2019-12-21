@@ -30,7 +30,6 @@ export class ExerciseFormComponent implements OnInit {
     if (value >= 10) {
       return Math.round(value / 10) + 'k';
     }
-
     return value;
   }
 
@@ -55,33 +54,24 @@ export class ExerciseFormComponent implements OnInit {
       const sortAsc = Storage.get('equipments.sortAsc', false);
       const columnSort = Storage.get('equipments.columnSort', 'equipment_created');
       this.listQuery = new ListEquipmentQuery(page, limit, sortAsc, columnSort);
-
       this.loadData();
     }
 
 
   loadData() {
-    
     if(!this.data){
       this.isNew = true;
       return;
-    }
-    
+    } 
     this.exercise = this.data;
-
   }
 
   loadEquip(){
-
       this.equipService.getEquipments(this.listQuery).subscribe(result => {
       this.options = result.List;
       this.filterEquip();
-      for(let op of this.options){
-        if(op.id == this.exercise.id_equipment)
-          this.form.controls.equipment.setValue(op.name);
-      }
+      this.form.controls.equipment.setValue(this.exercise.equipment.name);
     });
-
   }
 
   close(): void {
@@ -94,9 +84,7 @@ export class ExerciseFormComponent implements OnInit {
       this.snackBar.open('Preencha os campos obrigatórios', 'OK', { duration: 3000 });
       return;
     }
-
     this.dialogRef.close();
-
   }
 
   hasError(field: string, error: string): boolean {
@@ -109,7 +97,6 @@ export class ExerciseFormComponent implements OnInit {
 
   private _filter(name: string): EquipmentList[] {
     const filterValue = name.toString().toLowerCase();
-
     return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
@@ -121,4 +108,5 @@ export class ExerciseFormComponent implements OnInit {
     );
   }
 
+  
 }
