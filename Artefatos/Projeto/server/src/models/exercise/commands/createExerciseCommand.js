@@ -9,18 +9,23 @@ class CreateExerciseCommand extends Command {
     constructor(
         id,
         name,
-        training,
-        date,
-        timeInitial,
-        timeEnd
+        description,
+        id_training,
+        id_equipment,
+        repetition,
+        charge,
+        sessions
     ){
         super();
         this.id = id;
         this.name = name;
-        this.training = training;
-        this.date = date;
-        this.timeInitial = timeInitial;
-        this.timeEnd = timeEnd;
+        this.description = description;
+        this.id_training = id_training;
+        this.id_equipment = id_equipment;
+        this.repetition = repetition;
+        this.charge = charge;
+        this.sessions = sessions;
+        
     }
 
     async GetError(){
@@ -30,16 +35,22 @@ class CreateExerciseCommand extends Command {
         if (!this.name)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
             
-        if (!this.training)
+        if (!this.id_training)
             return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
         
-            if (!this.date)
-            return new Error(EErrorCode.InvalidParams, "Paramter id cannot be null");
+        if (!this.description)
+        return new Error(EErrorCode.InvalidParams, "Paramter id cannot be null");
             
-        if (!this.timeInitial)
+        if (!this.id_equipment)
             return new Error(EErrorCode.InvalidParams, "Paramter name cannot be null");
             
-        if (!this.timeEnd)
+        // if (!this.repetition)
+        //     return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
+
+        if (!this.charge)
+            return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
+
+        if (!this.sessions)
             return new Errror(EErrorCode.InvalidParams, "Parameter code cannot be null");
 
         return null;
@@ -54,10 +65,12 @@ class CreateExerciseCommand extends Command {
         const Cal = new Exercise(
             this.id,
             this.name,
-            this.training,
-            this.date,
-            this.timeInitial,
-            this.timeEnd
+            this.description,
+            this.id_training,
+            this.id_equipment,
+            this.repetition,
+            this.charge,
+            this.sessions
         );
 
         const result = await ExerciseDb.create(Cal);

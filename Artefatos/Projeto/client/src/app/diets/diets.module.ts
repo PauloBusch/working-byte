@@ -49,7 +49,8 @@ import { DataService } from '../shared/services/data.service';
 
         MatCardModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatTabsModule
     ],
     providers: [
         DietService,

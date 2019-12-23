@@ -5,14 +5,15 @@ import { TrainingListComponent } from './training-list/training-list.component';
 import { MatTableModule, MatIconModule, MatPaginatorModule, MatButtonModule, 
   MatFormFieldModule, MatInputModule, MatBottomSheetModule, MatProgressSpinnerModule, 
   MatCheckboxModule, MatMenuModule, MatToolbarModule, MatListModule,  MatSelectModule, 
-  MatSidenavModule, MatSnackBarModule, MatCardModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatDialogModule} from '@angular/material';
+  MatSidenavModule, MatSnackBarModule, MatCardModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatDialogModule, MatSliderModule} from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from '../app-routing.module';
+import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
 
 
 @NgModule({
-  declarations: [TrainingFormComponent, TrainingListComponent],
+  declarations: [TrainingFormComponent, TrainingListComponent, ExerciseFormComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -39,7 +40,9 @@ import { AppRoutingModule } from '../app-routing.module';
     MatNativeDateModule,
     MatAutocompleteModule,
     MatDialogModule,
-    MatTableModule
-  ]
+    MatTableModule,
+    MatSliderModule
+  ],
+  entryComponents: [ExerciseFormComponent]
 })
 export class TrainingModule { }

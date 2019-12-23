@@ -1,0 +1,74 @@
+<div fxLayout="row" class="header">
+    <button mat-icon-button type="button" (click)="close()">
+        <mat-icon>clear</mat-icon>
+    </button>
+    <h2 fxFlex>{{ isNew ? 'Cadastro' : 'Edição' }} de exercicios</h2>
+    <button mat-icon-button [mat-dialog-close]="exercise" (click)="save()" cdkFocusInitial>
+        <mat-icon>done</mat-icon>
+    </button>
+</div>
+<form [formGroup]="form">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="100">
+            <input matInput placeholder="Nome"  formControlName="name" [(ngModel)]="exercise.name" maxlength="50">
+            <mat-error *ngIf="hasError('name', 'required')">Informe o nome</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+            <mat-form-field fxFlex="100">
+                <input matInput placeholder="Descrição"  formControlName="description" [(ngModel)]="exercise.description" maxlength="150">
+                <mat-error *ngIf="hasError('description', 'required')">Informe o nome</mat-error>
+            </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="100">            
+            <input matInput placeholder="Equipamento"  formControlName="equipment" aria-label="Equipamento" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="form.controls.equipment.setValue($event.option.value.name); exercise.equipment = $event.option.value"  [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{ option.name }}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+
+</form>
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <mat-slider  fxFlex="60"
+        thumbLabel
+        tickInterval="1"
+        ster="4"
+        min="1"
+        max="100"
+        [(ngModel)]="exercise.repetition"
+        >
+    </mat-slider>
+    <mat-form-field fxFlex="30">
+            <input matInput type="number"  placeholder="Repetições" [(ngModel)]="exercise.repetition">
+    </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <mat-slider fxFlex="60"
+    thumbLabel
+    tickInterval="1"
+    ster="4"
+    min="1"
+    max="100"
+    [(ngModel)]="exercise.charge"
+    ></mat-slider>
+    <mat-form-field fxFlex="30">
+        <input matInput type="number" placeholder="Carga" [(ngModel)]="exercise.charge">
+    </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-slider fxFlex="60"
+        thumbLabel
+        tickInterval="1"
+        ster="4"
+        min="1"
+        max="30"
+        [(ngModel)]="exercise.sessions"
+        ></mat-slider>
+        <mat-form-field fxFlex="30">
+            <input matInput type="number" placeholder="Sessoes" [(ngModel)]="exercise.sessions">
+        </mat-form-field>
+    </div>

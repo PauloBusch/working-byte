@@ -1,5 +1,6 @@
 const { QueryHandle } = require('../utils/handle/queryHandle');
 const { GetExerciseQuery } = require('../models/exercise/queries/getExerciseQuery');
+const { GetExerciseTrainingQuery } = require('../models/exercise/queries/getExerciseTrainingQuery');
 const { ListExerciseQuery } = require('../models/exercise/queries/listExerciseQuery');
 
 const { CommandHandle } = require('../utils/handle/commandHandle');
@@ -13,6 +14,12 @@ const controllerExercise = { }
 
 controllerExercise.getById = async (req, res) => {
     const query = Obj.getData(new GetExerciseQuery(), req);
+    const result = await QueryHandle.Execute(query);
+    res.json(result);
+}
+
+controllerExercise.getByIdTraining = async (req, res) => {
+    const query = Obj.getData(new GetExerciseTrainingQuery(), req);
     const result = await QueryHandle.Execute(query);
     res.json(result);
 }
